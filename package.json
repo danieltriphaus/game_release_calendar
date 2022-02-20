@@ -6,10 +6,15 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "startServer": "nodemon ./src/api/index.js"
   },
   "dependencies": {
+    "cookie-parser": "^1.4.6",
     "core-js": "^3.8.3",
+    "express": "^4.17.3",
+    "multer": "^1.4.4",
+    "openapi-backend": "^5.2.0",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },

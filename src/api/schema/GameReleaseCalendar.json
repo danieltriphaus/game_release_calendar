@@ -1,0 +1,379 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GameReleaseCalendar",
+    "version": "1.0",
+    "description": "API for a Web App that can generate a calendar with video game releases",
+    "contact": {
+      "name": "Daniel Triphaus",
+      "email": "d.triphaus@outlook.de"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/game/search": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "operationId": "get-game-search",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "q",
+            "description": "Search Query",
+            "required": true
+          }
+        ],
+        "description": "Search for Games",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Game"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "query mising": {
+                    "value": {
+                      "error": "invalid request",
+                      "message": "query parameter missing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/game": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Game"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/entity_not_found"
+          }
+        },
+        "operationId": "get-game",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "description": "Get a Game"
+      }
+    },
+    "/user/{user_id}/games": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGame"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/invalid_api_key"
+          },
+          "404": {
+            "$ref": "#/components/responses/entity_not_found"
+          }
+        },
+        "operationId": "get-user-games",
+        "parameters": [],
+        "description": "Get Users Saved Games"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "summary": "",
+        "operationId": "post-user-games",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "$ref": "#/components/responses/invalid_api_key"
+          },
+          "404": {
+            "$ref": "#/components/responses/entity_not_found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [],
+        "description": "Save Games for User"
+      }
+    },
+    "/user/{user_id}/calendar": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/calendar": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/invalid_api_key"
+          },
+          "404": {
+            "$ref": "#/components/responses/entity_not_found"
+          }
+        },
+        "operationId": "get-user-calendar",
+        "description": "Returns the ics File for the users release calendar",
+        "parameters": []
+      }
+    },
+    "/access": {
+      "post": {
+        "summary": "",
+        "operationId": "post-access",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "apiKey as a Cookie"
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/invalid_api_key"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "string",
+                "description": "apiKey to validate"
+              }
+            }
+          },
+          "description": ""
+        },
+        "security": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Game": {
+        "title": "Game",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "first_release_date": {
+            "type": "number"
+          },
+          "developers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "cover": {
+            "type": "object",
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "title": "Error",
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserGame": {
+        "title": "UserGame",
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string"
+          },
+          "game_id": {
+            "type": "number"
+          }
+        },
+        "description": "A game that a user has saved because they are interested in it"
+      }
+    },
+    "responses": {
+      "entity_not_found": {
+        "description": "Entity not found Response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "entity not found": {
+                "value": {
+                  "error": "not_found",
+                  "message": "entity not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "invalid_api_key": {
+        "description": "Invalid API Key",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            },
+            "examples": {
+              "invalid API Key": {
+                "value": {
+                  "error": "not_authorized",
+                  "message": "invalid API Key "
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "parameters": {},
+    "securitySchemes": {
+      "apiKey": {
+        "name": "API Key",
+        "type": "apiKey",
+        "in": "cookie",
+        "description": ""
+      }
+    },
+    "requestBodies": {}
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}
