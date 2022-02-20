@@ -5,13 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --runInBand",
     "lint": "vue-cli-service lint",
     "startServer": "nodemon ./src/api/index.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "core-js": "^3.8.3",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "multer": "^1.4.4",
     "openapi-backend": "^5.2.0",

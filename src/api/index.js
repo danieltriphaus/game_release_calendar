@@ -2,6 +2,9 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { apiBackend } from "./middleware/apiBackend.js";
 import multer from "multer";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
