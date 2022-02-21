@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --runInBand",
     "lint": "vue-cli-service lint",
-    "startServer": "nodemon ./src/api/index.js"
+    "startServer": "nodemon ./src/api/app.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
