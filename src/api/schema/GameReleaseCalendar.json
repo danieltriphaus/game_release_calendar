@@ -97,7 +97,8 @@
             "required": true
           }
         ],
-        "description": "Get a Game"
+        "description": "Get a Game",
+        "security": [ {"apiKey":[]} ]
       }
     },
     "/user/{user_id}/games": {
