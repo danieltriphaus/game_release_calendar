@@ -14,11 +14,14 @@ const api = new OpenAPIBackend({
         notImplemented: (context, req, res) => {
             res.status(501).json("API Route Handler not implemented");
         },
+        unauthorizedHandler: (context, req, res) => {
+            res.status(401).json({ error: "not_authorized", message: "invalid API Key" });
+        },
     },
 });
 
 api.registerSecurityHandler("apiKey", (context, req) => {
-    return req.cookies.api_key !== process.env.API_KEY;
+    return req.cookies.api_key === process.env.API_KEY;
 });
 
 api.init();
