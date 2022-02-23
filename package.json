@@ -10,6 +10,7 @@
     "startServer": "nodemon ./src/api/app.js"
   },
   "dependencies": {
+    "axios": "^0.26.0",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.8.3",
     "dotenv": "^16.0.0",
