@@ -219,7 +219,7 @@
                 "schema": {
                   "type": "string"
                 },
-                "description": "apiKey as a Cookie"
+                "description": "API Key and IGDB Access Token"
               }
             }
           },
@@ -238,7 +238,22 @@
           },
           "description": ""
         },
-        "security": []
+        "security": [],
+        "description": "Validate API Key and Set Auth Cookies"
+      },
+      "get": {
+        "summary": "",
+        "operationId": "get-access",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "$ref": "#/components/responses/invalid_api_key"
+          }
+        },
+        "parameters": [],
+        "description": "Endpoint to determine if a user is logged in"
       }
     }
   },

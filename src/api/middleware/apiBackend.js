@@ -6,6 +6,9 @@ import { getGame } from "../handlers/getGame.js";
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
     handlers: {
+        "get-access": (context, req, res) => {
+            res.status(200).end();
+        },
         "post-access": postAccess,
         "get-game": getGame,
         notFound: (context, req, res) => {

@@ -32,16 +32,22 @@ it("should return 200 and set cookies with api_key and igdb access token if apiK
 
     await postAccess(context, request, response);
 
-    expect(response.cookie).toHaveBeenCalledWith("api_key", request.body.apiKey, {
-        maxAge: tokenResponse.expires_in * 1000,
-        httpOnly: true,
-        secure: true,
-    });
-    expect(response.cookie).toHaveBeenCalledWith("igdb_access_token", tokenResponse.access_token, {
-        maxAge: tokenResponse.expires_in * 1000,
-        httpOnly: true,
-        secure: true,
-    });
+    expect(response.cookie).toHaveBeenCalledWith(
+        "api_key",
+        request.body.apiKey,
+        expect.objectContaining({
+            maxAge: tokenResponse.expires_in * 1000,
+            httpOnly: true,
+        })
+    );
+    expect(response.cookie).toHaveBeenCalledWith(
+        "igdb_access_token",
+        tokenResponse.access_token,
+        expect.objectContaining({
+            maxAge: tokenResponse.expires_in * 1000,
+            httpOnly: true,
+        })
+    );
     expect(response.status).toHaveBeenCalledWith(200);
 });
 

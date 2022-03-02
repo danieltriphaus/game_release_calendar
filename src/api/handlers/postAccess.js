@@ -2,7 +2,6 @@ import axios from "axios";
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
-    secure: true,
 };
 
 export const postAccess = async (context, req, res) => {
