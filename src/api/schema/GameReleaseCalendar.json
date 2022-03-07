@@ -264,35 +264,55 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number"
+            "type": "integer"
           },
-          "name": {
-            "type": "string"
+          "cover": {
+            "type": "object",
+            "properties": {
+              "height": {
+                "type": "integer"
+              },
+              "url": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              }
+            }
           },
           "first_release_date": {
-            "type": "number"
+            "type": "integer"
           },
-          "developers": {
+          "involved_companies": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
                 "id": {
-                  "type": "string"
+                  "type": "integer"
                 },
                 "name": {
                   "type": "string"
+                },
+                "developer": {
+                  "type": "boolean"
+                },
+                "company": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
-          "cover": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string"
-              }
-            }
+          "name": {
+            "type": "string"
           }
         }
       },
