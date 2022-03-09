@@ -20,6 +20,7 @@
     "multer": "^1.4.4",
     "openapi-backend": "^5.2.0",
     "vue": "^3.2.13",
+    "vue-debounce": "^3.0.2",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {

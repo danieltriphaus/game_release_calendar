@@ -7838,6 +7838,11 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
+vue-debounce@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vue-debounce/-/vue-debounce-3.0.2.tgz#3b29c33db7cd2a8c20f77e0be66beda1b85f7e8d"
+  integrity sha512-+shuc9Ry+AFqJbN7BMfagazB81/bTiPWvUZ4KBjambgrd3B5EQBojxeGzeNZ21xRflnwB098BG1d0HtWv8WyzA==
+
 vue-eslint-parser@^8.0.1:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-8.2.0.tgz#8c3990deb901b0d528d99f4d052a831cd1d0284c"

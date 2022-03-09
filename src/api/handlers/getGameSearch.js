@@ -3,7 +3,7 @@ import axios from "axios";
 const query =
     'search "{query}";' +
     "fields name, first_release_date, cover.height, cover.width, cover.url, involved_companies.developer, involved_companies.company.name;" +
-    "where involved_companies.developer = true;";
+    "where involved_companies.developer = true; limit 2;";
 
 export const getGameSearch = async (context, req, res) => {
     const response = await axios.post("https://api.igdb.com/v4/games", query.replace("{query}", req.query.q), {

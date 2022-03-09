@@ -13,21 +13,43 @@
         
         <div v-else class="row mt-4">
             <div class="col">
-                <input type="search" id="search-games" name="search-games" class="form-control" placeholder="Suche Game">
+                <input type="search" v-debounce:500ms="searchGames" v-model="searchQuery" id="search-games" name="search-games" class="form-control" placeholder="Suche Game">
+            </div>
+        </div>
+
+        <div class="results mt-2" v-for="result in searchResults" :key="result.id">
+            <div class="row">
+                <div class="col result mt-2">
+                    <img :src="result.cover.url.replace('thumb', 'cover_small')" class="game-cover">
+                    <div class="game-info">
+                        <h5>{{ result.name }}</h5>
+                        <h6>{{ result.involved_companies.find((involved_company) => involved_company.developer === true).company.name }}</h6>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+//ToDo: Refactor into Components
 import axios from "axios";
+import { getDirective } from "vue-debounce";
 
 export default {
   name: "IndexView",
+  directives: {
+    debounce: getDirective(3)
+  },
   components: {
   },
   data() {
-    return { isAuthenticated: false, apiKey: "" }
+    return { 
+      isAuthenticated: false,
+      apiKey: "",
+      searchQuery: "",
+      searchResults: [],
+    }
   },
   async mounted() {
     const response = await axios.get("/api/access").catch((error) => {
@@ -48,7 +70,34 @@ export default {
       if (response) {
         this.isAuthenticated = true;
       }
+    },
+    async searchGames() {
+      const response = await axios.get("/api/game/search", { params: { q: this.searchQuery }});
+      this.searchResults = response.data;
     }
+  },
+  computed: {
   }
 };
 </script>
+
+<style scoped>
+    .result {
+        display: flex;
+        cursor: pointer;
+        padding: 2px;
+    }
+
+    .result:hover {
+        background-color: rgb(211, 209, 209);
+    }
+
+    .game-cover {   
+        height: 100px;
+    }
+
+    .game-info {
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+</style>
