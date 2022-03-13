@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 
 import Index from "@/frontend/views/Index";
 import axios from "axios";
+import { arrow } from "@popperjs/core";
 
 jest.mock("axios");
 
@@ -124,5 +125,41 @@ it("should display search results when returned from api", async () => {
 
     await waitFor(() => {
         expect(screen.queryByText(searchResponse[0].name)).not.toBeInTheDocument();
+    });
+});
+
+it("should send clicked game id to api", async () => {
+    axios.get.mockResolvedValueOnce({ status: 200 });
+
+    render(Index);
+
+    await waitFor(() => {
+        expect(screen.queryByPlaceholderText("API Key")).toBeFalsy();
+        expect(screen.queryByText("Senden")).toBeFalsy();
+    });
+
+    await waitFor(() => {
+        expect(screen.queryByPlaceholderText("Suche Game")).toBeVisible();
+    });
+
+    axios.get.mockResolvedValueOnce({ data: searchResponse });
+
+    await fireEvent.update(screen.getByPlaceholderText("Suche Game"), "test query");
+    await fireEvent.keyUp(screen.getByPlaceholderText("Suche Game"));
+
+    await waitFor(() => {
+        expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/game/search"), {
+            params: { q: "test query" },
+        });
+        expect(screen.getByText(searchResponse[0].name)).toBeVisible();
+    });
+
+    await fireEvent.click(screen.getByTestId("result-" + searchResponse[0].id));
+
+    await waitFor(() => {
+        expect(axios.post).toBeCalledWith(
+            expect.stringContaining("/games"),
+            expect.arrayContaining([searchResponse[0].id])
+        );
     });
 });

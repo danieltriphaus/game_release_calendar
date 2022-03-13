@@ -19,7 +19,7 @@
 
         <div class="results mt-2" v-for="result in searchResults" :key="result.id">
             <div class="row">
-                <div class="col result mt-2">
+                <div class="col result mt-2" :data-testid="'result-' + result.id" @click="addGame(result.id)">
                     <img :src="result.cover.url.replace('thumb', 'cover_small')" class="game-cover">
                     <div class="game-info">
                         <h5>{{ result.name }}</h5>
@@ -74,6 +74,9 @@ export default {
     async searchGames() {
       const response = await axios.get("/api/game/search", { params: { q: this.searchQuery }});
       this.searchResults = response.data;
+    },
+    async addGame(id) {
+      await axios.post("/api/user/y1xx/games", [id]);
     }
   },
   computed: {

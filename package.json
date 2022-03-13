@@ -10,6 +10,7 @@
     "startServer": "nodemon ./src/api/app.js"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^6.6.2",
     "@popperjs/core": "^2.11.2",
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
