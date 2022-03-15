@@ -4,6 +4,7 @@ import { postAccess } from "../handlers/postAccess.js";
 import { getGame } from "../handlers/getGame.js";
 import { getGameSearch } from "../handlers/getGameSearch.js";
 import { postUserGames } from "../handlers/postUserGames.js";
+import { postUserCalendar } from "../handlers/postUserCalendar.js";
 
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
@@ -12,6 +13,7 @@ const api = new OpenAPIBackend({
         "post-access": postAccess,
         "get-game": getGame,
         "post-user-games": postUserGames,
+        "post-user-calendar": postUserCalendar,
         "get-access": (context, req, res) => {
             res.status(200).end();
         },

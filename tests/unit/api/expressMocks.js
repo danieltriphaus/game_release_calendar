@@ -5,12 +5,15 @@ export function getContext(operationId) {
         operation: {
             operationId,
         },
+        request: getRequest(),
+        response: getResponse(),
     };
 }
 
 export function getRequest() {
     return {
         body: {},
+        params: {},
     };
 }
 

@@ -3,14 +3,17 @@ import "@testing-library/jest-dom";
 
 import Index from "@/frontend/views/Index";
 import axios from "axios";
-import { arrow } from "@popperjs/core";
 
 jest.mock("axios");
+
+function renderIndexView() {
+    render(Index, { global: { stubs: ["router-link"] } });
+}
 
 it("should render apiKey input if user is not authenticated", () => {
     axios.get.mockRejectedValueOnce({ response: { status: 401 } });
 
-    render(Index);
+    renderIndexView();
 
     expect(axios.get).toHaveBeenCalledWith(expect.stringContaining("/access"));
     expect(screen.getByPlaceholderText("API Key")).toBeVisible();
@@ -19,7 +22,7 @@ it("should render apiKey input if user is not authenticated", () => {
 it("should render search input if api_key is valid", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
 
-    render(Index);
+    renderIndexView();
 
     await waitFor(() => {
         expect(screen.queryByPlaceholderText("API Key")).toBeFalsy();
@@ -35,7 +38,7 @@ it("should render search input if valid api key is sent", async () => {
     axios.get.mockRejectedValueOnce({ response: { status: 401 } });
     axios.post.mockResolvedValueOnce({ status: 200 });
 
-    render(Index);
+    renderIndexView();
 
     await fireEvent.update(screen.getByPlaceholderText("API Key"), "test_api_key");
     await fireEvent.click(screen.getByTestId("api-validate"));
@@ -54,7 +57,7 @@ it("should render search input if valid api key is sent", async () => {
     axios.get.mockRejectedValueOnce({ response: { status: 401 } });
     axios.post.mockResolvedValueOnce({ response: { status: 401 } });
 
-    render(Index);
+    renderIndexView();
 
     await fireEvent.update(screen.getByPlaceholderText("API Key"), "test_api_key");
     await fireEvent.click(screen.getByTestId("api-validate"));
@@ -95,7 +98,7 @@ const searchResponse = [
 it("should display search results when returned from api", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
 
-    render(Index);
+    renderIndexView();
 
     await waitFor(() => {
         expect(screen.queryByPlaceholderText("API Key")).toBeFalsy();
@@ -131,7 +134,7 @@ it("should display search results when returned from api", async () => {
 it("should send clicked game id to api", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
 
-    render(Index);
+    renderIndexView();
 
     await waitFor(() => {
         expect(screen.queryByPlaceholderText("API Key")).toBeFalsy();

@@ -1,5 +1,9 @@
 <template>
     <div class="container">
+        <div v-if="isAuthenticated">
+            <router-link to="/calendar">Kalendar generieren</router-link>
+        </div>
+
         <div v-if="!isAuthenticated" class="row mt-4">
             <form name="api-validate" @submit.prevent="validateApiKey">
                 <div class="col-md-10">

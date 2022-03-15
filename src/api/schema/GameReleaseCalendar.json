@@ -204,7 +204,61 @@
         },
         "operationId": "get-user-calendar",
         "description": "Returns the ics File for the users release calendar",
-        "parameters": []
+        "parameters": [],
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-user-calendar",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "description": "Calendar Access Token\n"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "wrong password": {
+                    "value": {
+                      "error": "unauthorized",
+                      "message": "wrong password"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Generate Token for Calendar Access",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "description": "Password",
+                "format": "password",
+                "readOnly": true
+              }
+            }
+          },
+          "description": ""
+        }
       }
     },
     "/access": {
@@ -269,6 +323,9 @@
           "cover": {
             "type": "object",
             "properties": {
+              "id": {
+                "type": "number"
+              },
               "height": {
                 "type": "integer"
               },
@@ -402,6 +459,11 @@
         "type": "apiKey",
         "in": "cookie",
         "description": ""
+      },
+      "token": {
+        "name": "generated Token for URL Parameter",
+        "type": "apiKey",
+        "in": "query"
       }
     },
     "requestBodies": {}

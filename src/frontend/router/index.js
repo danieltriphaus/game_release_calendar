@@ -1,11 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Index from "../views/Index.vue";
+import Calendar from "../views/Calendar.vue";
 
 const routes = [
     {
         path: "/",
         name: "index",
         component: Index,
+    },
+    {
+        path: "/calendar",
+        name: "calendar",
+        component: Calendar,
     },
 ];
 
