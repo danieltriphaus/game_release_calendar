@@ -30,6 +30,7 @@ it("should respond with token when password is correct", async () => {
     const context = getContext("post-user-calendar");
     context.request.body.password = "testPassword";
     context.request.params.user_id = "testUser";
+    context.request.cookies = { igdb_access_token: "token" };
 
     getUser.mockResolvedValueOnce({ password: "testPassword" });
     nanoid.mockReturnValueOnce("token");
@@ -45,11 +46,16 @@ it("should create calendar in database", async () => {
     const context = getContext("post-user-calendar");
     context.request.body.password = "testPassword";
     context.request.params.user_id = "testUser";
+    context.request.cookies = { igdb_access_token: "token" };
 
     getUser.mockResolvedValueOnce({ password: "testPassword" });
     nanoid.mockReturnValueOnce("token");
 
     await postUserCalendar(context, context.request, context.response);
 
-    expect(createCalendar).toHaveBeenCalledWith(context.request.params.user_id, "token");
+    expect(createCalendar).toHaveBeenCalledWith(
+        context.request.params.user_id,
+        "token",
+        context.request.cookies.igdb_access_token
+    );
 });

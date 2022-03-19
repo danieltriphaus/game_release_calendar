@@ -30,7 +30,9 @@ export default {
     computed: {
         calendarLink() {
             if (this.calendarToken) {
-                return window.location.href + "api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendar?token=" + this.calendarToken;
+                return window.location.protocol + "//" + window.location.hostname 
+                    + ( window.location.port !== 80 ? ":" + window.location.port : "" )
+                    + "/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendar?token=" + this.calendarToken;
             } else {
                 return "";
             }

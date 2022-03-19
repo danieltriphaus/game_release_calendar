@@ -7,7 +7,7 @@ export const postUserCalendar = async (context, req, res) => {
 
     if (user.password === req.body.password) {
         const token = nanoid(32);
-        await createCalendar(context.request.params.user_id, token);
+        await createCalendar(context.request.params.user_id, token, req.cookies.igdb_access_token);
         res.status(200).json(token);
     } else {
         res.status(401).json({ error: "unauthorized", message: "wrong password" });

@@ -1,6 +1,6 @@
 import { Datastore } from "@google-cloud/datastore";
 
-export const createCalendar = async (userId, token) => {
+export const createCalendar = async (userId, token, igdbAccessToken) => {
     const datastore = new Datastore();
 
     const calendarEntity = {
@@ -8,6 +8,7 @@ export const createCalendar = async (userId, token) => {
         data: {
             createdAt: new Date(),
             token,
+            igdbAccessToken,
         },
     };
 

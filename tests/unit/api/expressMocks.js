@@ -22,6 +22,7 @@ export function getResponse() {
         cookie: jest.fn(() => response),
         status: jest.fn(() => response),
         json: jest.fn(() => response),
+        send: jest.fn(() => response),
     };
 
     return response;

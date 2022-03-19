@@ -16,7 +16,7 @@ it("should create calendar and show link", async () => {
     await fireEvent.click(screen.getByTestId("create-calendar"));
 
     await waitFor(() => {
-        expect(screen.getByText(window.location.href + "api/user/undefined/calendar?token=testToken")).toBeVisible();
+        expect(screen.getByText("/api/user/undefined/calendar?token=testToken", { exact: false })).toBeVisible();
     });
 });
 

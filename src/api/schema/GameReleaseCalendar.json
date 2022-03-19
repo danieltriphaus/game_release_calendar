@@ -204,7 +204,16 @@
         },
         "operationId": "get-user-calendar",
         "description": "Returns the ics File for the users release calendar",
-        "parameters": [],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "token",
+            "description": "Token for Security purposes"
+          }
+        ],
         "security": [
           {
             "token": []
@@ -250,9 +259,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "string",
-                "description": "Password",
+                "type": "object",
                 "format": "password",
+                "properties": {
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  }
+                },
+                "required": [
+                  "password"
+                ],
                 "readOnly": true
               }
             }
