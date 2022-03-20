@@ -326,6 +326,39 @@
         "parameters": [],
         "description": "Endpoint to determine if a user is logged in"
       }
+    },
+    "/user/{user_id}/calendars": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Calendar"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-user-calendars",
+        "description": "Get a list of Calendars for a User"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user_id",
+          "in": "path",
+          "required": true
+        }
+      ]
     }
   },
   "components": {
@@ -429,6 +462,22 @@
           }
         },
         "description": "A game that a user has saved because they are interested in it"
+      },
+      "Calendar": {
+        "title": "Calendar",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "description": "Game Release Calendar"
       }
     },
     "responses": {

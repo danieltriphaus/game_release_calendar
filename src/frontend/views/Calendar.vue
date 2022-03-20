@@ -8,35 +8,32 @@
                 <input type="submit" class="btn btn-outline-primary" data-testid="create-calendar">
             </div>
         </form>
-        <div class="row calendar-link" data-testid="calendar-link">
-            <div class="col" v-if="calendarToken.length > 0">
-                <a :href="calendarLink">{{ calendarLink }}</a>
-            </div>
+
+        <div v-for="calendar in calendars" :key="calendar.token" class="row calendar-link" data-testid="calendar-link">
+            <calendar-link :calendar="calendar" />
         </div>
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import CalendarLink from "../components/CalendarLink";
 
 export default {
     name: "CalendarView",
+    components: {
+        CalendarLink
+    },
     data() {
         return {
             password: "",
             calendarToken: "",
+            calendars: [],
         };
     },
-    computed: {
-        calendarLink() {
-            if (this.calendarToken) {
-                return window.location.protocol + "//" + window.location.hostname 
-                    + ( window.location.port !== 80 ? ":" + window.location.port : "" )
-                    + "/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendar?token=" + this.calendarToken;
-            } else {
-                return "";
-            }
-        }
+    async mounted() {
+        const response = await axios.get("/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendars");
+        this.calendars = response.data;
     },
     methods: {
         async createCalendar() {
@@ -50,8 +47,8 @@ export default {
                     }
                 });
             if (response) {
-                console.log(response.data);
                 this.calendarToken = response.data;
+                this.calendars.push({ token: this.calendarToken });
             }
         }
     }
