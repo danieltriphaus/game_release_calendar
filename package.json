@@ -7,13 +7,15 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --runInBand",
     "lint": "vue-cli-service lint",
-    "startServer": "nodemon ./src/api/app.js"
+    "startServer": "nodemon ./src/api/app.js",
+    "start": "node src/api/app.js"
   },
   "dependencies": {
     "@google-cloud/datastore": "^6.6.2",
     "@popperjs/core": "^2.11.2",
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
+    "connect-history-api-fallback": "^1.6.0",
     "cookie-parser": "^1.4.6",
     "core-js": "^3.8.3",
     "dotenv": "^16.0.0",

@@ -8,14 +8,9 @@ module.exports = defineConfig({
         devServer: {
             hot: true,
             allowedHosts: "all",
-            // https: {
-            //     key: fs.readFileSync(process.env.HTTPS_CERT_KEY),
-            //     cert: fs.readFileSync(process.env.HTTPS_CERT),
-            // },
             proxy: {
                 "/api/": {
                     target: "http://localhost:3000/",
-                    pathRewrite: { "^/api": "" },
                     logLevel: "debug",
                     changeOrigin: true,
                 },
