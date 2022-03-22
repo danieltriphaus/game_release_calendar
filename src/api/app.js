@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(historyApiFallback());
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
-    app.use(express.static(__dirname + "/views/"));
+    app.use(express.static(__dirname + "/views/", { etag: false, lastModified: false }));
 }
 
 let port = process.env.PORT;
