@@ -24,11 +24,13 @@ export const getUserCalendar = async (context, req, res) => {
         const games = response.data;
 
         games.forEach((game) => {
-            outputCalendar.createEvent({
-                start: new Date(game.first_release_date * 1000),
-                summary: game.name,
-                allDay: true,
-            });
+            if (game.first_release_date) {
+                outputCalendar.createEvent({
+                    start: new Date(game.first_release_date * 1000),
+                    summary: game.name,
+                    allDay: true,
+                });
+            }
         });
 
         res.status(200).send(outputCalendar.toString());

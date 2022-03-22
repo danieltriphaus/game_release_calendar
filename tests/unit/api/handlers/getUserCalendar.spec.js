@@ -82,3 +82,23 @@ it("should return 404 if calendar cannot be found", async () => {
         expect.objectContaining({ error: expect.stringContaining(""), message: expect.stringContaining("") })
     );
 });
+
+it("should not create event if release_date is undefined", async () => {
+    gameResponse.push({ id: 12345, name: "Game Without Release Date" });
+
+    getGameList.mockResolvedValueOnce(gameList);
+    getCalendar.mockResolvedValueOnce(calendar);
+    axios.post.mockResolvedValueOnce({ data: gameResponse });
+
+    const context = getContext();
+    context.request.query = calendar.token;
+
+    await getUserCalendar(context, context.request, context.response);
+
+    expect(context.response.status).toBeCalledWith(200);
+    expect(context.response.send).not.toBeCalledWith(
+        expect.stringContaining(gameResponse[gameResponse.length - 1].name)
+    );
+
+    gameResponse.pop();
+});
