@@ -131,6 +131,39 @@ it("should display search results when returned from api", async () => {
     });
 });
 
+it("should display game without cover", async () => {
+    axios.get.mockResolvedValueOnce({ status: 200 });
+
+    renderIndexView();
+
+    await waitFor(() => {
+        expect(screen.queryByPlaceholderText("API Key")).toBeFalsy();
+        expect(screen.queryByText("Senden")).toBeFalsy();
+    });
+
+    await waitFor(() => {
+        expect(screen.queryByPlaceholderText("Suche Game")).toBeVisible();
+    });
+
+    searchResponse.push({
+        id: 11132,
+        first_release_date: 1488240000,
+        involved_companies: [{ id: 24436, company: { id: 1843, name: "Guerrilla Games" }, developer: true }],
+        name: "Game Without Cover",
+    });
+
+    axios.get.mockResolvedValueOnce({ data: searchResponse });
+
+    await fireEvent.update(screen.getByPlaceholderText("Suche Game"), "test query");
+    await fireEvent.keyUp(screen.getByPlaceholderText("Suche Game"));
+
+    await waitFor(() => {
+        expect(screen.getByText(searchResponse[searchResponse.length - 1].name)).toBeVisible();
+    });
+
+    searchResponse.pop();
+});
+
 it("should send clicked game id to api", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
 

@@ -24,7 +24,9 @@
         <div class="results mt-2" v-for="result in searchResults" :key="result.id">
             <div class="row">
                 <div class="col result mt-2" :data-testid="'result-' + result.id" @click="addGame(result.id)">
-                    <img :src="result.cover.url.replace('thumb', 'cover_small')" class="game-cover">
+                    <img v-if="result.cover && result.cover.url" 
+                         :src="result.cover.url.replace('thumb', 'cover_small')" class="game-cover"
+                    >
                     <div class="game-info">
                         <h5>{{ result.name }}</h5>
                         <h6>{{ result.involved_companies.find((involved_company) => involved_company.developer === true).company.name }}</h6>
