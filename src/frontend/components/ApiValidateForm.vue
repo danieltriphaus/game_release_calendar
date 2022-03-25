@@ -19,14 +19,30 @@
 
 <script setup>
     import axios from "axios";
+    import { onMounted } from "vue";
 
     const props = defineProps(['modelValue']);
     const emit = defineEmits(["update:modelValue", "authenticated"]);
 
+    onMounted(async () => {
+        const response = await axios.get("/api/access").catch((error) => {
+            if (!error.response || error.response.status !== 401) {
+                throw error;
+            }
+        });
+        if (response && response.status === 200) {
+            emit("authenticated");
+        }
+    });
+
     async function validateApiKey() {
       const form = new FormData();
       form.append("apiKey", props.modelValue);
-      const response = await axios.post("/api/access", form).catch((error) => {console.log(error)});
+      const response = await axios.post("/api/access", form).catch((error) => {
+          if (!error.response || error.response.status !== 401) {
+                throw error;
+            }
+      });
       if (response) {
         emit("authenticated");
       }
