@@ -3,13 +3,14 @@ import ical from "ical-generator";
 import axios from "axios";
 import { getCalendar } from "../datastore/getCalendar.js";
 
-const query = "fields name, first_release_date; where id = ({gameIds});";
+const query = "fields name, first_release_date; where id = ({gameIds}); limit 500;";
 
 export const getUserCalendar = async (context, req, res) => {
     const calendar = await getCalendar(context.request.params.user_id, req.query.token);
     if (calendar) {
         const gameList = await getGameList(context.request.params.user_id);
         const gameIdsString = gameList.games.join(",");
+        console.log(gameIdsString);
 
         const response = await axios.post("https://api.igdb.com/v4/games", query.replace("{gameIds}", gameIdsString), {
             headers: {
@@ -24,6 +25,7 @@ export const getUserCalendar = async (context, req, res) => {
         const games = response.data;
 
         games.forEach((game) => {
+            console.log(game);
             if (game.first_release_date) {
                 outputCalendar.createEvent({
                     start: new Date(game.first_release_date * 1000),
