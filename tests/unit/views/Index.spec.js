@@ -7,7 +7,7 @@ import axios from "axios";
 jest.mock("axios");
 
 function renderIndexView() {
-    render(Index, { global: { stubs: ["router-link"] } });
+    render(Index, { global: { stubs: ["router-link", "game-list"] } });
 }
 
 it("should render apiKey input if user is not authenticated", () => {
@@ -95,8 +95,18 @@ const searchResponse = [
     },
 ];
 
+function getMockApiImplementation() {
+    return (url) => {
+        if (url.search("/game/search") >= 0) {
+            return Promise.resolve({ status: 200, data: searchResponse });
+        } else {
+            return Promise.resolve({ status: 200, data: {} });
+        }
+    };
+}
+
 it("should display search results when returned from api", async () => {
-    axios.get.mockResolvedValueOnce({ status: 200 });
+    axios.get.mockImplementationOnce(getMockApiImplementation());
 
     renderIndexView();
 
@@ -109,7 +119,7 @@ it("should display search results when returned from api", async () => {
         expect(screen.queryByPlaceholderText("Suche Game")).toBeVisible();
     });
 
-    axios.get.mockResolvedValueOnce({ data: searchResponse });
+    axios.get.mockImplementationOnce(getMockApiImplementation());
 
     await fireEvent.update(screen.getByPlaceholderText("Suche Game"), "test query");
     await fireEvent.keyUp(screen.getByPlaceholderText("Suche Game"));

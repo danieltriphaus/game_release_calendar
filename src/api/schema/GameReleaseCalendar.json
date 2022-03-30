@@ -112,7 +112,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/UserGame"
+                    "$ref": "#/components/schemas/Game"
                   }
                 }
               }
@@ -435,37 +435,10 @@
           }
         }
       },
-      "User": {
-        "title": "User",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          }
-        }
-      },
-      "UserGame": {
-        "title": "UserGame",
-        "type": "object",
-        "properties": {
-          "user_id": {
-            "type": "string"
-          },
-          "game_id": {
-            "type": "number"
-          }
-        },
-        "description": "A game that a user has saved because they are interested in it"
-      },
       "Calendar": {
         "title": "Calendar",
         "type": "object",
+        "description": "Game Release Calendar",
         "properties": {
           "id": {
             "type": "string"
@@ -476,8 +449,7 @@
           "createdAt": {
             "type": "string"
           }
-        },
-        "description": "Game Release Calendar"
+        }
       }
     },
     "responses": {
