@@ -6,7 +6,7 @@
                 <div class="game-info">
                     <h5>{{ game.name }}</h5>
                     <h6>{{ game.involved_companies.find((company) => company.developer).company.name }}</h6>
-                    <h6 data-testid="release-date">{{ (new Date(game.first_release_date * 1000)).toLocaleDateString() }}</h6>
+                    <h6 data-testid="release-date">{{ (new Date(game.first_release_date * 1000)).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" }) }}</h6>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ onMounted(async () => {
 
 const sortedGames = computed(() => {
     const gamesCopy = [ ...games.value ];
-
+    
     return gamesCopy.sort((a, b) => {
         if (a.first_release_date < b.first_release_date) {
             return -1;

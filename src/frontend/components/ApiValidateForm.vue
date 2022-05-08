@@ -7,8 +7,7 @@
                 name="api-key" 
                 class="form-control" 
                 placeholder="API Key" 
-                :value="modelValue" 
-                @input="$emit('update:modelValue', $event.target.value)"
+                v-model="apiKey"
             >
         </div>
         <div class="col-md-2">
@@ -19,10 +18,10 @@
 
 <script setup>
     import axios from "axios";
-    import { onMounted } from "vue";
+    import { onMounted, ref } from "vue";
 
-    const props = defineProps(['modelValue']);
-    const emit = defineEmits(["update:modelValue", "authenticated"]);
+    const apiKey = ref("");
+    const emit = defineEmits(["authenticated"]);
 
     onMounted(async () => {
         const response = await axios.get("/api/access").catch((error) => {
@@ -37,7 +36,8 @@
 
     async function validateApiKey() {
       const form = new FormData();
-      form.append("apiKey", props.modelValue);
+      console.log(apiKey);
+      form.append("apiKey", apiKey.value);
       const response = await axios.post("/api/access", form).catch((error) => {
           if (!error.response || error.response.status !== 401) {
                 throw error;
