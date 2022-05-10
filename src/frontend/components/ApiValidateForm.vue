@@ -36,7 +36,6 @@
 
     async function validateApiKey() {
       const form = new FormData();
-      console.log(apiKey);
       form.append("apiKey", apiKey.value);
       const response = await axios.post("/api/access", form).catch((error) => {
           if (!error.response || error.response.status !== 401) {

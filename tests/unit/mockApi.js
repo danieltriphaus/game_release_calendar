@@ -16,7 +16,7 @@ const gameList = [
     },
     {
         id: 136150,
-        first_release_date: 1488326400,
+        //first_release_date: 1488326400,
         involved_companies: [
             { id: 143054, company: { id: 1843, name: "Other Developer" }, developer: true },
             { id: 143055, company: { id: 45, name: "Sony Computer Entertainment, Inc. (SCEI)" }, developer: false },

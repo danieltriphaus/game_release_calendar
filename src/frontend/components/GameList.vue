@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row" v-for="game in sortedGames" :key="game.id">
-            <div class="col game mt-2">
+            <div :id="'game-' + game.id" class="col game mt-2" data-testid="game">
                 <img v-if="game.cover" :src="game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + game.id + '-cover'">
                 <div class="game-info">
                     <h5>{{ game.name }}</h5>
@@ -35,6 +35,7 @@ onMounted(async () => {
     games.value = response.data;
 });
 
+//ToDo: move sorting logic to api layer
 const sortedGames = computed(() => {
     const gamesCopy = [ ...games.value ];
     
