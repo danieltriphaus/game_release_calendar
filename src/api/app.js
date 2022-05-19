@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import { apiBackend } from "./middleware/apiBackend.js";
 import multer from "multer";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 
 import historyApiFallback from "connect-history-api-fallback";
 
@@ -17,6 +18,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(cookieParser());
 router.use(multer().any());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(apiBackend());
 

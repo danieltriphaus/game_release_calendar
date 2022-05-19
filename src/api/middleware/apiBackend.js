@@ -8,6 +8,7 @@ import { postUserCalendar } from "../handlers/postUserCalendar.js";
 import { getUserCalendar } from "../handlers/getUserCalendar.js";
 import { getUserCalendars } from "../handlers/getUserCalendars.js";
 import { getUserGames } from "../handlers/getUserGames.js";
+import { postUserGLogin } from "../handlers/postUserGLogin.js";
 
 import { getCalendar } from "../datastore/getCalendar.js";
 
@@ -22,6 +23,7 @@ const api = new OpenAPIBackend({
         "get-user-calendar": getUserCalendar,
         "post-user-calendar": postUserCalendar,
         "get-user-calendars": getUserCalendars,
+        "post-user-g-login": postUserGLogin,
         "get-access": (context, req, res) => {
             res.status(200).end();
         },

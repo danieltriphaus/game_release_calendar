@@ -1,38 +1,35 @@
-import axios from "axios";
+import { getIgdbAccessToken } from "../igdb/getIgdbAccessToken.js";
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
 };
 
+export const setAccessCookies = (res, igdbAccessToken) => {
+    res.cookie("api_key", process.env.API_KEY, {
+        maxAge: igdbAccessToken.expires_in * 1000,
+        ...COOKIE_OPTIONS,
+    });
+
+    res.cookie("igdb_access_token", igdbAccessToken.access_token, {
+        maxAge: igdbAccessToken.expires_in * 1000,
+        ...COOKIE_OPTIONS,
+    });
+};
+
 export const postAccess = async (context, req, res) => {
     if (req.body.apiKey === process.env.API_KEY) {
-        const response = await axios
-            .post(
-                "https://id.twitch.tv/oauth2/token?client_id=" +
-                    process.env.IGDB_API_CLIENT_ID +
-                    "&client_secret=" +
-                    process.env.IGDB_API_CLIENT_SECRET +
-                    "&grant_type=client_credentials"
-            )
-            .catch((error) => {
-                if (error.response) {
-                    res.status(error.response.data.status).json({
-                        error: "external_request",
-                        message: error.response.data.message,
-                    });
-                }
+        let igdbAccessToken;
+        try {
+            igdbAccessToken = await getIgdbAccessToken();
+        } catch (error) {
+            res.status(error.response.data.status).json({
+                error: "external_request",
+                message: error.response.data.message,
             });
+        }
 
-        if (response) {
-            res.cookie("api_key", req.body.apiKey, {
-                maxAge: response.data.expires_in * 1000,
-                ...COOKIE_OPTIONS,
-            });
-
-            res.cookie("igdb_access_token", response.data.access_token, {
-                maxAge: response.data.expires_in * 1000,
-                ...COOKIE_OPTIONS,
-            });
+        if (igdbAccessToken) {
+            setAccessCookies(res, igdbAccessToken);
             res.status(200).json();
         }
     } else {

@@ -14,6 +14,7 @@ export function getRequest() {
     return {
         body: {},
         params: {},
+        cookies: {},
     };
 }
 
@@ -23,6 +24,7 @@ export function getResponse() {
         status: jest.fn(() => response),
         json: jest.fn(() => response),
         send: jest.fn(() => response),
+        end: jest.fn(() => response),
     };
 
     return response;

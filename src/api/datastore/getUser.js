@@ -8,3 +8,12 @@ export const getUser = async (userId) => {
 
     return user;
 };
+
+export const getUsersByEmailAddress = async (emailAddress) => {
+    const datastore = new Datastore();
+
+    const query = datastore.createQuery("user").filter("email_address", "=", emailAddress);
+    const [users] = await datastore.runQuery(query);
+
+    return users;
+};

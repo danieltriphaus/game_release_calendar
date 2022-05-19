@@ -359,6 +359,64 @@
           "required": true
         }
       ]
+    },
+    "/user/g-login": {
+      "post": {
+        "summary": "",
+        "operationId": "post-user-g-login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "CSRF Validation Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "csrf-validation-error": {
+                    "value": {
+                      "error": "csrf_validation_error",
+                      "message": "CSRF token validation failed"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Login Endpoint called by Google Sign In",
+        "security": [],
+        "x-internal": true,
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "credential": {
+                    "type": "string"
+                  },
+                  "g_csrf_token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
     }
   },
   "components": {
@@ -450,6 +508,22 @@
             "type": "string"
           }
         }
+      },
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "google_id": {
+            "type": "string"
+          },
+          "email_address": {
+            "type": "string"
+          }
+        },
+        "description": "A user of the app"
       }
     },
     "responses": {
