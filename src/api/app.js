@@ -4,6 +4,7 @@ import { apiBackend } from "./middleware/apiBackend.js";
 import multer from "multer";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import { getIgdbAccessToken } from "./igdb/igdbAccessToken.js";
 
 import historyApiFallback from "connect-history-api-fallback";
 
@@ -37,6 +38,8 @@ if (process.env.NODE_ENV === "development") {
     port = 3000;
 }
 
-const listener = app.listen(port, () => {
+await getIgdbAccessToken();
+
+const listener = app.listen(port, async () => {
     console.log("Listening on port " + listener.address().port);
 });

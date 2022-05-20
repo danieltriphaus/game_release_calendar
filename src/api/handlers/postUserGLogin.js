@@ -2,7 +2,7 @@ import { OAuth2Client } from "google-auth-library";
 import { nanoid } from "nanoid";
 import { upsertUser } from "../datastore/upsertUser.js";
 import { getUsersByEmailAddress } from "../datastore/getUser.js";
-import { getIgdbAccessToken } from "../igdb/getIgdbAccessToken.js";
+import { getIgdbAccessToken } from "../igdb/igdbAccessToken.js";
 import { setAccessCookies } from "./postAccess.js";
 
 export const postUserGLogin = async (context, req, res) => {

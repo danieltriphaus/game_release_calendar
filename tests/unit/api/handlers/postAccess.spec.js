@@ -1,6 +1,7 @@
 import { postAccess } from "@/api/handlers/postAccess";
 import { getContext, getRequest, getResponse } from "../expressMocks";
 import axios from "axios";
+import { clearLocalAccessToken } from "@/api/igdb/igdbAccessToken.js";
 
 jest.mock("axios");
 
@@ -15,6 +16,7 @@ it("should return 401 with error if apiKey is invalid", async () => {
 
     expect(response.status).toHaveBeenCalledWith(401);
     expect(response.json).toHaveBeenCalledWith(expect.objectContaining({}));
+    clearLocalAccessToken();
 });
 
 it("should return 200 and set cookies with api_key and igdb access token if apiKey is valid", async () => {
@@ -40,31 +42,6 @@ it("should return 200 and set cookies with api_key and igdb access token if apiK
             httpOnly: true,
         })
     );
-    expect(response.cookie).toHaveBeenCalledWith(
-        "igdb_access_token",
-        tokenResponse.access_token,
-        expect.objectContaining({
-            maxAge: tokenResponse.expires_in * 1000,
-            httpOnly: true,
-        })
-    );
     expect(response.status).toHaveBeenCalledWith(200);
-});
-
-it("should return error object if external request failed", async () => {
-    const response = getResponse();
-    const request = getRequest();
-    request.body.apiKey = "test_api_key";
-
-    const failedExternalResponse = { data: { status: 400, message: "invalid client" } };
-
-    axios.post.mockRejectedValueOnce({ response: failedExternalResponse });
-
-    await postAccess(context, request, response);
-
-    expect(response.status).toHaveBeenCalledWith(failedExternalResponse.data.status);
-    expect(response.json).toHaveBeenCalledWith({
-        error: "external_request",
-        message: failedExternalResponse.data.message,
-    });
+    clearLocalAccessToken();
 });
