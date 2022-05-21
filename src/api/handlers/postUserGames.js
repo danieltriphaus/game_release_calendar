@@ -1,9 +1,8 @@
-import { Datastore } from "@google-cloud/datastore";
 import { getGameList } from "../datastore/getGameList.js";
+import { upsertGameList } from "../datastore/upsertGameList.js";
 
 //ToDo: write test
 export const postUserGames = async (context, req, res) => {
-    const datastore = new Datastore();
     const userId = context.request.params.user_id;
 
     const gameList = await getGameList(userId);
@@ -14,14 +13,7 @@ export const postUserGames = async (context, req, res) => {
         games.push(...gameList.games);
     }
 
-    const gameListEntity = {
-        key: datastore.key(["user", userId, "game_list", "default"]),
-        data: {
-            games,
-        },
-    };
-
-    await datastore.upsert(gameListEntity);
+    await upsertGameList(userId, games, "default");
 
     res.status(200);
     res.end();

@@ -7,6 +7,7 @@ import { postUserCalendar } from "../handlers/postUserCalendar.js";
 import { getUserCalendar } from "../handlers/getUserCalendar.js";
 import { getUserCalendars } from "../handlers/getUserCalendars.js";
 import { getUserGames } from "../handlers/getUserGames.js";
+import { deleteUserGames } from "../handlers/deleteUserGames.js";
 import { postUserGLogin } from "../handlers/postUserGLogin.js";
 import { deleteAccess } from "../handlers/deleteAccess.js";
 
@@ -20,6 +21,7 @@ const api = new OpenAPIBackend({
         "get-game": getGame,
         "post-user-games": postUserGames,
         "get-user-games": getUserGames,
+        "delete-user-games": deleteUserGames,
         "get-user-calendar": getUserCalendar,
         "post-user-calendar": postUserCalendar,
         "get-user-calendars": getUserCalendars,
@@ -44,6 +46,7 @@ const api = new OpenAPIBackend({
 
 api.registerSecurityHandler("userAuth", async (context, req) => {
     const user = await getUserByAuthKey(req.cookies.auth_key);
+
     if (context.request.params.user_id && context.request.params.user_id === user.id) {
         return user;
     }

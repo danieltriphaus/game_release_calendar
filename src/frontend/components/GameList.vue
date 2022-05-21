@@ -8,6 +8,9 @@
                 <h6>{{ game.involved_companies.find((company) => company.developer).company.name }}</h6>
                 <h6 data-testid="release-date">{{ (new Date(game.first_release_date * 1000)).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" }) }}</h6>
             </div>
+            <div class="game-actions">
+                <button type="button" @click="deleteGame(game.id)" class="btn btn-outline-danger">Löschen</button>
+            </div>
         </div>
     </div>
 </template>
@@ -15,8 +18,10 @@
 <script setup>
 import GameSearch from "./GameSearch.vue";
 
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref, computed, inject } from "vue";
 import axios from "axios";
+
+const user = inject("user");
 
 const props = defineProps({
     userId: {
@@ -49,6 +54,12 @@ function onGameAdded(game) {
     games.value.push(game);
 }
 
+async function deleteGame(id) {
+    console.log(user);
+    await axios.delete("/api/user/" + user.value.id + "/games", { data: [id] });
+    populateGameList();
+}
+
 //ToDo: move sorting logic to api layer
 const sortedGames = computed(() => {
     const gamesCopy = [ ...games.value ];
@@ -77,6 +88,12 @@ const sortedGames = computed(() => {
     }
 
     .game-info {
+        margin-top: 10px;
+        padding-left: 10px;
+    }
+
+    .game-actions {
+        text-align: right;
         margin-top: 10px;
         padding-left: 10px;
     }

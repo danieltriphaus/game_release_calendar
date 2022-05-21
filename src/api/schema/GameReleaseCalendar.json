@@ -180,6 +180,33 @@
             "userAuth": []
           }
         ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-user-games",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "userAuth": []
+          }
+        ],
+        "description": "Delete Game from Users list"
       }
     },
     "/user/{user_id}/calendar": {
