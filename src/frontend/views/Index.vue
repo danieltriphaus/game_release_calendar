@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="row">
         <template v-if="isAuthenticated">
             <router-link to="/calendar">Kalendar generieren</router-link>
             <game-search />

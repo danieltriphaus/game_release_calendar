@@ -275,39 +275,6 @@
       }
     },
     "/access": {
-      "post": {
-        "summary": "",
-        "operationId": "post-access",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "headers": {
-              "Set-Cookie": {
-                "schema": {
-                  "type": "string"
-                },
-                "description": "API Key and IGDB Access Token"
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/invalid_api_key"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "string",
-                "description": "apiKey to validate"
-              }
-            }
-          },
-          "description": ""
-        },
-        "security": [],
-        "description": "Validate API Key and Set Auth Cookies"
-      },
       "get": {
         "summary": "",
         "operationId": "get-access",
@@ -321,6 +288,20 @@
         },
         "parameters": [],
         "description": "Endpoint to determine if a user is logged in",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-access",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
         "security": [
           {
             "userAuth": []

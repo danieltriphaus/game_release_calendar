@@ -8,6 +8,7 @@ import { getUserCalendar } from "../handlers/getUserCalendar.js";
 import { getUserCalendars } from "../handlers/getUserCalendars.js";
 import { getUserGames } from "../handlers/getUserGames.js";
 import { postUserGLogin } from "../handlers/postUserGLogin.js";
+import { deleteAccess } from "../handlers/deleteAccess.js";
 
 import { getCalendar } from "../datastore/getCalendar.js";
 import { getUserByAuthKey } from "../datastore/getUser.js";
@@ -23,6 +24,7 @@ const api = new OpenAPIBackend({
         "post-user-calendar": postUserCalendar,
         "get-user-calendars": getUserCalendars,
         "post-user-g-login": postUserGLogin,
+        "delete-access": deleteAccess,
         "get-access": (context, req, res) => {
             // eslint-disable-next-line no-unused-vars
             const { auth_key, ...publicUserData } = context.security.userAuth;

@@ -5,6 +5,7 @@
             <div class="game-info">
                 <h5>{{ result.name }}</h5>
                 <h6>{{ developerName }}</h6>
+                <h6 data-testid="release-date">{{ (new Date(result.first_release_date * 1000)).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" }) }}</h6>
             </div>
         </div>
     </div>
@@ -40,7 +41,6 @@ async function addGame() {
     .result {
         display: flex;
         cursor: pointer;
-        padding: 2px;
     }
 
     .result:hover {
