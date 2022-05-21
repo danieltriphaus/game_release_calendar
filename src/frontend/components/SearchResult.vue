@@ -16,9 +16,9 @@ import axios from "axios";
 import { computed, inject } from "vue";
 
 const userId = inject("userId");
-console.log(userId);
 
 const props = defineProps(["result"]);
+const emit = defineEmits(["game-added"]);
 
 const hasCover = computed(() => {
     return props.result.cover && props.result.cover.url;
@@ -32,8 +32,9 @@ const developerName = computed(() => {
     return props.result.involved_companies.find((involved_company) => involved_company.developer === true).company.name
 });
 
-async function addGame() {    
-    await axios.post("/api/user/" + userId.value + "/games", [props.result.id]);
+function addGame() {    
+    axios.post("/api/user/" + userId.value + "/games", [props.result.id]);
+    emit("game-added", props.result.id);
 }
 </script>
 

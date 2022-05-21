@@ -1,4 +1,5 @@
 <template>
+    <game-search @game-added="onGameAdded" />
     <div class="row" v-for="game in sortedGames" :key="game.id">
         <div :id="'game-' + game.id" class="col game mt-2" data-testid="game">
             <img v-if="game.cover" :src="game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + game.id + '-cover'">
@@ -12,6 +13,8 @@
 </template>
 
 <script setup>
+import GameSearch from "./GameSearch.vue";
+
 import { onMounted, ref, computed } from "vue";
 import axios from "axios";
 
@@ -28,7 +31,7 @@ const props = defineProps({
 
 const games = ref([]);
 
-onMounted(async () => {
+async function populateGameList() {
     const response = await axios.get("/api/user/" + props.userId + "/games").catch(() => { 
         console.log("error");
         //ToDo: implement UI Message no Games added
@@ -36,7 +39,15 @@ onMounted(async () => {
     if (response) {
         games.value = response.data;
     }
+}
+
+onMounted(async () => {
+    await populateGameList();
 });
+
+function onGameAdded(game) {
+    games.value.push(game);
+}
 
 //ToDo: move sorting logic to api layer
 const sortedGames = computed(() => {
