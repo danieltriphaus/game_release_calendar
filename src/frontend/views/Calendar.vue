@@ -1,13 +1,10 @@
 <template>
     <div class="container">
-        <form class="row" name="generate-calendar" @submit.prevent="createCalendar">
-            <div class="col-md-10">
-                <input type="password" id="api-key" name="api-key" class="form-control" placeholder="Password" v-model="password">
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-primary" @click="createCalendar">Kalender erstellen</button>
             </div>
-            <div class="col-md-2">
-                <input type="submit" class="btn btn-outline-primary" data-testid="create-calendar">
-            </div>
-        </form>
+        </div>
 
         <div v-for="calendar in calendars" :key="calendar.token" class="row calendar-link" data-testid="calendar-link">
             <calendar-link :calendar="calendar" />
@@ -24,6 +21,7 @@ export default {
     components: {
         CalendarLink
     },
+    inject: ["user"],
     data() {
         return {
             password: "",
@@ -32,20 +30,14 @@ export default {
         };
     },
     async mounted() {
-        const response = await axios.get("/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendars");
-        this.calendars = response.data;
+        if (this.user.id.length > 0) {
+            const response = await axios.get("/api/user/" + this.user.id + "/calendars");
+            this.calendars = response.data;
+        }
     },
     methods: {
         async createCalendar() {
-            const response = await axios
-                .post("/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendar", { password: this.password })
-                .catch((error) => {
-                    if (error.response && error.response.status === 401) {
-                        console.log("unauthorized");
-                    } else {
-                        throw error;
-                    }
-                });
+            const response = await axios.post("/api/user/" + this.user.id + "/calendar");
             if (response) {
                 this.calendarToken = response.data;
                 this.calendars.push({ token: this.calendarToken });

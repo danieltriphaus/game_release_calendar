@@ -12,7 +12,10 @@
 
 <script setup>
 import axios from "axios";
-import { computed } from "vue";
+import { computed, inject } from "vue";
+
+const userId = inject("userId");
+console.log(userId);
 
 const props = defineProps(["result"]);
 
@@ -29,7 +32,7 @@ const developerName = computed(() => {
 });
 
 async function addGame() {    
-    await axios.post("/api/user/y1xx/games", [props.result.id]);
+    await axios.post("/api/user/" + userId.value + "/games", [props.result.id]);
 }
 </script>
 

@@ -9,7 +9,7 @@ it("should render game info", async () => {
     const api = mockApi();
     const gameList = api.getEndpointResponseData("/api/user/y1xx/games", "GET");
 
-    render(GameList);
+    render(GameList, { props: { userId: "y1xx" } });
 
     await waitFor(() => {
         gameList.forEach((game) => {
@@ -29,10 +29,12 @@ it("should render cover if it exists", async () => {
     const api = mockApi();
     const gameList = api.getEndpointResponseData("/api/user/y1xx/games", "GET");
 
-    render(GameList);
+    render(GameList, { props: { userId: "y1xx" } });
 
     await waitFor(() => {
         expect(screen.getByTestId("game-" + gameList[0].id + "-cover")).toBeVisible();
         expect(screen.queryByTestId("game-" + gameList[1].id + "-cover")).not.toBeInTheDocument();
     });
 });
+
+//ToDo: Add test for api call to add game to list

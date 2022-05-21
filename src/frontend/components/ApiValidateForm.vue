@@ -1,49 +1,24 @@
 <template>
-    <form name="api-validate" @submit.prevent="validateApiKey">
-        <div class="col-md-10">
-            <input 
-                type="password" 
-                id="api-key" 
-                name="api-key" 
-                class="form-control" 
-                placeholder="API Key" 
-                v-model="apiKey"
-            >
-        </div>
-        <div class="col-md-2">
-            <input type="submit" class="btn btn-outline-primary" data-testid="api-validate">
-        </div>
-    </form>
+    <span />
 </template>
 
 <script setup>
     import axios from "axios";
-    import { onMounted, ref } from "vue";
+    import { onMounted } from "vue";
 
-    const apiKey = ref("");
-    const emit = defineEmits(["authenticated"]);
+    const emit = defineEmits(["authenticated", "authentication-failed"]);
 
     onMounted(async () => {
         const response = await axios.get("/api/access").catch((error) => {
             if (!error.response || error.response.status !== 401) {
                 throw error;
             }
+            if (error.response && error.response.status === 401) {
+                emit("authentication-failed");
+            }
         });
         if (response && response.status === 200) {
-            emit("authenticated");
+            emit("authenticated", response.data);
         }
     });
-
-    async function validateApiKey() {
-      const form = new FormData();
-      form.append("apiKey", apiKey.value);
-      const response = await axios.post("/api/access", form).catch((error) => {
-          if (!error.response || error.response.status !== 401) {
-                throw error;
-            }
-      });
-      if (response) {
-        emit("authenticated");
-      }
-    }
 </script>

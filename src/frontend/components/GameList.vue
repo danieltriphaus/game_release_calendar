@@ -17,7 +17,7 @@
 import { onMounted, ref, computed } from "vue";
 import axios from "axios";
 
-defineProps({
+const props = defineProps({
     userId: {
         type: String,
         default: ""
@@ -31,8 +31,13 @@ defineProps({
 const games = ref([]);
 
 onMounted(async () => {
-    const response = await axios.get("/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/games");
-    games.value = response.data;
+    const response = await axios.get("/api/user/" + props.userId + "/games").catch(() => { 
+        console.log("error");
+        //ToDo: implement UI Message no Games added
+    });
+    if (response) {
+        games.value = response.data;
+    }
 });
 
 //ToDo: move sorting logic to api layer

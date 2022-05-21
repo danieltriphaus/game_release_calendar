@@ -64,7 +64,8 @@
               }
             }
           }
-        }
+        },
+        "security": []
       }
     },
     "/game": {
@@ -97,7 +98,8 @@
             "required": true
           }
         ],
-        "description": "Get a Game"
+        "description": "Get a Game",
+        "security": []
       }
     },
     "/user/{user_id}/games": {
@@ -127,7 +129,12 @@
         },
         "operationId": "get-user-games",
         "parameters": [],
-        "description": "Get Users Saved Games"
+        "description": "Get Users Saved Games",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -167,7 +174,12 @@
           "description": ""
         },
         "parameters": [],
-        "description": "Save Games for User"
+        "description": "Save Games for User",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       }
     },
     "/user/{user_id}/calendar": {
@@ -255,27 +267,11 @@
           }
         },
         "description": "Generate Token for Calendar Access",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "format": "password",
-                "properties": {
-                  "password": {
-                    "type": "string",
-                    "format": "password"
-                  }
-                },
-                "required": [
-                  "password"
-                ],
-                "readOnly": true
-              }
-            }
-          },
-          "description": ""
-        }
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       }
     },
     "/access": {
@@ -324,7 +320,12 @@
           }
         },
         "parameters": [],
-        "description": "Endpoint to determine if a user is logged in"
+        "description": "Endpoint to determine if a user is logged in",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       }
     },
     "/user/{user_id}/calendars": {
@@ -347,7 +348,12 @@
           }
         },
         "operationId": "get-user-calendars",
-        "description": "Get a list of Calendars for a User"
+        "description": "Get a list of Calendars for a User",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -405,9 +411,6 @@
                 "type": "object",
                 "properties": {
                   "credential": {
-                    "type": "string"
-                  },
-                  "g_csrf_token": {
                     "type": "string"
                   }
                 }
@@ -512,6 +515,7 @@
       "User": {
         "title": "User",
         "type": "object",
+        "description": "A user of the app",
         "properties": {
           "id": {
             "type": "string"
@@ -522,8 +526,7 @@
           "email_address": {
             "type": "string"
           }
-        },
-        "description": "A user of the app"
+        }
       }
     },
     "responses": {
@@ -566,23 +569,17 @@
     },
     "parameters": {},
     "securitySchemes": {
-      "apiKey": {
-        "name": "API Key",
-        "type": "apiKey",
-        "in": "cookie",
-        "description": ""
-      },
       "token": {
         "name": "generated Token for URL Parameter",
         "type": "apiKey",
         "in": "query"
+      },
+      "userAuth": {
+        "name": "User Auth Key from Database",
+        "type": "apiKey",
+        "in": "cookie"
       }
     },
     "requestBodies": {}
-  },
-  "security": [
-    {
-      "apiKey": []
-    }
-  ]
+  }
 }

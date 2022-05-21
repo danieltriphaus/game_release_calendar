@@ -3,7 +3,10 @@ import { nanoid } from "nanoid";
 import { upsertUser } from "../datastore/upsertUser.js";
 import { getUsersByEmailAddress } from "../datastore/getUser.js";
 import { getIgdbAccessToken } from "../igdb/igdbAccessToken.js";
-import { setAccessCookies } from "./postAccess.js";
+
+const COOKIE_OPTIONS = {
+    httpOnly: true,
+};
 
 export const postUserGLogin = async (context, req, res) => {
     let userData;
@@ -25,6 +28,7 @@ export const postUserGLogin = async (context, req, res) => {
             id: nanoid(),
             google_id: payload["sub"],
             email_address: payload["email"],
+            auth_key: nanoid(32),
         };
 
         try {
@@ -36,6 +40,17 @@ export const postUserGLogin = async (context, req, res) => {
     }
 
     const igdbAccessToken = await getIgdbAccessToken();
-    setAccessCookies(res, igdbAccessToken);
-    res.status(200).json(userData);
+    res.cookie("api_key", process.env.API_KEY, {
+        maxAge: igdbAccessToken.expires_in * 1000,
+        ...COOKIE_OPTIONS,
+    });
+
+    res.cookie("auth_key", userData.auth_key, {
+        maxAge: igdbAccessToken.expires_in * 1000,
+        ...COOKIE_OPTIONS,
+    });
+
+    // eslint-disable-next-line no-unused-vars
+    const { auth_key, ...publicUserData } = userData;
+    res.status(200).json(publicUserData);
 };

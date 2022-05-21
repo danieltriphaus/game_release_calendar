@@ -1,6 +1,5 @@
 import { OpenAPIBackend } from "openapi-backend";
 
-import { postAccess } from "../handlers/postAccess.js";
 import { getGame } from "../handlers/getGame.js";
 import { getGameSearch } from "../handlers/getGameSearch.js";
 import { postUserGames } from "../handlers/postUserGames.js";
@@ -11,12 +10,12 @@ import { getUserGames } from "../handlers/getUserGames.js";
 import { postUserGLogin } from "../handlers/postUserGLogin.js";
 
 import { getCalendar } from "../datastore/getCalendar.js";
+import { getUserByAuthKey } from "../datastore/getUser.js";
 
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
     handlers: {
         "get-game-search": getGameSearch,
-        "post-access": postAccess,
         "get-game": getGame,
         "post-user-games": postUserGames,
         "get-user-games": getUserGames,
@@ -25,7 +24,9 @@ const api = new OpenAPIBackend({
         "get-user-calendars": getUserCalendars,
         "post-user-g-login": postUserGLogin,
         "get-access": (context, req, res) => {
-            res.status(200).end();
+            // eslint-disable-next-line no-unused-vars
+            const { auth_key, ...publicUserData } = context.security.userAuth;
+            res.status(200).json(publicUserData);
         },
         notFound: (context, req, res) => {
             res.status(404).json("API Route not found");
@@ -39,8 +40,14 @@ const api = new OpenAPIBackend({
     },
 });
 
-api.registerSecurityHandler("apiKey", (context, req) => {
-    return req.cookies.api_key === process.env.API_KEY;
+api.registerSecurityHandler("userAuth", async (context, req) => {
+    const user = await getUserByAuthKey(req.cookies.auth_key);
+    if (context.request.params.user_id && context.request.params.user_id === user.id) {
+        return user;
+    }
+    if (!context.request.params.user_id && user) {
+        return user;
+    }
 });
 
 api.registerSecurityHandler("token", async (context) => {

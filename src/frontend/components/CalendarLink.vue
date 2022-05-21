@@ -7,6 +7,7 @@
 <script>
 export default {
     name: "CalendarLink",
+    inject: ["user"],
     props: {
         calendar: {
             type: Object,
@@ -21,7 +22,7 @@ export default {
         calendarLink() {
             return window.location.protocol + "//" + window.location.hostname 
                 + ( window.location.port !== 80 ? ":" + window.location.port : "" )
-                + "/api/user/" + process.env.VUE_APP_DEFAULT_USER + "/calendar?token=" + this.calendar.token;
+                + "/api/user/" + this.user.id + "/calendar?token=" + this.calendar.token;
         }
     }
 }

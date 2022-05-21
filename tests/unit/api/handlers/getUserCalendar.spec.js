@@ -3,10 +3,12 @@ import { getGameList } from "@/api/datastore/getGameList";
 import { getCalendar } from "@/api/datastore/getCalendar";
 import axios from "axios";
 import { getContext } from "../expressMocks";
+import { getIgdbAccessToken } from "@/api/igdb/igdbAccessToken.js";
 
 jest.mock("axios");
 jest.mock("@/api/datastore/getGameList");
 jest.mock("@/api/datastore/getCalendar");
+jest.mock("@/api/igdb/igdbAccessToken.js");
 
 const gameList = {
     games: [119308, 112874],
@@ -32,9 +34,14 @@ const gameResponse = [
     },
 ];
 
+const igdbAccessToken = {
+    access_token: "testtoken",
+};
+
 it("should add gameIds as string to igdb request", async () => {
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
+    getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);
     axios.post.mockResolvedValueOnce({ data: gameResponse });
 
     const context = getContext();
@@ -46,7 +53,7 @@ it("should add gameIds as string to igdb request", async () => {
         expect.stringContaining("/games"),
         expect.stringContaining(gameList.games[0].toString(), gameList.games[1].toString()),
         expect.objectContaining({
-            headers: expect.objectContaining({ Authorization: "Bearer " + calendar.igdbAccessToken }),
+            headers: expect.objectContaining({ Authorization: "Bearer " + igdbAccessToken.access_token }),
         })
     );
 });
@@ -54,6 +61,7 @@ it("should add gameIds as string to igdb request", async () => {
 it("should create calendar from returned game data", async () => {
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
+    getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);
     axios.post.mockResolvedValueOnce({ data: gameResponse });
 
     const context = getContext();
@@ -88,6 +96,7 @@ it("should not create event if release_date is undefined", async () => {
 
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
+    getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);
     axios.post.mockResolvedValueOnce({ data: gameResponse });
 
     const context = getContext();
