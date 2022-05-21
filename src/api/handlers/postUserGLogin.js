@@ -40,10 +40,6 @@ export const postUserGLogin = async (context, req, res) => {
     }
 
     const igdbAccessToken = await getIgdbAccessToken();
-    res.cookie("api_key", process.env.API_KEY, {
-        maxAge: igdbAccessToken.expires_in * 1000,
-        ...COOKIE_OPTIONS,
-    });
 
     res.cookie("auth_key", userData.auth_key, {
         maxAge: igdbAccessToken.expires_in * 1000,
