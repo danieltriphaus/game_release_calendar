@@ -44,7 +44,12 @@ const api = new OpenAPIBackend({
     },
 });
 
-api.registerSecurityHandler("userAuth", async (context, req) => {
+api.registerSecurityHandler("userAuth", async (context, req, res) => {
+    if (process.env.NODE_ENV === "development" && req.query.auth_key) {
+        req.cookies.auth_key = req.query.auth_key;
+        res.cookie("auth_key", req.query.auth_key, { httpOnly: true });
+    }
+
     const user = await getUserByAuthKey(req.cookies.auth_key);
 
     if (context.request.params.user_id && context.request.params.user_id === user.id) {

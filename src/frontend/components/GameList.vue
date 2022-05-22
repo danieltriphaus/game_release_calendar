@@ -2,7 +2,7 @@
     <game-search @game-added="onGameAdded" />
     <h5>Released Games</h5>
     <div class="row" v-for="game in releasedGames" :key="game.id">
-        <game-card :game="game" />
+        <game-card :game="game" @delete-game="deleteGame" />
     </div>
     <div class="border mt-4"></div>
     <h5>Unreleased Games</h5>
