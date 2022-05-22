@@ -1,22 +1,19 @@
 <template>
     <game-search @game-added="onGameAdded" />
-    <div class="row" v-for="game in sortedGames" :key="game.id">
-        <div :id="'game-' + game.id" class="col game mt-2" data-testid="game">
-            <img v-if="game.cover" :src="game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + game.id + '-cover'">
-            <div class="game-info">
-                <h5>{{ game.name }}</h5>
-                <h6>{{ game.involved_companies.find((company) => company.developer).company.name }}</h6>
-                <h6 data-testid="release-date">{{ (new Date(game.first_release_date * 1000)).toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" }) }}</h6>
-            </div>
-            <div class="game-actions">
-                <button type="button" @click="deleteGame(game.id)" class="btn btn-outline-danger">Löschen</button>
-            </div>
-        </div>
+    <h5>Released Games</h5>
+    <div class="row" v-for="game in releasedGames" :key="game.id">
+        <game-card :game="game" />
+    </div>
+    <div class="border mt-4"></div>
+    <h5>Unreleased Games</h5>
+    <div class="row" v-for="game in unreleasedGames" :key="game.id">
+        <game-card :game="game" @delete-game="deleteGame" />
     </div>
 </template>
 
 <script setup>
 import GameSearch from "./GameSearch.vue";
+import GameCard from "./GameCard.vue";
 
 import { onMounted, ref, computed, inject } from "vue";
 import axios from "axios";
@@ -37,8 +34,8 @@ const props = defineProps({
 const games = ref([]);
 
 async function populateGameList() {
-    const response = await axios.get("/api/user/" + props.userId + "/games").catch(() => { 
-        console.log("error");
+    const response = await axios.get("/api/user/" + props.userId + "/games").catch((error) => { 
+        console.log(error.response);
         //ToDo: implement UI Message no Games added
     });
     if (response) {
@@ -55,7 +52,6 @@ function onGameAdded(game) {
 }
 
 async function deleteGame(id) {
-    console.log(user);
     await axios.delete("/api/user/" + user.value.id + "/games", { data: [id] });
     populateGameList();
 }
@@ -76,6 +72,20 @@ const sortedGames = computed(() => {
         }
     });
 });
+
+const releasedGames = computed(() => {
+    const games = sortedGames.value.filter((game) => {
+        return new Date(game.first_release_date * 1000) <= new Date()
+    });
+    return games;
+});
+
+const unreleasedGames = computed(() => {
+    const games = sortedGames.value.filter((game) => {
+        return new Date(game.first_release_date * 1000) > new Date() || !game.first_release_date
+    });
+    return games;
+})
 </script>
 
 <style scoped>
@@ -96,5 +106,10 @@ const sortedGames = computed(() => {
         text-align: right;
         margin-top: 10px;
         padding-left: 10px;
+    }
+
+    .border {
+        border-bottom: 1px;
+        border-bottom-color: black;
     }
 </style>
