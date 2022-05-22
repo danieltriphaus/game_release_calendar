@@ -3,6 +3,7 @@ node_modules
 /dist
 src/api/views
 grc-6732-62f6819d4df8.json
+coverage
 
 # local env files
 .env.local

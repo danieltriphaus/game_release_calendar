@@ -3,6 +3,7 @@ import { getContext } from "../expressMocks";
 import { getCalendars } from "@/api/datastore/getCalendars.js";
 
 jest.mock("@/api/datastore/getCalendars.js");
+jest.mock("@/api/igdb/igdbAccessToken.js");
 
 const calendars = [
     {

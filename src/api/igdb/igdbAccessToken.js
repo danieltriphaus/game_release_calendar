@@ -21,9 +21,11 @@ export const getIgdbAccessToken = async () => {
                 console.error(error);
             });
 
-        accessToken = response.data;
-        console.log("igdb Access Token sucessfully obtained");
-        return response.data;
+        if (response) {
+            accessToken = response.data;
+            console.log("igdb Access Token sucessfully obtained");
+            return response.data;
+        }
     } else {
         return accessToken;
     }

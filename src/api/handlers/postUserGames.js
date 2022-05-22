@@ -1,7 +1,6 @@
 import { getGameList } from "../datastore/getGameList.js";
 import { upsertGameList } from "../datastore/upsertGameList.js";
 
-//ToDo: write test
 export const postUserGames = async (context, req, res) => {
     const userId = context.request.params.user_id;
 

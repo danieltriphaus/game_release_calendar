@@ -36,5 +36,3 @@ it("should render cover if it exists", async () => {
         expect(screen.queryByTestId("game-" + gameList[1].id + "-cover")).not.toBeInTheDocument();
     });
 });
-
-//ToDo: Add test for api call to add game to list

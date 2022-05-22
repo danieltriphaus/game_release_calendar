@@ -33,4 +33,14 @@ it("should return return either local accessToken or get new one from igdb API",
     const accessTokenAfterClear = await getIgdbAccessToken();
     expect(accessTokenAfterClear).toMatchObject(tokenResponseSecond);
     expect(axios.post).toHaveBeenCalledTimes(2);
+
+    clearLocalAccessToken();
+});
+
+it("should not throw error if accessToken could not be obtained", async () => {
+    axios.post.mockRejectedValueOnce({ response: { status: 500 } });
+
+    const accessToken = await getIgdbAccessToken();
+
+    expect(accessToken).toBeFalsy();
 });
