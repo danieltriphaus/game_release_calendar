@@ -61,10 +61,10 @@ const sortedGames = computed(() => {
     const gamesCopy = [ ...games.value ];
     
     return gamesCopy.sort((a, b) => {
-        if (a.first_release_date < b.first_release_date) {
+        if (a.first_release_date < b.first_release_date || !b.first_release_date) {
             return -1;
         }
-        if (a.first_release_date > b.first_release_date) {
+        if (a.first_release_date > b.first_release_date || !a.first_release_date) {
             return 1;
         }
         if (a.first_release_date === b.first_release_date) {

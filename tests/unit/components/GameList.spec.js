@@ -20,7 +20,7 @@ it("should render game info", async () => {
         });
         screen.getAllByTestId("release-date").forEach((node) => {
             expect(node).not.toBeEmptyDOMElement();
-            expect(node.textContent).toMatch(/\d|Invalid Date/);
+            expect(node.textContent).toMatch(/\d|TBA/);
         });
     });
 });
