@@ -1,0 +1,235 @@
+[
+    {
+        "id": 26622,
+        "cover": {
+            "id": 153290,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3aa2.jpg",
+            "width": 600
+        },
+        "first_release_date": 1656547200,
+        "involved_companies": [{ "id": 157920, "company": { "id": 4534, "name": "GalaxyTrail" }, "developer": true }],
+        "name": "Freedom Planet 2"
+    },
+    {
+        "id": 112874,
+        "cover": {
+            "id": 115194,
+            "height": 1056,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2gvu.jpg",
+            "width": 792
+        },
+        "first_release_date": 1645142400,
+        "involved_companies": [
+            { "id": 166703, "company": { "id": 1843, "name": "Guerrilla Games" }, "developer": true },
+            { "id": 166704, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false }
+        ],
+        "name": "Horizon Forbidden West"
+    },
+    {
+        "id": 113119,
+        "cover": {
+            "id": 219277,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4p71.jpg",
+            "width": 600
+        },
+        "first_release_date": 1651017600,
+        "involved_companies": [
+            { "id": 166559, "company": { "id": 18521, "name": "Crows Crows Crows" }, "developer": true }
+        ],
+        "name": "The Stanley Parable: Ultra Deluxe"
+    },
+    {
+        "id": 119133,
+        "cover": {
+            "id": 212094,
+            "height": 2468,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4jni.jpg",
+            "width": 1851
+        },
+        "first_release_date": 1645747200,
+        "involved_companies": [
+            { "id": 158585, "company": { "id": 248, "name": "Bandai Namco Entertainment" }, "developer": false },
+            { "id": 158586, "company": { "id": 1012, "name": "FromSoftware" }, "developer": true }
+        ],
+        "name": "Elden Ring"
+    },
+    {
+        "id": 119308,
+        "cover": {
+            "id": 106381,
+            "height": 1800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2a31.jpg",
+            "width": 1350
+        },
+        "first_release_date": 1648166400,
+        "involved_companies": [
+            { "id": 102032, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false },
+            { "id": 102033, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true }
+        ],
+        "name": "GhostWire: Tokyo"
+    },
+    {
+        "id": 127342,
+        "cover": {
+            "id": 87004,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co1v4s.jpg",
+            "width": 600
+        },
+        "involved_companies": [
+            { "id": 98883, "company": { "id": 795, "name": "Ninja Theory" }, "developer": true },
+            { "id": 98884, "company": { "id": 1010, "name": "Microsoft Studios" }, "developer": false }
+        ],
+        "name": "Senua's Saga: Hellblade II"
+    },
+    {
+        "id": 134583,
+        "cover": {
+            "id": 199903,
+            "height": 960,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4a8v.jpg",
+            "width": 720
+        },
+        "first_release_date": 1665446400,
+        "involved_companies": [
+            { "id": 158604, "company": { "id": 26, "name": "Square Enix" }, "developer": false },
+            { "id": 158605, "company": { "id": 37969, "name": "Luminous Productions" }, "developer": true }
+        ],
+        "name": "FORSPOKEN"
+    },
+    {
+        "id": 136993,
+        "cover": {
+            "id": 176615,
+            "height": 3408,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3s9z.jpg",
+            "width": 2556
+        },
+        "first_release_date": 1666656000,
+        "involved_companies": [
+            { "id": 106240, "company": { "id": 50, "name": "WB Games" }, "developer": false },
+            { "id": 106241, "company": { "id": 937, "name": "WB Games Montréal" }, "developer": true }
+        ],
+        "name": "Gotham Knights"
+    },
+    {
+        "id": 144022,
+        "cover": {
+            "id": 208864,
+            "height": 1600,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4h5s.jpg",
+            "width": 1200
+        },
+        "first_release_date": 1644278400,
+        "involved_companies": [{ "id": 120003, "company": { "id": 11674, "name": "Sloclap" }, "developer": true }],
+        "name": "Sifu"
+    },
+    {
+        "id": 145028,
+        "cover": {
+            "id": 134976,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2w5c.jpg",
+            "width": 600
+        },
+        "first_release_date": 1660003200,
+        "involved_companies": [
+            { "id": 165392, "company": { "id": 16437, "name": "Team17" }, "developer": false },
+            { "id": 165393, "company": { "id": 32832, "name": "OverBorder Studio" }, "developer": true }
+        ],
+        "name": "Thymesia"
+    },
+    {
+        "id": 152076,
+        "cover": {
+            "id": 222171,
+            "height": 1800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4rff.jpg",
+            "width": 1350
+        },
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 171442, "company": { "id": 34938, "name": "Brass Token" }, "developer": true },
+            { "id": 171443, "company": { "id": 34980, "name": "Primer Matter" }, "developer": false }
+        ],
+        "name": "The Chant"
+    },
+    {
+        "id": 152242,
+        "cover": {
+            "id": 152586,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co39qi.jpg",
+            "width": 600
+        },
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 139321, "company": { "id": 442, "name": "Asobo Studio" }, "developer": true },
+            { "id": 166433, "company": { "id": 110, "name": "Focus Entertainment" }, "developer": false }
+        ],
+        "name": "A Plague Tale: Requiem"
+    },
+    {
+        "id": 152262,
+        "cover": {
+            "id": 152650,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co39sa.jpg",
+            "width": 600
+        },
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 138907, "company": { "id": 14755, "name": "Modus Games" }, "developer": false },
+            { "id": 138908, "company": { "id": 35075, "name": "Reply Game Studio" }, "developer": true }
+        ],
+        "name": "Soulstice"
+    },
+    {
+        "id": 168670,
+        "cover": {
+            "id": 177429,
+            "height": 1199,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3swl.jpg",
+            "width": 899
+        },
+        "first_release_date": 1643328000,
+        "involved_companies": [
+            { "id": 148121, "company": { "id": 2121, "name": "Iron Galaxy Studios" }, "developer": false },
+            { "id": 158971, "company": { "id": 401, "name": "Naughty Dog" }, "developer": true },
+            { "id": 163383, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false }
+        ],
+        "name": "Uncharted: Legacy of Thieves Collection"
+    },
+    {
+        "id": 191420,
+        "cover": {
+            "id": 209117,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4hct.jpg",
+            "width": 600
+        },
+        "first_release_date": 1652313600,
+        "involved_companies": [
+            { "id": 163699, "company": { "id": 26, "name": "Square Enix" }, "developer": false },
+            { "id": 163700, "company": { "id": 18556, "name": "h.a.n.d. Inc." }, "developer": true }
+        ],
+        "name": "The Centennial Case: A Shijima Story"
+    },
+    {
+        "id": 194404,
+        "cover": {
+            "id": 213304,
+            "height": 1212,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4kl4.jpg",
+            "width": 909
+        },
+        "first_release_date": 1654819200,
+        "involved_companies": [
+            { "id": 165766, "company": { "id": 4895, "name": "Supermassive Games" }, "developer": true },
+            { "id": 165767, "company": { "id": 8, "name": "2K Games" }, "developer": false }
+        ],
+        "name": "The Quarry"
+    }
+]

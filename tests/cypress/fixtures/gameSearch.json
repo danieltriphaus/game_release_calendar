@@ -1,0 +1,46 @@
+[
+    {
+        "id": 91724,
+        "cover": {
+            "id": 66493,
+            "height": 445,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/rfayiuzryriced9g4c1k.jpg",
+            "width": 333
+        },
+        "involved_companies": [
+            { "id": 65698, "company": { "id": 15756, "name": "A Different Game" }, "developer": true },
+            { "id": 65699, "company": { "id": 14586, "name": "Majesco" }, "developer": false }
+        ],
+        "name": "Ghostwire"
+    },
+    {
+        "id": 119308,
+        "cover": {
+            "id": 106381,
+            "height": 1800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2a31.jpg",
+            "width": 1350
+        },
+        "first_release_date": 1648166400,
+        "involved_companies": [
+            { "id": 102032, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false },
+            { "id": 102033, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true }
+        ],
+        "name": "GhostWire: Tokyo"
+    },
+    {
+        "id": 194210,
+        "cover": {
+            "id": 212737,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4k5d.jpg",
+            "width": 600
+        },
+        "first_release_date": 1646697600,
+        "involved_companies": [
+            { "id": 165295, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true },
+            { "id": 165296, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false }
+        ],
+        "name": "Ghostwire: Tokyo - Prelude: The Corrupted Casefile"
+    }
+]

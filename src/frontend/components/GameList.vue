@@ -1,12 +1,12 @@
 <template>
     <game-search @game-added="onGameAdded" />
     <h5>Released Games</h5>
-    <div class="row" v-for="game in releasedGames" :key="game.id">
+    <div class="row" data-cy="released-games" v-for="game in releasedGames" :key="game.id">
         <game-card :game="game" @delete-game="deleteGame" />
     </div>
     <div class="border mt-4"></div>
     <h5>Unreleased Games</h5>
-    <div class="row" v-for="game in unreleasedGames" :key="game.id">
+    <div class="row" data-cy="unreleased-games" v-for="game in unreleasedGames" :key="game.id">
         <game-card :game="game" @delete-game="deleteGame" />
     </div>
 </template>

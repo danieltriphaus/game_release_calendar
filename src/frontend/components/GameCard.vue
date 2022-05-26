@@ -2,12 +2,12 @@
     <div :id="'game-' + props.game.id" class="col game mt-2" data-testid="game">
         <img v-if="props.game.cover" :src="props.game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + props.game.id + '-cover'">
         <div class="game-info">
-            <h5>{{ props.game.name }}</h5>
+            <h5 data-cy="game-title">{{ props.game.name }}</h5>
             <h6>{{ developer }}</h6>
-            <h6 data-testid="release-date">{{ releaseDate }}</h6>
+            <h6 data-testid="release-date" class="release-date">{{ releaseDate }}</h6>
         </div>
         <div class="game-actions">
-            <button type="button" @click="emit('delete-game', props.game.id)" class="btn btn-outline-danger">Löschen</button>
+            <button type="button" @click="emit('delete-game', props.game.id)" class="btn btn-outline-danger" data-cy="delete-game">Löschen</button>
         </div>
     </div>
 </template>

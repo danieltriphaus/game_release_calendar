@@ -2,7 +2,7 @@
     <div>
         <div class="row mt-4">
             <div class="col">
-                <input type="search" v-debounce:500ms="searchGames" v-model="search.query" id="search-games" name="search-games" class="form-control" placeholder="Suche Game">
+                <input type="search" v-debounce:500ms="searchGames" v-model="search.query" data-cy="search-games" name="search-games" class="form-control" placeholder="Suche Game">
             </div>
         </div>
 

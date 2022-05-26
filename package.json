@@ -6,6 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --runInBand",
+    "test:cypressOpen": "yarn run cypress open --project tests",
+    "test:cypress": "yarn run cypress run --project tests",
     "lint": "vue-cli-service lint",
     "startServer": "nodemon ./src/api/app.js",
     "start": "node src/api/app.js"
@@ -34,6 +36,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@cypress/vue": "^3.1.2",
+    "@cypress/webpack-dev-server": "^1.8.4",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/vue": "^6.4.2",
     "@vue/cli-plugin-babel": "~5.0.0",
@@ -44,10 +48,13 @@
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
+    "cypress": "^9.7.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.5",
     "prettier": "^2.4.1"
   }
