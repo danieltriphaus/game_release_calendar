@@ -7,12 +7,12 @@ jest.mock("@/api/datastore/upsertGameList");
 jest.mock("@/api/datastore/getGameList");
 
 it("add games to datastore", async () => {
-    const gameListGames = [123, 789];
+    const gameListGames = [123, 789, "6WjXhK3Iec1C9UwTBq123"];
     getGameList.mockResolvedValueOnce({ games: gameListGames });
 
     const context = getContext();
     context.request.params.user_id = "y1xx";
-    context.request.body = [132, 165];
+    context.request.body = [132, 165, "6WjXhK3Iec1C9UwTBqJhH"];
 
     await postUserGames(context, context.request, context.response);
 
@@ -27,7 +27,7 @@ it("add games to datastore", async () => {
 it("create list and add games if no list could be found", async () => {
     const context = getContext();
     context.request.params.user_id = "y1xx";
-    context.request.body = [132, 165];
+    context.request.body = [132, 165, "6WjXhK3Iec1C9UwTBqJhH"];
 
     await postUserGames(context, context.request, context.response);
 

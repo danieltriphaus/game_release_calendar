@@ -1,0 +1,42 @@
+<template>
+    <div class="row mt-2">
+        <template v-if="isTempGameInput">
+            <div class="col-6">
+                <div class="input-group">
+                    <input type="text" data-cy="temp-game-name" placeholder="Name" class="form-control" v-model="temporaryGame.name"/>
+                    <div class="input-group-append">
+                        <button type="button" data-cy="add-temp-game-to-list" @click="addTemporaryGame" class="btn btn-outline-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <div v-else class="col">
+            <button type="button" @click="isTempGameInput = true" data-cy="add-temp-game" class="btn btn-outline-primary">Game not found?</button>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { ref, reactive, inject } from "vue";
+import { nanoid } from "nanoid";
+import axios from "axios";
+
+const emit = defineEmits(["game-added"]);
+const userId = inject("userId");
+
+const isTempGameInput = ref(false);
+
+const temporaryGame = reactive({
+    id: "",
+    name: "",
+});
+
+function addTemporaryGame() {
+    temporaryGame.id = nanoid();
+    axios.post("/api/game", temporaryGame);
+    axios.post("/api/user/" + userId.value + "/games", [temporaryGame.id]);
+    isTempGameInput.value = false;
+    emit("game-added", temporaryGame);
+}
+
+</script>

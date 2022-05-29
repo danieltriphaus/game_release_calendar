@@ -98,8 +98,31 @@
             "required": true
           }
         ],
-        "description": "Get a Game",
-        "security": []
+        "description": "Get a Game"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-game",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Add temporary game to database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Game"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
       }
     },
     "/user/{user_id}/games": {
