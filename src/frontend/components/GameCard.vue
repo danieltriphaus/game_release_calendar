@@ -1,5 +1,5 @@
 <template>
-    <div :id="'game-' + props.game.id" class="col game mt-2" data-testid="game">
+    <div :id="'game-' + props.game.id" class="col game mt-2" data-testid="game" data-cy="game">
         <img v-if="props.game.cover" :src="props.game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + props.game.id + '-cover'">
         <div class="game-info">
             <h5 data-cy="game-title">{{ props.game.name }}</h5>
@@ -34,7 +34,7 @@ const releaseDate = computed(() => {
 });
 
 const developer = computed(() => {
-    return props.game.involved_companies.find((company) => company.developer).company.name
+    return props.game.involved_companies ? props.game.involved_companies.find((company) => company.developer).company.name : "";
 });
 </script>
 

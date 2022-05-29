@@ -4,14 +4,16 @@ import { getCalendar } from "@/api/datastore/getCalendar";
 import axios from "axios";
 import { getContext } from "../expressMocks";
 import { getIgdbAccessToken } from "@/api/igdb/igdbAccessToken.js";
+import { convertFromDatastoreResult } from "@/api/datastore/getTemporaryGames.js";
 
 jest.mock("axios");
 jest.mock("@/api/datastore/getGameList");
 jest.mock("@/api/datastore/getCalendar");
 jest.mock("@/api/igdb/igdbAccessToken.js");
+jest.mock("@/api/datastore/getTemporaryGames.js");
 
 const gameList = {
-    games: [119308, 112874],
+    games: [119308, 112874, "6WjXhK3Iec1C9UwTBqJhH"],
 };
 
 const calendar = {
@@ -39,6 +41,7 @@ const igdbAccessToken = {
 };
 
 it("should add gameIds as string to igdb request", async () => {
+    convertFromDatastoreResult.mockReturnValueOnce([]);
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
     getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);
@@ -51,7 +54,11 @@ it("should add gameIds as string to igdb request", async () => {
 
     expect(axios.post).toHaveBeenCalledWith(
         expect.stringContaining("/games"),
-        expect.stringContaining(gameList.games[0].toString(), gameList.games[1].toString()),
+        expect.stringContaining(
+            gameList.games[0].toString(),
+            gameList.games[1].toString(),
+            gameList.games[2].toString()
+        ),
         expect.objectContaining({
             headers: expect.objectContaining({ Authorization: "Bearer " + igdbAccessToken.access_token }),
         })
@@ -59,6 +66,7 @@ it("should add gameIds as string to igdb request", async () => {
 });
 
 it("should create calendar from returned game data", async () => {
+    convertFromDatastoreResult.mockReturnValueOnce([]);
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
     getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);
@@ -94,6 +102,7 @@ it("should return 404 if calendar cannot be found", async () => {
 it("should not create event if release_date is undefined", async () => {
     gameResponse.push({ id: 12345, name: "Game Without Release Date" });
 
+    convertFromDatastoreResult.mockReturnValueOnce([]);
     getGameList.mockResolvedValueOnce(gameList);
     getCalendar.mockResolvedValueOnce(calendar);
     getIgdbAccessToken.mockResolvedValueOnce(igdbAccessToken);

@@ -1,5 +1,6 @@
 <template>
     <game-search @game-added="onGameAdded" />
+    <add-temporary-game @game-added="onGameAdded" />
     <h5>Released Games</h5>
     <div class="row" data-cy="released-games" v-for="game in releasedGames" :key="game.id">
         <game-card :game="game" @delete-game="deleteGame" />
@@ -14,6 +15,7 @@
 <script setup>
 import GameSearch from "./GameSearch.vue";
 import GameCard from "./GameCard.vue";
+import AddTemporaryGame from "./AddTemporaryGame.vue";
 
 import { onMounted, ref, computed, inject } from "vue";
 import axios from "axios";

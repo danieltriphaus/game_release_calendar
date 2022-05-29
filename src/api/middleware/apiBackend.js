@@ -10,6 +10,7 @@ import { getUserGames } from "../handlers/getUserGames.js";
 import { deleteUserGames } from "../handlers/deleteUserGames.js";
 import { postUserGLogin } from "../handlers/postUserGLogin.js";
 import { deleteAccess } from "../handlers/deleteAccess.js";
+import { postGame } from "../handlers/postGame.js";
 
 import { getCalendar } from "../datastore/getCalendar.js";
 import { getUserByAuthKey } from "../datastore/getUser.js";
@@ -19,6 +20,7 @@ const api = new OpenAPIBackend({
     handlers: {
         "get-game-search": getGameSearch,
         "get-game": getGame,
+        "post-game": postGame,
         "post-user-games": postUserGames,
         "get-user-games": getUserGames,
         "delete-user-games": deleteUserGames,
