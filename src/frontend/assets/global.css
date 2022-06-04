@@ -1,0 +1,9 @@
+.btn-igdb {
+    color: #7313FF;
+    border-color: #7313FF;
+}
+
+.btn-igdb:hover {
+    color: #fff;
+    background-color: #7313FF;
+  }

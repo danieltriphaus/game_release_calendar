@@ -1,6 +1,7 @@
 export const displayFields = [
     "name",
     "first_release_date",
+    "url",
     "cover.height",
     "cover.width",
     "cover.url",

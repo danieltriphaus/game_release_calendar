@@ -56,14 +56,16 @@ describe("Game List Tests", () => {
 
         cy.visit("/");
 
-        cy.get("[data-cy='released-games'] [data-cy='game-title']")
-            .first()
-            .invoke("text")
-            .should("equal", "Uncharted: Legacy of Thieves Collection");
+        cy.get("[data-cy='released-games'] [data-cy='release-date']").should(($releaseDate) => {
+            expect(Date.parse($releaseDate[0].textContent))
+                .to.be.lessThan(Date.parse($releaseDate[1].textContent))
+                .and.to.be.lessThan(now);
+        });
 
-        cy.get("[data-cy='unreleased-games'] [data-cy='game-title']")
-            .first()
-            .invoke("text")
-            .should("equal", "The Quarry");
+        cy.get("[data-cy='unreleased-games'] [data-cy='release-date']").should(($releaseDate) => {
+            expect(Date.parse($releaseDate[0].textContent))
+                .to.be.lessThan(Date.parse($releaseDate[1].textContent))
+                .and.to.be.greaterThan(now);
+        });
     });
 });

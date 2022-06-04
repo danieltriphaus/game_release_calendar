@@ -1,15 +1,35 @@
 [
     {
-        "id": 26622,
+        "id": 9687,
         "cover": {
-            "id": 153290,
+            "id": 118486,
+            "height": 880,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2jfa.jpg",
+            "width": 660
+        },
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 154837, "company": { "id": 19142, "name": "Neostream Interactive" }, "developer": true }
+        ],
+        "name": "Little Devil Inside",
+        "url": "https://www.igdb.com/games/little-devil-inside"
+    },
+    {
+        "id": 19817,
+        "cover": {
+            "id": 81892,
             "height": 800,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3aa2.jpg",
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co1r6s.jpg",
             "width": 600
         },
-        "first_release_date": 1656547200,
-        "involved_companies": [{ "id": 157920, "company": { "id": 4534, "name": "GalaxyTrail" }, "developer": true }],
-        "name": "Freedom Planet 2"
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 111428, "company": { "id": 10219, "name": "ebb Software" }, "developer": true },
+            { "id": 150785, "company": { "id": 35637, "name": "Kowloon Nights" }, "developer": false },
+            { "id": 150786, "company": { "id": 37893, "name": "Kepler Interactive" }, "developer": false }
+        ],
+        "name": "Scorn",
+        "url": "https://www.igdb.com/games/scorn"
     },
     {
         "id": 112874,
@@ -24,21 +44,26 @@
             { "id": 166703, "company": { "id": 1843, "name": "Guerrilla Games" }, "developer": true },
             { "id": 166704, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false }
         ],
-        "name": "Horizon Forbidden West"
+        "name": "Horizon Forbidden West",
+        "url": "https://www.igdb.com/games/horizon-forbidden-west"
     },
     {
-        "id": 113119,
+        "id": 112875,
         "cover": {
-            "id": 219277,
-            "height": 800,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4p71.jpg",
-            "width": 600
+            "id": 177428,
+            "height": 1080,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3swk.jpg",
+            "width": 810
         },
-        "first_release_date": 1651017600,
+        "first_release_date": 1672444800,
         "involved_companies": [
-            { "id": 166559, "company": { "id": 18521, "name": "Crows Crows Crows" }, "developer": true }
+            { "id": 148075, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false },
+            { "id": 148076, "company": { "id": 4357, "name": "SIE Santa Monica Studio" }, "developer": true },
+            { "id": 154636, "company": { "id": 3644, "name": "Valkyrie Entertainment" }, "developer": false },
+            { "id": 154637, "company": { "id": 38814, "name": "Jetpack Interactive" }, "developer": false }
         ],
-        "name": "The Stanley Parable: Ultra Deluxe"
+        "name": "God of War Ragnarök",
+        "url": "https://www.igdb.com/games/god-of-war-ragnarok"
     },
     {
         "id": 119133,
@@ -53,7 +78,8 @@
             { "id": 158585, "company": { "id": 248, "name": "Bandai Namco Entertainment" }, "developer": false },
             { "id": 158586, "company": { "id": 1012, "name": "FromSoftware" }, "developer": true }
         ],
-        "name": "Elden Ring"
+        "name": "Elden Ring",
+        "url": "https://www.igdb.com/games/elden-ring"
     },
     {
         "id": 119308,
@@ -68,7 +94,20 @@
             { "id": 102032, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false },
             { "id": 102033, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true }
         ],
-        "name": "GhostWire: Tokyo"
+        "name": "GhostWire: Tokyo",
+        "url": "https://www.igdb.com/games/ghostwire-tokyo"
+    },
+    {
+        "id": 125633,
+        "cover": {
+            "id": 84587,
+            "height": 3024,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co1t9n.jpg",
+            "width": 2268
+        },
+        "involved_companies": [{ "id": 87184, "company": { "id": 2746, "name": "Pearl Abyss" }, "developer": true }],
+        "name": "Crimson Desert",
+        "url": "https://www.igdb.com/games/crimson-desert"
     },
     {
         "id": 127342,
@@ -82,7 +121,41 @@
             { "id": 98883, "company": { "id": 795, "name": "Ninja Theory" }, "developer": true },
             { "id": 98884, "company": { "id": 1010, "name": "Microsoft Studios" }, "developer": false }
         ],
-        "name": "Senua's Saga: Hellblade II"
+        "name": "Senua's Saga: Hellblade II",
+        "url": "https://www.igdb.com/games/senuas-saga-hellblade-ii"
+    },
+    {
+        "id": 127350,
+        "cover": {
+            "id": 217297,
+            "height": 1600,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4no1.jpg",
+            "width": 1200
+        },
+        "first_release_date": 1648684800,
+        "involved_companies": [
+            { "id": 158955, "company": { "id": 634, "name": "Devolver Digital" }, "developer": false },
+            { "id": 158956, "company": { "id": 22898, "name": "WolfEye Studios" }, "developer": true }
+        ],
+        "name": "Weird West",
+        "url": "https://www.igdb.com/games/weird-west"
+    },
+    {
+        "id": 134560,
+        "cover": {
+            "id": 221603,
+            "height": 800,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4qzn.jpg",
+            "width": 600
+        },
+        "first_release_date": 1672444800,
+        "involved_companies": [
+            { "id": 158592, "company": { "id": 11424, "name": "The Outsiders" }, "developer": true },
+            { "id": 158593, "company": { "id": 458, "name": "Funcom" }, "developer": false },
+            { "id": 158623, "company": { "id": 39493, "name": "Level Infinite" }, "developer": false }
+        ],
+        "name": "Metal: Hellsinger",
+        "url": "https://www.igdb.com/games/metal-hellsinger"
     },
     {
         "id": 134583,
@@ -97,49 +170,41 @@
             { "id": 158604, "company": { "id": 26, "name": "Square Enix" }, "developer": false },
             { "id": 158605, "company": { "id": 37969, "name": "Luminous Productions" }, "developer": true }
         ],
-        "name": "FORSPOKEN"
+        "name": "FORSPOKEN",
+        "url": "https://www.igdb.com/games/forspoken"
     },
     {
-        "id": 136993,
+        "id": 136625,
         "cover": {
-            "id": 176615,
-            "height": 3408,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3s9z.jpg",
-            "width": 2556
+            "id": 114879,
+            "height": 2079,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2gn3.jpg",
+            "width": 1559
         },
-        "first_release_date": 1666656000,
+        "first_release_date": 1672444800,
         "involved_companies": [
-            { "id": 106240, "company": { "id": 50, "name": "WB Games" }, "developer": false },
-            { "id": 106241, "company": { "id": 937, "name": "WB Games Montréal" }, "developer": true }
+            { "id": 110267, "company": { "id": 13854, "name": "Portkey Games" }, "developer": false },
+            { "id": 110268, "company": { "id": 1309, "name": "Avalanche Software" }, "developer": true },
+            { "id": 110269, "company": { "id": 28639, "name": "Wizarding World" }, "developer": false }
         ],
-        "name": "Gotham Knights"
+        "name": "Hogwarts Legacy",
+        "url": "https://www.igdb.com/games/hogwarts-legacy"
     },
     {
-        "id": 144022,
+        "id": 141538,
         "cover": {
-            "id": 208864,
-            "height": 1600,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4h5s.jpg",
-            "width": 1200
+            "id": 122477,
+            "height": 1080,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2mi5.jpg",
+            "width": 810
         },
-        "first_release_date": 1644278400,
-        "involved_companies": [{ "id": 120003, "company": { "id": 11674, "name": "Sloclap" }, "developer": true }],
-        "name": "Sifu"
-    },
-    {
-        "id": 145028,
-        "cover": {
-            "id": 134976,
-            "height": 800,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co2w5c.jpg",
-            "width": 600
-        },
-        "first_release_date": 1660003200,
+        "first_release_date": 1669939200,
         "involved_companies": [
-            { "id": 165392, "company": { "id": 16437, "name": "Team17" }, "developer": false },
-            { "id": 165393, "company": { "id": 32832, "name": "OverBorder Studio" }, "developer": true }
+            { "id": 114589, "company": { "id": 30458, "name": "Striking Distance Studios" }, "developer": true },
+            { "id": 173613, "company": { "id": 41542, "name": "Krafton" }, "developer": false }
         ],
-        "name": "Thymesia"
+        "name": "The Callisto Protocol",
+        "url": "https://www.igdb.com/games/the-callisto-protocol"
     },
     {
         "id": 152076,
@@ -154,22 +219,25 @@
             { "id": 171442, "company": { "id": 34938, "name": "Brass Token" }, "developer": true },
             { "id": 171443, "company": { "id": 34980, "name": "Primer Matter" }, "developer": false }
         ],
-        "name": "The Chant"
+        "name": "The Chant",
+        "url": "https://www.igdb.com/games/the-chant"
     },
     {
-        "id": 152242,
+        "id": 152203,
         "cover": {
-            "id": 152586,
+            "id": 219320,
             "height": 800,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co39qi.jpg",
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4p88.jpg",
             "width": 600
         },
-        "first_release_date": 1672444800,
+        "first_release_date": 1651708800,
         "involved_companies": [
-            { "id": 139321, "company": { "id": 442, "name": "Asobo Studio" }, "developer": true },
-            { "id": 166433, "company": { "id": 110, "name": "Focus Entertainment" }, "developer": false }
+            { "id": 165318, "company": { "id": 420, "name": "Flying Wild Hog" }, "developer": false },
+            { "id": 165319, "company": { "id": 10303, "name": "Leonard Menchiari" }, "developer": true },
+            { "id": 165320, "company": { "id": 634, "name": "Devolver Digital" }, "developer": false }
         ],
-        "name": "A Plague Tale: Requiem"
+        "name": "Trek to Yomi",
+        "url": "https://www.igdb.com/games/trek-to-yomi"
     },
     {
         "id": 152262,
@@ -184,23 +252,24 @@
             { "id": 138907, "company": { "id": 14755, "name": "Modus Games" }, "developer": false },
             { "id": 138908, "company": { "id": 35075, "name": "Reply Game Studio" }, "developer": true }
         ],
-        "name": "Soulstice"
+        "name": "Soulstice",
+        "url": "https://www.igdb.com/games/soulstice"
     },
     {
-        "id": 168670,
+        "id": 185253,
         "cover": {
-            "id": 177429,
-            "height": 1199,
-            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co3swl.jpg",
-            "width": 899
+            "id": 199914,
+            "height": 1600,
+            "url": "//images.igdb.com/igdb/image/upload/t_thumb/co4a96.jpg",
+            "width": 1200
         },
-        "first_release_date": 1643328000,
+        "first_release_date": 1650931200,
         "involved_companies": [
-            { "id": 148121, "company": { "id": 2121, "name": "Iron Galaxy Studios" }, "developer": false },
-            { "id": 158971, "company": { "id": 401, "name": "Naughty Dog" }, "developer": true },
-            { "id": 163383, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false }
+            { "id": 158581, "company": { "id": 1097, "name": "Shiro Games" }, "developer": true },
+            { "id": 158582, "company": { "id": 458, "name": "Funcom" }, "developer": false }
         ],
-        "name": "Uncharted: Legacy of Thieves Collection"
+        "name": "Dune: Spice Wars",
+        "url": "https://www.igdb.com/games/dune-spice-wars"
     },
     {
         "id": 191420,
@@ -215,7 +284,8 @@
             { "id": 163699, "company": { "id": 26, "name": "Square Enix" }, "developer": false },
             { "id": 163700, "company": { "id": 18556, "name": "h.a.n.d. Inc." }, "developer": true }
         ],
-        "name": "The Centennial Case: A Shijima Story"
+        "name": "The Centennial Case: A Shijima Story",
+        "url": "https://www.igdb.com/games/the-centennial-case-a-shijima-story"
     },
     {
         "id": 194404,
@@ -230,6 +300,7 @@
             { "id": 165766, "company": { "id": 4895, "name": "Supermassive Games" }, "developer": true },
             { "id": 165767, "company": { "id": 8, "name": "2K Games" }, "developer": false }
         ],
-        "name": "The Quarry"
+        "name": "The Quarry",
+        "url": "https://www.igdb.com/games/the-quarry"
     }
 ]

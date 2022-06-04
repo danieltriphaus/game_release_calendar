@@ -4,9 +4,10 @@
         <div class="game-info">
             <h5 data-cy="game-title">{{ props.game.name }}</h5>
             <h6>{{ developer }}</h6>
-            <h6 data-testid="release-date" class="release-date">{{ releaseDate }}</h6>
+            <h6 data-testid="release-date" data-cy="release-date" class="release-date">{{ releaseDate }}</h6>
         </div>
         <div class="game-actions">
+            <a :href="game.url" target="_blank" class="game-details btn btn-igdb">Details</a><br>
             <button type="button" @click="emit('delete-game', props.game.id)" class="btn btn-outline-danger" data-cy="delete-game">Löschen</button>
         </div>
     </div>
