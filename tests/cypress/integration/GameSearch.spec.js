@@ -15,7 +15,7 @@ describe("Game Search Tests", () => {
         gameSearch.forEach((game) => {
             cy.get("[data-cy='result-" + game.id + "'] [data-cy='release-date']")
                 .invoke("text")
-                .should("match", /\d|TBA/);
+                .should("match", /\d|TBD/);
         });
     });
 

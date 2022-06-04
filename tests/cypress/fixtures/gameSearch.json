@@ -11,7 +11,12 @@
             { "id": 65698, "company": { "id": 15756, "name": "A Different Game" }, "developer": true },
             { "id": 65699, "company": { "id": 14586, "name": "Majesco" }, "developer": false }
         ],
-        "name": "Ghostwire"
+        "name": "Ghostwire",
+        "release_dates": [
+            { "id": 154101, "category": 7, "human": "TBD" },
+            { "id": 154102, "category": 7, "human": "TBD" }
+        ],
+        "url": "https://www.igdb.com/games/ghostwire"
     },
     {
         "id": 119308,
@@ -26,7 +31,12 @@
             { "id": 102032, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false },
             { "id": 102033, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true }
         ],
-        "name": "GhostWire: Tokyo"
+        "name": "GhostWire: Tokyo",
+        "release_dates": [
+            { "id": 343288, "category": 0, "date": 1648166400, "human": "Mar 25, 2022" },
+            { "id": 343289, "category": 0, "date": 1648166400, "human": "Mar 25, 2022" }
+        ],
+        "url": "https://www.igdb.com/games/ghostwire-tokyo"
     },
     {
         "id": 194210,
@@ -41,6 +51,12 @@
             { "id": 165295, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true },
             { "id": 165296, "company": { "id": 16565, "name": "Bethesda Softworks" }, "developer": false }
         ],
-        "name": "Ghostwire: Tokyo - Prelude: The Corrupted Casefile"
+        "name": "Ghostwire: Tokyo - Prelude: The Corrupted Casefile",
+        "release_dates": [
+            { "id": 347530, "category": 0, "date": 1646697600, "human": "Mar 08, 2022" },
+            { "id": 347531, "category": 0, "date": 1646697600, "human": "Mar 08, 2022" },
+            { "id": 347532, "category": 0, "date": 1646697600, "human": "Mar 08, 2022" }
+        ],
+        "url": "https://www.igdb.com/games/ghostwire-tokyo-prelude-the-corrupted-casefile"
     }
 ]

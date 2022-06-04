@@ -1,7 +1,7 @@
 import userGames from "../fixtures/userGames.json";
 
 describe("Game List Tests", () => {
-    it("should display release date of games or TBA", () => {
+    it("should display release date of games or TBD", () => {
         const now = new Date(Date.UTC(2022, 5, 1)).getTime();
         cy.clock(now);
 
@@ -14,7 +14,7 @@ describe("Game List Tests", () => {
         userGames.forEach((game) => {
             cy.get("#game-" + game.id + " .release-date")
                 .invoke("text")
-                .should("match", /\d|TBA/);
+                .should("match", /\d|TBD/);
         });
     });
 

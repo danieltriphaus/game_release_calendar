@@ -12,6 +12,14 @@
             { "id": 154837, "company": { "id": 19142, "name": "Neostream Interactive" }, "developer": true }
         ],
         "name": "Little Devil Inside",
+        "release_dates": [
+            { "id": 322358, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 322359, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 322360, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 322361, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 322362, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 322363, "category": 2, "date": 1672444800, "human": "2022" }
+        ],
         "url": "https://www.igdb.com/games/little-devil-inside"
     },
     {
@@ -29,6 +37,10 @@
             { "id": 150786, "company": { "id": 37893, "name": "Kepler Interactive" }, "developer": false }
         ],
         "name": "Scorn",
+        "release_dates": [
+            { "id": 330191, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 330192, "category": 6, "date": 1672444800, "human": "Q4 2022" }
+        ],
         "url": "https://www.igdb.com/games/scorn"
     },
     {
@@ -45,6 +57,10 @@
             { "id": 166704, "company": { "id": 10100, "name": "Sony Interactive Entertainment" }, "developer": false }
         ],
         "name": "Horizon Forbidden West",
+        "release_dates": [
+            { "id": 306302, "category": 0, "date": 1645142400, "human": "Feb 18, 2022" },
+            { "id": 306303, "category": 0, "date": 1645142400, "human": "Feb 18, 2022" }
+        ],
         "url": "https://www.igdb.com/games/horizon-forbidden-west"
     },
     {
@@ -63,6 +79,10 @@
             { "id": 154637, "company": { "id": 38814, "name": "Jetpack Interactive" }, "developer": false }
         ],
         "name": "God of War Ragnarök",
+        "release_dates": [
+            { "id": 247790, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 247791, "category": 2, "date": 1672444800, "human": "2022" }
+        ],
         "url": "https://www.igdb.com/games/god-of-war-ragnarok"
     },
     {
@@ -79,6 +99,13 @@
             { "id": 158586, "company": { "id": 1012, "name": "FromSoftware" }, "developer": true }
         ],
         "name": "Elden Ring",
+        "release_dates": [
+            { "id": 320703, "category": 0, "date": 1645747200, "human": "Feb 25, 2022" },
+            { "id": 320704, "category": 0, "date": 1645747200, "human": "Feb 25, 2022" },
+            { "id": 320705, "category": 0, "date": 1645747200, "human": "Feb 25, 2022" },
+            { "id": 320706, "category": 0, "date": 1645747200, "human": "Feb 25, 2022" },
+            { "id": 320707, "category": 0, "date": 1645747200, "human": "Feb 25, 2022" }
+        ],
         "url": "https://www.igdb.com/games/elden-ring"
     },
     {
@@ -95,6 +122,10 @@
             { "id": 102033, "company": { "id": 2145, "name": "Tango Gameworks" }, "developer": true }
         ],
         "name": "GhostWire: Tokyo",
+        "release_dates": [
+            { "id": 343288, "category": 0, "date": 1648166400, "human": "Mar 25, 2022" },
+            { "id": 343289, "category": 0, "date": 1648166400, "human": "Mar 25, 2022" }
+        ],
         "url": "https://www.igdb.com/games/ghostwire-tokyo"
     },
     {
@@ -107,6 +138,7 @@
         },
         "involved_companies": [{ "id": 87184, "company": { "id": 2746, "name": "Pearl Abyss" }, "developer": true }],
         "name": "Crimson Desert",
+        "release_dates": [{ "id": 300894, "category": 7, "human": "TBD" }],
         "url": "https://www.igdb.com/games/crimson-desert"
     },
     {
@@ -122,6 +154,10 @@
             { "id": 98884, "company": { "id": 1010, "name": "Microsoft Studios" }, "developer": false }
         ],
         "name": "Senua's Saga: Hellblade II",
+        "release_dates": [
+            { "id": 310116, "category": 7, "human": "TBD" },
+            { "id": 310117, "category": 7, "human": "TBD" }
+        ],
         "url": "https://www.igdb.com/games/senuas-saga-hellblade-ii"
     },
     {
@@ -138,6 +174,12 @@
             { "id": 158956, "company": { "id": 22898, "name": "WolfEye Studios" }, "developer": true }
         ],
         "name": "Weird West",
+        "release_dates": [
+            { "id": 332232, "category": 0, "date": 1648684800, "human": "Mar 31, 2022" },
+            { "id": 332233, "category": 0, "date": 1648684800, "human": "Mar 31, 2022" },
+            { "id": 332234, "category": 0, "date": 1648684800, "human": "Mar 31, 2022" },
+            { "id": 332235, "category": 0, "date": 1648684800, "human": "Mar 31, 2022" }
+        ],
         "url": "https://www.igdb.com/games/weird-west"
     },
     {
@@ -155,6 +197,11 @@
             { "id": 158623, "company": { "id": 39493, "name": "Level Infinite" }, "developer": false }
         ],
         "name": "Metal: Hellsinger",
+        "release_dates": [
+            { "id": 329638, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 329640, "category": 2, "date": 1672444800, "human": "2022" },
+            { "id": 329641, "category": 2, "date": 1672444800, "human": "2022" }
+        ],
         "url": "https://www.igdb.com/games/metal-hellsinger"
     },
     {
@@ -171,6 +218,10 @@
             { "id": 158605, "company": { "id": 37969, "name": "Luminous Productions" }, "developer": true }
         ],
         "name": "FORSPOKEN",
+        "release_dates": [
+            { "id": 346917, "category": 0, "date": 1665446400, "human": "Oct 11, 2022" },
+            { "id": 346918, "category": 0, "date": 1665446400, "human": "Oct 11, 2022" }
+        ],
         "url": "https://www.igdb.com/games/forspoken"
     },
     {
@@ -188,6 +239,14 @@
             { "id": 110269, "company": { "id": 28639, "name": "Wizarding World" }, "developer": false }
         ],
         "name": "Hogwarts Legacy",
+        "release_dates": [
+            { "id": 348858, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 348859, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 348860, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 348861, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 348862, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 348909, "category": 6, "date": 1672444800, "human": "Q4 2022" }
+        ],
         "url": "https://www.igdb.com/games/hogwarts-legacy"
     },
     {
@@ -204,6 +263,12 @@
             { "id": 173613, "company": { "id": 41542, "name": "Krafton" }, "developer": false }
         ],
         "name": "The Callisto Protocol",
+        "release_dates": [
+            { "id": 362554, "category": 0, "date": 1669939200, "human": "Dec 02, 2022" },
+            { "id": 362555, "category": 0, "date": 1669939200, "human": "Dec 02, 2022" },
+            { "id": 362651, "category": 0, "date": 1669939200, "human": "Dec 02, 2022" },
+            { "id": 362652, "category": 0, "date": 1669939200, "human": "Dec 02, 2022" }
+        ],
         "url": "https://www.igdb.com/games/the-callisto-protocol"
     },
     {
@@ -220,6 +285,11 @@
             { "id": 171443, "company": { "id": 34980, "name": "Primer Matter" }, "developer": false }
         ],
         "name": "The Chant",
+        "release_dates": [
+            { "id": 359508, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 359509, "category": 6, "date": 1672444800, "human": "Q4 2022" },
+            { "id": 359510, "category": 6, "date": 1672444800, "human": "Q4 2022" }
+        ],
         "url": "https://www.igdb.com/games/the-chant"
     },
     {
@@ -237,6 +307,13 @@
             { "id": 165320, "company": { "id": 634, "name": "Devolver Digital" }, "developer": false }
         ],
         "name": "Trek to Yomi",
+        "release_dates": [
+            { "id": 351607, "category": 0, "date": 1651708800, "human": "May 05, 2022" },
+            { "id": 351608, "category": 0, "date": 1651708800, "human": "May 05, 2022" },
+            { "id": 351609, "category": 0, "date": 1651708800, "human": "May 05, 2022" },
+            { "id": 351610, "category": 0, "date": 1651708800, "human": "May 05, 2022" },
+            { "id": 351611, "category": 0, "date": 1651708800, "human": "May 05, 2022" }
+        ],
         "url": "https://www.igdb.com/games/trek-to-yomi"
     },
     {
@@ -253,6 +330,7 @@
             { "id": 138908, "company": { "id": 35075, "name": "Reply Game Studio" }, "developer": true }
         ],
         "name": "Soulstice",
+        "release_dates": [{ "id": 289806, "category": 2, "date": 1672444800, "human": "2022" }],
         "url": "https://www.igdb.com/games/soulstice"
     },
     {
@@ -269,6 +347,7 @@
             { "id": 158582, "company": { "id": 458, "name": "Funcom" }, "developer": false }
         ],
         "name": "Dune: Spice Wars",
+        "release_dates": [{ "id": 352340, "category": 0, "date": 1650931200, "human": "Apr 26, 2022" }],
         "url": "https://www.igdb.com/games/dune-spice-wars"
     },
     {
@@ -285,6 +364,12 @@
             { "id": 163700, "company": { "id": 18556, "name": "h.a.n.d. Inc." }, "developer": true }
         ],
         "name": "The Centennial Case: A Shijima Story",
+        "release_dates": [
+            { "id": 343942, "category": 0, "date": 1652313600, "human": "May 12, 2022" },
+            { "id": 343943, "category": 0, "date": 1652313600, "human": "May 12, 2022" },
+            { "id": 343944, "category": 0, "date": 1652313600, "human": "May 12, 2022" },
+            { "id": 343945, "category": 0, "date": 1652313600, "human": "May 12, 2022" }
+        ],
         "url": "https://www.igdb.com/games/the-centennial-case-a-shijima-story"
     },
     {
@@ -301,6 +386,13 @@
             { "id": 165767, "company": { "id": 8, "name": "2K Games" }, "developer": false }
         ],
         "name": "The Quarry",
+        "release_dates": [
+            { "id": 348802, "category": 0, "date": 1654819200, "human": "Jun 10, 2022" },
+            { "id": 348803, "category": 0, "date": 1654819200, "human": "Jun 10, 2022" },
+            { "id": 348804, "category": 0, "date": 1654819200, "human": "Jun 10, 2022" },
+            { "id": 348805, "category": 0, "date": 1654819200, "human": "Jun 10, 2022" },
+            { "id": 348806, "category": 0, "date": 1654819200, "human": "Jun 10, 2022" }
+        ],
         "url": "https://www.igdb.com/games/the-quarry"
     }
 ]

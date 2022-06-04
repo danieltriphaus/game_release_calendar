@@ -26,11 +26,13 @@ const props = defineProps({
 });
 
 const releaseDate = computed(() => {
-    if (!props.game.first_release_date) {
-        return "TBA";
-    } else {
-        const releaseDateObject = new Date(props.game.first_release_date * 1000);
+    if (!props.game.release_dates) {
+        return "TBD";
+    } else if (props.game.release_dates[0].category === 0) {
+        const releaseDateObject = new Date(props.game.release_dates[0].date * 1000);
         return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" })
+    } else {
+        return props.game.release_dates[0].human;
     }
 });
 

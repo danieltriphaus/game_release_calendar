@@ -12,6 +12,7 @@
 </template>
 
 <script setup>
+//ToDo: combine with GameCard
 import axios from "axios";
 import { computed, inject } from "vue";
 
@@ -33,11 +34,13 @@ const developerName = computed(() => {
 });
 
 const releaseDate = computed(() => {
-    if (!props.result.first_release_date) {
-        return "TBA";
-    } else {
-        const releaseDateObject = new Date(props.result.first_release_date * 1000);
+    if (!props.result.release_dates) {
+        return "TBD";
+    } else if (props.result.release_dates[0].category === 0) {
+        const releaseDateObject = new Date(props.result.release_dates[0].date * 1000);
         return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" })
+    } else {
+        return props.result.release_dates[0].human;
     }
 });
 
