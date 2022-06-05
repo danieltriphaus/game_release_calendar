@@ -1,28 +1,28 @@
 <template>
-    <div :id="'game-' + props.game.id" class="col game mt-2" data-testid="game" data-cy="game">
-        <img v-if="props.game.cover" :src="props.game.cover.url.replace('thumb', 'cover_small')" class="game-cover" :data-testid="'game-' + props.game.id + '-cover'">
-        <div class="game-info">
-            <h5 data-cy="game-title">{{ props.game.name }}</h5>
-            <h6>{{ developer }}</h6>
-            <h6 data-testid="release-date" data-cy="release-date" class="release-date">{{ releaseDate }}</h6>
-        </div>
-        <div class="game-actions">
-            <a :href="game.url" target="_blank" class="game-details btn btn-igdb">Details</a><br>
-            <button type="button" @click="emit('delete-game', props.game.id)" class="btn btn-outline-danger" data-cy="delete-game">Löschen</button>
-        </div>
+    <img v-if="hasCover" :src="coverUrl" class="game-cover" :data-testid="'game-' + props.game.id + '-cover'">
+    <div class="game-info">
+        <h5 data-cy="game-title">{{ props.game.name }}</h5>
+        <h6>{{ developer }}</h6>
+        <h6 data-testid="release-date" data-cy="release-date" class="release-date">{{ releaseDate }}</h6>
     </div>
 </template>
 
 <script setup>
 import { computed } from "vue";
 
-const emit = defineEmits(["delete-game"]);
-
 const props = defineProps({
     game: {
         type: Object,
         default: () => { return {} }
     }
+});
+
+const hasCover = computed(() => {
+    return props.game.cover && props.game.cover.url;
+});
+
+const coverUrl = computed(() => {
+    return props.game.cover.url.replace('thumb', 'cover_small')
 });
 
 const releaseDate = computed(() => {
@@ -47,12 +47,6 @@ const developer = computed(() => {
     }
 
     .game-info {
-        margin-top: 10px;
-        padding-left: 10px;
-    }
-
-    .game-actions {
-        text-align: right;
         margin-top: 10px;
         padding-left: 10px;
     }

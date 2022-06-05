@@ -3,18 +3,18 @@
     <add-temporary-game @game-added="onGameAdded" />
     <h5>Released Games</h5>
     <div class="row" data-cy="released-games" v-for="game in releasedGames" :key="game.id">
-        <game-card :game="game" @delete-game="deleteGame" />
+        <game-list-item :game="game" @delete-game="deleteGame" />
     </div>
     <div class="border mt-4"></div>
     <h5>Unreleased Games</h5>
     <div class="row" data-cy="unreleased-games" v-for="game in unreleasedGames" :key="game.id">
-        <game-card :game="game" @delete-game="deleteGame" />
+        <game-list-item :game="game" @delete-game="deleteGame" />
     </div>
 </template>
 
 <script setup>
 import GameSearch from "./GameSearch.vue";
-import GameCard from "./GameCard.vue";
+import GameListItem from "./GameListItem.vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
 
 import { onMounted, ref, computed, inject } from "vue";
@@ -93,21 +93,6 @@ const unreleasedGames = computed(() => {
 <style scoped>
     .game {
         display: flex;
-    }
-
-    .game-cover {   
-        height: 100px;
-    }
-
-    .game-info {
-        margin-top: 10px;
-        padding-left: 10px;
-    }
-
-    .game-actions {
-        text-align: right;
-        margin-top: 10px;
-        padding-left: 10px;
     }
 
     .border {

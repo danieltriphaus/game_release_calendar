@@ -13,30 +13,24 @@
     const nodeEnv = computed(() => process.env.NODE_ENV);
 
     onMounted(async () => {
-        const response = await axios.get("/api/access").catch((error) => {
-            if (!error.response || error.response.status !== 401) {
-                throw error;
-            }
-            if (error.response && error.response.status === 401) {
-                emit("authentication-failed");
-            }
-        });
-        if (response && response.status === 200) {
-            emit("authenticated", response.data);
-        }
+        await doAuthentication();
     });
 
     async function sendAuthKey() {
-        const response = await axios.get("/api/access", {params: { auth_key: authKey.value }}).catch((error) => {
-            if (!error.response || error.response.status !== 401) {
-                throw error;
-            }
-            if (error.response && error.response.status === 401) {
-                emit("authentication-failed");
-            }
-        });
-        if (response && response.status === 200) {
-            emit("authenticated", response.data);
-        }
+        await doAuthentication({ params: { auth_key: authKey.value } });
     }
+
+async function doAuthentication(axiosRequestConfig) {
+  const response=await axios.get("/api/access", axiosRequestConfig).catch((error) => {
+    if(!error.response || error.response.status!==401) {
+      throw error;
+    }
+    if(error.response && error.response.status===401) {
+      emit("authentication-failed");
+    }
+  });
+  if(response && response.status===200) {
+    emit("authenticated", response.data);
+  }
+}
 </script>
