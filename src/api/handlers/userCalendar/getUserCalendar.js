@@ -1,8 +1,8 @@
-import { getGameList } from "../datastore/getGameList.js";
+import { getGameList } from "../../datastore/getGameList.js";
 import ical from "ical-generator";
-import { getCalendar } from "../datastore/getCalendar.js";
-import { calendarFields } from "../igdb/gamesFieldLists.js";
-import { getGamesData } from "../library/getGamesData.js";
+import { getCalendar } from "../../datastore/getCalendar.js";
+import { calendarFields } from "../../igdb/gamesFieldLists.js";
+import { getGamesData } from "../../library/getGamesData.js";
 
 export const getUserCalendar = async (context, req, res) => {
     const calendar = await getCalendar(context.request.params.user_id, req.query.token);

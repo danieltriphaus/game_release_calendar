@@ -1,4 +1,4 @@
-import { getUserCalendar } from "@/api/handlers/getUserCalendar";
+import { getUserCalendar } from "@/api/handlers/userCalendar/getUserCalendar";
 import { getGameList } from "@/api/datastore/getGameList";
 import { getCalendar } from "@/api/datastore/getCalendar";
 import axios from "axios";

@@ -1,4 +1,4 @@
-import { postUserCalendar } from "../../../../src/api/handlers/postUserCalendar";
+import { postUserCalendar } from "@/api/handlers/userCalendar/postUserCalendar";
 import { getContext } from "../expressMocks";
 
 import { getUser } from "@/api/datastore/getUser";

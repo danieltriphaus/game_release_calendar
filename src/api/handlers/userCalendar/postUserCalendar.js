@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { createCalendar } from "../datastore/createCalendar.js";
+import { createCalendar } from "../../datastore/createCalendar.js";
 
 export const postUserCalendar = async (context, req, res) => {
     const token = nanoid(32);

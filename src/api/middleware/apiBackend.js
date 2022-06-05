@@ -1,34 +1,12 @@
 import { OpenAPIBackend } from "openapi-backend";
 
-import { getGame } from "../handlers/getGame.js";
-import { getGameSearch } from "../handlers/getGameSearch.js";
-import { postUserGames } from "../handlers/postUserGames.js";
-import { postUserCalendar } from "../handlers/postUserCalendar.js";
-import { getUserCalendar } from "../handlers/getUserCalendar.js";
-import { getUserCalendars } from "../handlers/getUserCalendars.js";
-import { getUserGames } from "../handlers/getUserGames.js";
-import { deleteUserGames } from "../handlers/deleteUserGames.js";
-import { postUserGLogin } from "../handlers/postUserGLogin.js";
-import { deleteAccess } from "../handlers/deleteAccess.js";
-import { postGame } from "../handlers/postGame.js";
-
-import { getCalendar } from "../datastore/getCalendar.js";
-import { getUserByAuthKey } from "../datastore/getUser.js";
+import { operationHandlerMapping } from "./operationHandlerMapping.js";
+import { userAuth, calendarToken } from "./securityHandlers.js";
 
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
     handlers: {
-        "get-game-search": getGameSearch,
-        "get-game": getGame,
-        "post-game": postGame,
-        "post-user-games": postUserGames,
-        "get-user-games": getUserGames,
-        "delete-user-games": deleteUserGames,
-        "get-user-calendar": getUserCalendar,
-        "post-user-calendar": postUserCalendar,
-        "get-user-calendars": getUserCalendars,
-        "post-user-g-login": postUserGLogin,
-        "delete-access": deleteAccess,
+        ...operationHandlerMapping,
         "get-access": (context, req, res) => {
             // eslint-disable-next-line no-unused-vars
             const { auth_key, ...publicUserData } = context.security.userAuth;
@@ -46,26 +24,8 @@ const api = new OpenAPIBackend({
     },
 });
 
-api.registerSecurityHandler("userAuth", async (context, req, res) => {
-    if (process.env.NODE_ENV === "development" && req.query.auth_key) {
-        req.cookies.auth_key = req.query.auth_key;
-        res.cookie("auth_key", req.query.auth_key, { httpOnly: true });
-    }
-
-    const user = await getUserByAuthKey(req.cookies.auth_key);
-
-    if (context.request.params.user_id && context.request.params.user_id === user.id) {
-        return user;
-    }
-    if (!context.request.params.user_id && user) {
-        return user;
-    }
-});
-
-api.registerSecurityHandler("token", async (context) => {
-    const calendar = await getCalendar(context.request.params.user_id, context.request.query.token);
-    return calendar;
-});
+api.registerSecurityHandler("userAuth", userAuth);
+api.registerSecurityHandler("token", calendarToken);
 
 api.init();
 

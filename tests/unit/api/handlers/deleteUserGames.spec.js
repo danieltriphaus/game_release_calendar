@@ -1,4 +1,4 @@
-import { deleteUserGames } from "@/api/handlers/deleteUserGames";
+import { deleteUserGames } from "@/api/handlers/userGames/deleteUserGames";
 import { getContext } from "../expressMocks";
 import { upsertGameList } from "@/api/datastore/upsertGameList";
 import { getGameList } from "@/api/datastore/getGameList";

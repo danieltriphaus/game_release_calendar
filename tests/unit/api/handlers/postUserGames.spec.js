@@ -1,4 +1,4 @@
-import { postUserGames } from "@/api/handlers/postUserGames";
+import { postUserGames } from "@/api/handlers/userGames/postUserGames";
 import { getContext } from "../expressMocks";
 import { upsertGameList } from "@/api/datastore/upsertGameList";
 import { getGameList } from "@/api/datastore/getGameList";

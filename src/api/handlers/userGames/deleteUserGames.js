@@ -1,5 +1,5 @@
-import { upsertGameList } from "../datastore/upsertGameList.js";
-import { getGameList } from "../datastore/getGameList.js";
+import { upsertGameList } from "../../datastore/upsertGameList.js";
+import { getGameList } from "../../datastore/getGameList.js";
 
 export const deleteUserGames = async (context, req, res) => {
     const userId = context.request.params.user_id;

@@ -2,7 +2,6 @@ import { getIgdbAccessToken } from "../igdb/igdbAccessToken.js";
 import { getGamesById } from "../igdb/getGamesById.js";
 import { getTemporaryGames, convertFromDatastoreResult } from "../datastore/getTemporaryGames.js";
 
-//ToDo: write test
 export const getGamesData = async (gameIds, fields) => {
     const accessToken = (await getIgdbAccessToken()).access_token;
 

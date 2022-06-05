@@ -1,4 +1,4 @@
-import { getCalendars } from "../datastore/getCalendars.js";
+import { getCalendars } from "../../datastore/getCalendars.js";
 
 export const getUserCalendars = async (context, req, res) => {
     const calendars = await getCalendars(context.request.params.user_id);
