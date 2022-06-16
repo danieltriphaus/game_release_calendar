@@ -10,6 +10,7 @@ describe("Game List Tests", () => {
         cy.intercept("https://accounts.google.com/gsi/client", {});
 
         cy.visit("/");
+        cy.get(".list-category").click({ multiple: true });
 
         userGames.forEach((game) => {
             cy.get("#game-" + game.id + " .release-date")
@@ -40,6 +41,7 @@ describe("Game List Tests", () => {
         });
 
         cy.visit("/");
+        cy.get(".list-category").click({ multiple: true });
 
         cy.get("#game-" + userGames[2].id + " [data-cy='delete-game']").click();
         cy.wait("@getGames");
@@ -55,6 +57,7 @@ describe("Game List Tests", () => {
         cy.clock(now);
 
         cy.visit("/");
+        cy.get(".list-category").click({ multiple: true });
 
         cy.get("[data-cy='released-games'] [data-cy='release-date']").should(($releaseDate) => {
             expect(Date.parse($releaseDate[0].textContent))

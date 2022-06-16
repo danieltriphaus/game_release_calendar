@@ -1,5 +1,15 @@
 <template>
     <div class="container">
+        <div v-if="isAuthenticated" class="row">
+            <div class="col-3 offset-9 text-end">
+                <b-dropdown id="user-menu" variant="primary">
+                    <template #button-content>
+                        <i class="bi-person-circle" />
+                    </template>
+                    <b-dropdown-item @click="signOut" variant="danger"><i class="bi-door-open me-2"></i>Sign Out</b-dropdown-item>
+                </b-dropdown>
+            </div>
+        </div>
         <div v-if="!isAuthenticated" class="row mt-4">
             <template v-if="authenticationFailed">
                 <div id="g_id_onload"
@@ -22,12 +32,6 @@
         </div>
         
         <router-view v-if="isAuthenticated"/>
-
-        <div class="row mt-4" v-if="isAuthenticated">
-            <div class="col">
-                <button type="button" class="btn btn-outline-danger" @click="signOut">Abmelden</button>
-            </div>
-        </div>
     </div>
 </template>
 

@@ -1,17 +1,20 @@
 <template>
     <div class="row mt-2">
         <template v-if="isTempGameInput">
-            <div class="col-6">
+            <div class="col">
                 <div class="input-group">
                     <input type="text" data-cy="temp-game-name" placeholder="Name" class="form-control" v-model="temporaryGame.name"/>
                     <div class="input-group-append">
-                        <button type="button" data-cy="add-temp-game-to-list" @click="addTemporaryGame" class="btn btn-outline-primary">Add</button>
+                        <button type="button" data-cy="add-temp-game-to-list" @click="addTemporaryGame" class="btn btn-outline-primary"><i class="bi bi-check2-square" /></button>
+                    </div>
+                    <div class="input-group-append">
+                        <button type="button" @click="endTemporaryGameInput" class="btn btn-outline-danger"><i class="bi bi-x" /></button>
                     </div>
                 </div>
             </div>
         </template>
         <div v-else class="col">
-            <button type="button" @click="isTempGameInput = true" data-cy="add-temp-game" class="btn btn-outline-primary">Game not found?</button>
+            <button type="button" @click="isTempGameInput = true;" data-cy="add-temp-game" class="btn btn-outline-primary">Game not found?</button>
         </div>
     </div>
 </template>
@@ -35,8 +38,13 @@ function addTemporaryGame() {
     temporaryGame.id = nanoid();
     axios.post("/api/game", temporaryGame);
     axios.post("/api/user/" + userId.value + "/games", [temporaryGame.id]);
-    isTempGameInput.value = false;
-    emit("game-added", temporaryGame);
+    emit("game-added", {...temporaryGame});
+    endTemporaryGameInput();
 }
 
+function endTemporaryGameInput() {
+    isTempGameInput.value = false;
+    temporaryGame.id = "";
+    temporaryGame.name = "";
+}
 </script>

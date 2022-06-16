@@ -42,12 +42,20 @@ const developer = computed(() => {
 </script>
 
 <style scoped>
-    .game-cover {   
+    img {   
         height: 100px;
     }
 
     .game-info {
-        margin-top: 10px;
+        
         padding-left: 10px;
+    }
+
+    .game-info h5 {
+        font-size: 1rem;
+    }
+
+    .game-info h6 {
+        font-size: 0.8rem;
     }
 </style>
