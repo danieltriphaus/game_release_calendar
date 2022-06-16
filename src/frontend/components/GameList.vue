@@ -99,7 +99,9 @@ onMounted(async () => {
 });
 
 onBeforeMount(() => {
-    categoryAccordion.isVisible = JSON.parse(localStorage.getItem("categoryExpandCollapse"));
+    if (localStorage.getItem("categoryExpandCollapse")) {
+        categoryAccordion.isVisible = JSON.parse(localStorage.getItem("categoryExpandCollapse"));
+    }
 });
 
 function onGameAdded(game) {
