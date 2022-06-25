@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("removeBootstrapOverlay", () => {
+    cy.get(".b-overlay").then((elem) => {
+        const elemHtml = elem.get(0);
+        elemHtml.remove();
+    });
+});

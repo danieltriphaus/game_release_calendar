@@ -6,10 +6,12 @@ describe("Game List Tests", () => {
         cy.clock(now);
 
         cy.intercept("/api/access", { id: "y1xx" });
-        cy.intercept("/api/user/*/games", { fixture: "userGames.json" });
+        cy.intercept("/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
         cy.intercept("https://accounts.google.com/gsi/client", {});
 
         cy.visit("/");
+        cy.wait("@getUserGames");
+        cy.removeBootstrapOverlay();
         cy.get(".list-category").click({ multiple: true });
 
         userGames.forEach((game) => {
@@ -28,7 +30,7 @@ describe("Game List Tests", () => {
         const deletedGameId = userGames[2].id;
 
         cy.intercept("/api/user/*/games", (req) => {
-            req.alias = "getGames";
+            req.alias = "getUserGames";
             req.reply(userGamesCopy);
         });
         cy.intercept("https://accounts.google.com/gsi/client", {});
@@ -41,22 +43,26 @@ describe("Game List Tests", () => {
         });
 
         cy.visit("/");
+        cy.wait("@getUserGames");
+        cy.removeBootstrapOverlay();
         cy.get(".list-category").click({ multiple: true });
 
         cy.get("#game-" + userGames[2].id + " [data-cy='delete-game']").click();
-        cy.wait("@getGames");
+        cy.wait("@getUserGames");
         cy.get("#game-" + deletedGameId).should("not.exist");
     });
 
     it("should sort games by date and seperate into released and unreleased", () => {
         cy.intercept("/api/access", { id: "y1xx" });
-        cy.intercept("/api/user/*/games", { fixture: "userGames.json" });
+        cy.intercept("/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
         cy.intercept("https://accounts.google.com/gsi/client", {});
 
         const now = new Date(Date.UTC(2022, 5, 1)).getTime();
         cy.clock(now);
 
         cy.visit("/");
+        cy.wait("@getUserGames");
+        cy.removeBootstrapOverlay();
         cy.get(".list-category").click({ multiple: true });
 
         cy.get("[data-cy='released-games'] [data-cy='release-date']").should(($releaseDate) => {

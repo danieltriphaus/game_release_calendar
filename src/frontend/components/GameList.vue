@@ -90,8 +90,8 @@ async function populateGameList() {
     });
     if (response) {
         games.value = response.data;
-        emits("loading-complete");
     }
+    emits("loading-complete");
 }
 
 onMounted(async () => {

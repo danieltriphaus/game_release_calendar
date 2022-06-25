@@ -4,7 +4,7 @@ describe("add temporary game tests", () => {
         cy.clock(now);
 
         cy.intercept("/api/access", { id: "y1xx" });
-        cy.intercept("GET", "/api/user/*/games", { fixture: "userGames.json" });
+        cy.intercept("GET", "/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
         cy.intercept("https://accounts.google.com/gsi/client", {});
     });
 
@@ -13,6 +13,8 @@ describe("add temporary game tests", () => {
         cy.intercept("POST", "/api/user/*/games", {}).as("postUserGame");
 
         cy.visit("/");
+        cy.wait("@getUserGames");
+        cy.removeBootstrapOverlay();
 
         cy.get("[data-cy='add-temp-game']").click();
 
