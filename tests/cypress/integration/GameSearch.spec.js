@@ -10,6 +10,7 @@ describe("Game Search Tests", () => {
 
         cy.get("[data-cy='search-games']").type("ghostwire");
 
+        cy.get("[data-cy='game-search-spinner']");
         cy.wait("@gameSearch");
 
         gameSearch.forEach((game) => {
@@ -30,6 +31,7 @@ describe("Game Search Tests", () => {
         cy.visit("/");
 
         cy.get("[data-cy='search-games']").type("ghostwire");
+        cy.get("[data-cy='game-search-spinner']");
         cy.wait("@gameSearch");
 
         cy.get("[data-cy='result-91724']").click();
