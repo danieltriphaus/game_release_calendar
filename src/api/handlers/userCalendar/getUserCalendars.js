@@ -2,10 +2,11 @@ import { getCalendars } from "../../datastore/getCalendars.js";
 import { createCalendar } from "../../datastore/createCalendar.js";
 import { nanoid } from "nanoid";
 
+//ToDo: Add Query Param "list"
 export const getUserCalendars = async (context, req, res) => {
     let calendars = await getCalendars(context.request.params.user_id);
 
-    if (!calendars.length) {
+    if (!calendars.length || !calendars.find((cal) => cal.list === "default")) {
         const calendar = {
             token: nanoid(32),
             list: "default",

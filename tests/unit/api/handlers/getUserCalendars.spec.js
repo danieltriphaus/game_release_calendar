@@ -54,3 +54,20 @@ it("should create default calendar if none are found and return it", async () =>
     expect(context.response.status).toBeCalledWith(200);
     expect(context.response.json).toBeCalledWith(expect.arrayContaining([expect.objectContaining(newCalendar)]));
 });
+
+it("should create default calendar if only calendars without lists are found and return it", async () => {
+    const context = getContext();
+    context.request.params.user_id = "testUser";
+    getCalendars.mockResolvedValueOnce([{ token: 1234 }]);
+
+    await getUserCalendars(context, context.request, context.response);
+
+    const newCalendar = {
+        token: expect.stringContaining(""),
+        list: "default",
+    };
+
+    expect(createCalendar).toBeCalledWith(context.request.params.user_id, newCalendar);
+    expect(context.response.status).toBeCalledWith(200);
+    expect(context.response.json).toBeCalledWith(expect.arrayContaining([expect.objectContaining(newCalendar)]));
+});

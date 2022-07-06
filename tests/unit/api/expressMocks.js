@@ -25,6 +25,7 @@ export function getResponse() {
         json: jest.fn(() => response),
         send: jest.fn(() => response),
         end: jest.fn(() => response),
+        contentType: jest.fn(),
     };
 
     return response;
