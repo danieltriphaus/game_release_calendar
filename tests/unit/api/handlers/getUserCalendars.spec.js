@@ -1,9 +1,11 @@
 import { getUserCalendars } from "@/api/handlers/userCalendar/getUserCalendars";
 import { getContext } from "../expressMocks";
 import { getCalendars } from "@/api/datastore/getCalendars.js";
+import { createCalendar } from "@/api/datastore/createCalendar.js";
 
 jest.mock("@/api/datastore/getCalendars.js");
 jest.mock("@/api/igdb/igdbAccessToken.js");
+jest.mock("@/api/datastore/createCalendar.js");
 
 const calendars = [
     {
@@ -36,13 +38,19 @@ it("should remove igdbAccessToken from result", async () => {
     );
 });
 
-it("shoudl return empty array if no calendars are found", async () => {
+it("should create default calendar if none are found and return it", async () => {
     const context = getContext();
     context.request.params.user_id = "testUser";
     getCalendars.mockResolvedValueOnce([]);
 
     await getUserCalendars(context, context.request, context.response);
 
+    const newCalendar = {
+        token: expect.stringContaining(""),
+        list: "default",
+    };
+
+    expect(createCalendar).toBeCalledWith(context.request.params.user_id, newCalendar);
     expect(context.response.status).toBeCalledWith(200);
-    expect(context.response.json).toBeCalledWith([]);
+    expect(context.response.json).toBeCalledWith(expect.arrayContaining([expect.objectContaining(newCalendar)]));
 });

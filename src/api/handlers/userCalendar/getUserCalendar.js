@@ -22,6 +22,7 @@ export const getUserCalendar = async (context, req, res) => {
             }
         });
 
+        res.contentType("text/calendar");
         res.status(200).send(outputCalendar.toString());
     } else {
         res.status(404).json({ error: "not_found", message: "calendar not found" });

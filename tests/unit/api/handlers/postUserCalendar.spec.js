@@ -38,5 +38,5 @@ it("should create calendar in database", async () => {
 
     await postUserCalendar(context, context.request, context.response);
 
-    expect(createCalendar).toHaveBeenCalledWith(context.request.params.user_id, "token");
+    expect(createCalendar).toHaveBeenCalledWith(context.request.params.user_id, { token: "token" });
 });
