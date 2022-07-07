@@ -35,10 +35,32 @@
     async function getCalendarLink() 
     {
         isGettingLink.value = true;
-        const response = await axios.get("/api/user/" + user.value.id + "/calendars");
-        if (response) {
-            calendar.value = response.data.find((calendar) => calendar.list === "default");
+        let defaultCalendar = await getDefaultCalendar();
+        if (!defaultCalendar) {
+            defaultCalendar = await createAndGetDefaultCalendar()
         }
+        calendar.value = defaultCalendar;
         isGettingLink.value = false;
+    }
+
+    async function getDefaultCalendar() {
+        const response = await axios.get("/api/user/" + user.value.id + "/calendars", {params: {list: "default"}}).catch((error) => {
+            console.log(error);
+            if (error.response && error.response.status !== 404) {
+                throw error;
+            }
+        });
+        return getCalendarFromResponse(response);
+    }
+    
+    async function createAndGetDefaultCalendar() {
+        const response = await axios.post("/api/user/" + user.value.id + "/calendar", {list: "default"});
+        return getCalendarFromResponse(response);
+    }
+
+    function getCalendarFromResponse(response) {
+        if (response) {
+            return response.data[0] ? response.data[0] : response.data;
+        }
     }
 </script>

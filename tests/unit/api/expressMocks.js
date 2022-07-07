@@ -15,6 +15,7 @@ export function getRequest() {
         body: {},
         params: {},
         cookies: {},
+        query: {},
     };
 }
 
