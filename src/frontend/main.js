@@ -14,4 +14,3 @@ app.use(BootstrapVue3);
 app.use(router).mount("#app");
 
 //ToDo: Migrate from VUE CLI to Vite
-//ToDo: Migrate to Cypress 10

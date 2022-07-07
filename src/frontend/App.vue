@@ -55,7 +55,7 @@ export default {
     return {
       authenticationFailed: false,
       isAuthenticated: false,
-      gsiAppId: process.env.VUE_APP_GOOGLE_SIGN_IN_APP_ID,
+      gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
       user: {
         id: ""
       },

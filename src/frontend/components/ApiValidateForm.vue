@@ -10,7 +10,7 @@
 
     const emit = defineEmits(["authenticated", "authentication-failed"]);
 
-    const nodeEnv = computed(() => process.env.NODE_ENV);
+    const nodeEnv = computed(() => import.meta.env.NODE_ENV);
 
     onMounted(async () => {
         await doAuthentication();
