@@ -3,6 +3,7 @@ import gameSearch from "../fixtures/gameSearch.json";
 describe("Game Search Tests", () => {
     it("should display release date of games or TBA", () => {
         cy.intercept("/api/access", { id: "y1xx" });
+        cy.intercept("/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
         cy.intercept("/api/game/search*", { fixture: "gameSearch.json" }).as("gameSearch");
         cy.intercept("https://accounts.google.com/gsi/client", {});
 

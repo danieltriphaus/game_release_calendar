@@ -84,10 +84,7 @@ const accordionTabIcon = computed(() => {
 
 async function populateGameList() {
     emits("loading");
-    const response = await axios.get("/api/user/" + props.userId + "/games").catch((error) => { 
-        console.log(error.response);
-        //ToDo: implement UI Message no Games added
-    });
+    const response = await axios.get("/api/user/" + props.userId + "/games");
     if (response) {
         games.value = response.data;
     }
@@ -113,7 +110,6 @@ async function deleteGame(id) {
     populateGameList();
 }
 
-//ToDo: move sorting logic to api layer
 const sortedGames = computed(() => {
     const gamesCopy = [ ...games.value ];
     
