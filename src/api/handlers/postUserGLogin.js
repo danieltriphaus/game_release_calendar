@@ -1,8 +1,7 @@
-import { OAuth2Client } from "google-auth-library";
+import { getGLoginPayload } from "../library/getGLoginPayload.js";
 import { nanoid } from "nanoid";
 import { upsertUser } from "../datastore/upsertUser.js";
 import { getUsersByEmailAddress } from "../datastore/getUser.js";
-import { getIgdbAccessToken } from "../igdb/igdbAccessToken.js";
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
@@ -11,13 +10,7 @@ const COOKIE_OPTIONS = {
 export const postUserGLogin = async (context, req, res) => {
     let userData;
 
-    const client = new OAuth2Client(process.env.VUE_APP_GOOGLE_SIGN_IN_APP_ID);
-    const ticket = await client.verifyIdToken({
-        idToken: req.body.credential,
-        audience: process.env.VUE_APP_GOOGLE_SIGN_IN_APP_ID,
-    });
-
-    const payload = ticket.getPayload();
+    const payload = await getGLoginPayload(req.body.credential);
 
     const users = await getUsersByEmailAddress(payload.email);
 
@@ -39,10 +32,8 @@ export const postUserGLogin = async (context, req, res) => {
         }
     }
 
-    const igdbAccessToken = await getIgdbAccessToken();
-
     res.cookie("auth_key", userData.auth_key, {
-        maxAge: igdbAccessToken.expires_in * 1000,
+        maxAge: 5260000 * 1000,
         ...COOKIE_OPTIONS,
     });
 
