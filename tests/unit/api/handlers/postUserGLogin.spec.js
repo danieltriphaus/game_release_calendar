@@ -19,7 +19,7 @@ const dbUser = {
     auth_key: "test_auth_key",
 };
 
-it("should save google user in database and login if it does not exist", async () => {
+it("should save google user in database if it does not exist", async () => {
     getGLoginPayload.mockResolvedValueOnce(googleUser);
     getUsersByEmailAddress.mockResolvedValueOnce([]);
 
