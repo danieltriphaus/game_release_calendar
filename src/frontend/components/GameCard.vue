@@ -1,9 +1,22 @@
 <template>
-    <img v-if="hasCover" :src="coverUrl" class="game-cover" :data-testid="'game-' + props.game.id + '-cover'">
+    <img
+        v-if="hasCover"
+        :src="coverUrl"
+        class="game-cover"
+        :data-testid="'game-' + props.game.id + '-cover'"
+    >
     <div class="game-info">
-        <h5 data-cy="game-title">{{ props.game.name }}</h5>
+        <h5 data-cy="game-title">
+            {{ props.game.name }}
+        </h5>
         <h6>{{ developer }}</h6>
-        <h6 data-testid="release-date" data-cy="release-date" class="release-date">{{ releaseDate }}</h6>
+        <h6
+            data-testid="release-date"
+            data-cy="release-date"
+            class="release-date"
+        >
+            {{ releaseDate }}
+        </h6>
     </div>
 </template>
 

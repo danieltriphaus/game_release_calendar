@@ -18,6 +18,5 @@ export const userAuth = async (context, req, res) => {
 };
 
 export const calendarToken = async (context) => {
-    const calendar = await getCalendar(context.request.params.user_id, context.request.query.token);
-    return calendar;
+    return await getCalendar(context.request.params.user_id, context.request.query.token);
 };

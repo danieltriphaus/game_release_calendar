@@ -1,6 +1,10 @@
 <template>
     <div class="row">
-        <div class="col result mt-2" :data-cy="'result-' + result.id" @click="addGame(result.id)">
+        <div
+            class="col result mt-2"
+            :data-cy="'result-' + result.id"
+            @click="addGame(result.id)"
+        >
             <game-card :game="result" />
         </div>
     </div>
@@ -13,7 +17,7 @@ import GameCard from "./GameCard.vue";
 
 const userId = inject("userId");
 
-const props = defineProps(["result"]);
+const props = defineProps({result: { type: Object, default: () => {}}});
 const emit = defineEmits(["game-added"]);
 
 function addGame() {    

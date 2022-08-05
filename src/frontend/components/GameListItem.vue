@@ -1,9 +1,25 @@
 <template>
-    <div :id="'game-' + props.game.id" class="col game" data-testid="game" data-cy="game">
+    <div
+        :id="'game-' + props.game.id"
+        class="col game"
+        data-testid="game"
+        data-cy="game"
+    >
         <game-card :game="game" />
         <div class="game-actions">
-            <a :href="game.url" target="_blank" class="game-details btn btn-igdb"><i class="bi bi-info-square"></i></a><br>
-            <button type="button" @click="emit('delete-game', props.game.id)" class="btn btn-outline-danger" data-cy="delete-game"><i class="bi bi-trash-fill"></i></button>
+            <a
+                :href="game.url"
+                target="_blank"
+                class="game-details btn btn-igdb"
+            ><i class="bi bi-info-square" /></a><br>
+            <button
+                type="button"
+                class="btn btn-outline-danger"
+                data-cy="delete-game"
+                @click="emit('delete-game', props.game.id)"
+            >
+                <i class="bi bi-trash-fill" />
+            </button>
         </div>
     </div>
 </template>

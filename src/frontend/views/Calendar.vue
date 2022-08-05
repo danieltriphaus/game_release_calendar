@@ -2,11 +2,22 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-outline-primary" @click="createCalendar">Kalender erstellen</button>
+                <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    @click="createCalendar"
+                >
+                    Kalender erstellen
+                </button>
             </div>
         </div>
 
-        <div v-for="calendar in calendars" :key="calendar.token" class="row calendar-link" data-testid="calendar-link">
+        <div
+            v-for="calendar in calendars"
+            :key="calendar.token"
+            class="row calendar-link"
+            data-testid="calendar-link"
+        >
             <calendar-link :calendar="calendar" />
         </div>
     </div>

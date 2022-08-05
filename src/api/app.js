@@ -38,8 +38,7 @@ if (process.env.NODE_ENV === "development") {
     port = 3000;
 }
 
-await getIgdbAccessToken();
-
 const listener = app.listen(port, async () => {
+    await getIgdbAccessToken();
     console.log("Listening on port " + listener.address().port);
 });

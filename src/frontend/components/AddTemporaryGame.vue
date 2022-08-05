@@ -3,18 +3,47 @@
         <template v-if="isTempGameInput">
             <div class="col">
                 <div class="input-group">
-                    <input type="text" data-cy="temp-game-name" placeholder="Name" class="form-control" v-model="temporaryGame.name"/>
+                    <input
+                        v-model="temporaryGame.name"
+                        type="text"
+                        data-cy="temp-game-name"
+                        placeholder="Name"
+                        class="form-control"
+                    >
                     <div class="input-group-append">
-                        <button type="button" data-cy="add-temp-game-to-list" @click="addTemporaryGame" class="btn btn-outline-primary"><i class="bi bi-check2-square" /></button>
+                        <button
+                            type="button"
+                            data-cy="add-temp-game-to-list"
+                            class="btn btn-outline-primary"
+                            @click="addTemporaryGame"
+                        >
+                            <i class="bi bi-check2-square" />
+                        </button>
                     </div>
                     <div class="input-group-append">
-                        <button type="button" @click="endTemporaryGameInput" class="btn btn-outline-danger"><i class="bi bi-x" /></button>
+                        <button
+                            type="button"
+                            class="btn btn-outline-danger"
+                            @click="endTemporaryGameInput"
+                        >
+                            <i class="bi bi-x" />
+                        </button>
                     </div>
                 </div>
             </div>
         </template>
-        <div v-else class="col">
-            <button type="button" @click="isTempGameInput = true;" data-cy="add-temp-game" class="btn btn-outline-primary">Game not found?</button>
+        <div
+            v-else
+            class="col"
+        >
+            <button
+                type="button"
+                data-cy="add-temp-game"
+                class="btn btn-outline-primary"
+                @click="isTempGameInput = true;"
+            >
+                Game not found?
+            </button>
         </div>
     </div>
 </template>

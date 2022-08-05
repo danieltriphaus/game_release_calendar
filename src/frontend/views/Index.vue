@@ -1,10 +1,10 @@
 <template>
     <template v-if="isAuthenticated">
         <!-- <router-link to="/calendar">Kalendar generieren</router-link> -->
-        <calendar-control></calendar-control>
+        <calendar-control />
         <b-overlay :show="gameListLoading">
             <game-list 
-                :userId="user.id"
+                :user-id="user.id"
                 @loading="gameListLoading = true"
                 @loading-complete="gameListLoading = false"
             />

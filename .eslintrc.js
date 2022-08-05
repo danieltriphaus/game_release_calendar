@@ -6,13 +6,14 @@ module.exports = {
         "vue/setup-compiler-macros": true,
         "cypress/globals": true,
     },
-    extends: ["plugin:vue/vue3-essential", "eslint:recommended", "plugin:vue/base"],
-    plugins: ["cypress"],
+    extends: ["plugin:vue/vue3-essential", "eslint:recommended", "plugin:vue/vue3-recommended", "plugin:vue/base", "plugin:sonarjs/recommended"],
+    plugins: ["cypress", "sonarjs"],
     rules: {
         "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-        "vue/html-indent": ["warn", 4],
+        "vue/html-indent": ["error", 4],
         "vue/script-setup-uses-vars": "error",
+        "vue/script-indent": ["error", 4],
     },
     overrides: [
         {

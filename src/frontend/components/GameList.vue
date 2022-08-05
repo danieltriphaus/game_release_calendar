@@ -1,9 +1,17 @@
 <template>
     <game-search @game-added="onGameAdded" />
     <add-temporary-game @game-added="onGameAdded" />
-    <div class="list-category" v-b-toggle.released-games>
-        <h5 class="list-heading mt-4">Released Games</h5>
-        <i class="list-icon mt-4" :class="'bi-' + accordionTabIcon('released-games')"></i>
+    <div
+        v-b-toggle.released-games
+        class="list-category"
+    >
+        <h5 class="list-heading mt-4">
+            Released Games
+        </h5>
+        <i
+            class="list-icon mt-4"
+            :class="'bi-' + accordionTabIcon('released-games')"
+        />
     </div>
     <b-collapse 
         id="released-games"
@@ -11,13 +19,29 @@
         @hide="onCollapseStateChanged('released-games', false)"
         @show="onCollapseStateChanged('released-games', true)"
     >
-        <div class="row" data-cy="released-games" v-for="game in releasedGames" :key="game.id">
-            <game-list-item :game="game" @delete-game="deleteGame" />
+        <div
+            v-for="game in releasedGames"
+            :key="game.id"
+            class="row"
+            data-cy="released-games"
+        >
+            <game-list-item
+                :game="game"
+                @delete-game="deleteGame"
+            />
         </div>
     </b-collapse>
-    <div class="list-category" v-b-toggle.unreleased-games>
-        <h5 class="list-heading mt-4">Unreleased Games</h5>
-        <i class="list-icon mt-4" :class="'bi-' + accordionTabIcon('unreleased-games')"></i>
+    <div
+        v-b-toggle.unreleased-games
+        class="list-category"
+    >
+        <h5 class="list-heading mt-4">
+            Unreleased Games
+        </h5>
+        <i
+            class="list-icon mt-4"
+            :class="'bi-' + accordionTabIcon('unreleased-games')"
+        />
     </div>
     <b-collapse
         id="unreleased-games"
@@ -25,8 +49,16 @@
         @hide="onCollapseStateChanged('unreleased-games', false)"
         @show="onCollapseStateChanged('unreleased-games', true)"
     >
-        <div class="row" data-cy="unreleased-games" v-for="game in unreleasedGames" :key="game.id">
-            <game-list-item :game="game" @delete-game="deleteGame" />
+        <div
+            v-for="game in unreleasedGames"
+            :key="game.id"
+            class="row"
+            data-cy="unreleased-games"
+        >
+            <game-list-item
+                :game="game"
+                @delete-game="deleteGame"
+            />
         </div>
     </b-collapse>
 </template>
@@ -127,17 +159,15 @@ const sortedGames = computed(() => {
 });
 
 const releasedGames = computed(() => {
-    const games = sortedGames.value.filter((game) => {
+    return sortedGames.value.filter((game) => {
         return new Date(game.first_release_date * 1000) <= new Date()
     });
-    return games;
 });
 
 const unreleasedGames = computed(() => {
-    const games = sortedGames.value.filter((game) => {
+    return sortedGames.value.filter((game) => {
         return new Date(game.first_release_date * 1000) > new Date() || !game.first_release_date
     });
-    return games;
 })
 </script>
 

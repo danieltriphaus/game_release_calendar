@@ -2,13 +2,33 @@
     <div>
         <div class="row mt-4">
             <div class="col">
-                <input type="search" v-debounce:500ms="searchGames" v-model="search.query" data-cy="search-games" name="search-games" class="form-control" placeholder="Search Games">
-                <b-spinner v-if="isSearchInProgress" class="inside-input-spinner" variant="primary" data-cy="game-search-spinner"></b-spinner>
+                <input
+                    v-model="search.query"
+                    v-debounce:500ms="searchGames"
+                    type="search"
+                    data-cy="search-games"
+                    name="search-games"
+                    class="form-control"
+                    placeholder="Search Games"
+                >
+                <b-spinner
+                    v-if="isSearchInProgress"
+                    class="inside-input-spinner"
+                    variant="primary"
+                    data-cy="game-search-spinner"
+                />
             </div>
         </div>
 
-        <div class="results mt-2" v-for="result in search.results" :key="result.id">
-            <search-result :result="result" @game-added="onGameAdded"/>
+        <div
+            v-for="result in search.results"
+            :key="result.id"
+            class="results mt-2"
+        >
+            <search-result
+                :result="result"
+                @game-added="onGameAdded"
+            />
         </div>
     </div>
 </template>

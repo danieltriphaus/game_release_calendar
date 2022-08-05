@@ -1,37 +1,56 @@
 <template>
     <div class="container">
-        <div v-if="isAuthenticated" class="row">
+        <div
+            v-if="isAuthenticated"
+            class="row"
+        >
             <div class="col-3 offset-9 text-end">
-                <b-dropdown id="user-menu" variant="primary">
+                <b-dropdown
+                    id="user-menu"
+                    variant="primary"
+                >
                     <template #button-content>
                         <i class="bi-person-circle" />
                     </template>
-                    <b-dropdown-item @click="signOut" variant="danger"><i class="bi-door-open me-2"></i>Sign Out</b-dropdown-item>
+                    <b-dropdown-item
+                        variant="danger"
+                        @click="signOut"
+                    >
+                        <i class="bi-door-open me-2" />Sign Out
+                    </b-dropdown-item>
                 </b-dropdown>
             </div>
         </div>
-        <div v-if="!isAuthenticated" class="row mt-4">
+        <div
+            v-if="!isAuthenticated"
+            class="row mt-4"
+        >
             <template v-if="authenticationFailed">
-                <div id="g_id_onload"
-                     :data-client_id="gsiAppId"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="onSignIn">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-size="large"
-                     data-theme="outline"
-                     data-text="sign_in_with"
-                     data-shape="rectangular"
-                     data-csrf_token="token"
-                     data-logo_alignment="left">
-                </div>
+                <div
+                    id="g_id_onload"
+                    :data-client_id="gsiAppId"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="onSignIn"
+                />
+                <div
+                    class="g_id_signin"
+                    data-type="standard"
+                    data-size="large"
+                    data-theme="outline"
+                    data-text="sign_in_with"
+                    data-shape="rectangular"
+                    data-csrf_token="token"
+                    data-logo_alignment="left"
+                />
             </template>
-            <api-validate-form @authenticated="onAuthenticated" @authentication-failed="onAuthenticationFailed" />
+            <api-validate-form
+                @authenticated="onAuthenticated"
+                @authentication-failed="onAuthenticationFailed"
+            />
         </div>
         
-        <router-view v-if="isAuthenticated"/>
+        <router-view v-if="isAuthenticated" />
     </div>
 </template>
 
@@ -41,56 +60,56 @@ import axios from "axios";
 import { computed } from "vue";
 
 export default {
-  components: {
-    ApiValidateForm,
-  },
-  provide() {
-    return {
-      userId: computed(() => this.user.id ),
-      user: computed(() => this.user ),
-      isAuthenticated: computed(() => this.isAuthenticated)
-    }
-  },
-  data() {
-    return {
-      authenticationFailed: false,
-      isAuthenticated: false,
-      gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
-      user: {
-        id: ""
-      },
-    }
-  },
-  mounted() {
-    const googleSignInScript = document.createElement("script");
-    googleSignInScript.setAttribute("src", "https://accounts.google.com/gsi/client");
-    googleSignInScript.setAttribute("async", "");
-    googleSignInScript.setAttribute("defer", "");
-    document.head.appendChild(googleSignInScript);
+    components: {
+        ApiValidateForm,
+    },
+    provide() {
+        return {
+            userId: computed(() => this.user.id ),
+            user: computed(() => this.user ),
+            isAuthenticated: computed(() => this.isAuthenticated)
+        }
+    },
+    data() {
+        return {
+            authenticationFailed: false,
+            isAuthenticated: false,
+            gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
+            user: {
+                id: ""
+            },
+        }
+    },
+    mounted() {
+        const googleSignInScript = document.createElement("script");
+        googleSignInScript.setAttribute("src", "https://accounts.google.com/gsi/client");
+        googleSignInScript.setAttribute("async", "");
+        googleSignInScript.setAttribute("defer", "");
+        document.head.appendChild(googleSignInScript);
 
-    window.onSignIn = async (response) => {  
-      const loginResponse = await axios.post("/api/user/g-login", { credential: response.credential });
-      this.user = loginResponse.data;
-      this.isAuthenticated = true;
-    }
-  },
-  methods: {
-    onAuthenticated(user) {
-      this.isAuthenticated = true;
-      this.user = user;
+        window.onSignIn = async (response) => {  
+            const loginResponse = await axios.post("/api/user/g-login", { credential: response.credential });
+            this.user = loginResponse.data;
+            this.isAuthenticated = true;
+        }
     },
-    onAuthenticationFailed() {
-      this.isAuthenticated = false;
-      this.authenticationFailed = true;
-    },
-    async signOut() {
-      const response = await axios.delete("/api/access");
-      if (response.status === 200) {
-        await this.$router.push("/");
-        window.location.reload();
-      }
+    methods: {
+        onAuthenticated(user) {
+            this.isAuthenticated = true;
+            this.user = user;
+        },
+        onAuthenticationFailed() {
+            this.isAuthenticated = false;
+            this.authenticationFailed = true;
+        },
+        async signOut() {
+            const response = await axios.delete("/api/access");
+            if (response.status === 200) {
+                await this.$router.push("/");
+                window.location.reload();
+            }
+        }
     }
-  }
 };
 </script>
 
