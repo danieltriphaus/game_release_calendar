@@ -57,11 +57,11 @@ it("should add gameIds as string to igdb request", async () => {
         expect.stringContaining(
             gameList.games[0].toString(),
             gameList.games[1].toString(),
-            gameList.games[2].toString()
+            gameList.games[2].toString(),
         ),
         expect.objectContaining({
             headers: expect.objectContaining({ Authorization: "Bearer " + igdbAccessToken.access_token }),
-        })
+        }),
     );
 });
 
@@ -95,7 +95,7 @@ it("should return 404 if calendar cannot be found", async () => {
 
     expect(context.response.status).toBeCalledWith(404);
     expect(context.response.json).toBeCalledWith(
-        expect.objectContaining({ error: expect.stringContaining(""), message: expect.stringContaining("") })
+        expect.objectContaining({ error: expect.stringContaining(""), message: expect.stringContaining("") }),
     );
 });
 
@@ -115,7 +115,7 @@ it("should not create event if release_date is undefined", async () => {
 
     expect(context.response.status).toBeCalledWith(200);
     expect(context.response.send).not.toBeCalledWith(
-        expect.stringContaining(gameResponse[gameResponse.length - 1].name)
+        expect.stringContaining(gameResponse[gameResponse.length - 1].name),
     );
 
     gameResponse.pop();

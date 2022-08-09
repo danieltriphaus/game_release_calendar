@@ -17,10 +17,10 @@ import GameCard from "./GameCard.vue";
 
 const userId = inject("userId");
 
-const props = defineProps({result: { type: Object, default: () => {}}});
+const props = defineProps({ result: { type: Object, default: () => {} } });
 const emit = defineEmits(["game-added"]);
 
-function addGame() {    
+function addGame() {
     axios.post("/api/user/" + userId.value + "/games", [props.result.id]);
     emit("game-added", props.result.id);
 }

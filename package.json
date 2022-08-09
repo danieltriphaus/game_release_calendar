@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "node src/bin/build.mjs",
     "server": "vite preview",
     "test:unit": "jest --runInBand",
     "test:cypressOpen": "yarn run cypress open --project tests",

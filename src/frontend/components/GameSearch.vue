@@ -45,16 +45,16 @@ const emit = defineEmits(["game-added"]);
 
 const vDebounce = getDirective(3);
 
-const search = reactive({ 
+const search = reactive({
     query: "",
-    results: []
+    results: [],
 });
 
 const isSearchInProgress = ref(false);
 
 async function searchGames() {
     isSearchInProgress.value = true;
-    const response = await axios.get("/api/game/search", { params: { q: search.query }});
+    const response = await axios.get("/api/game/search", { params: { q: search.query } });
     search.results = response.data;
     isSearchInProgress.value = false;
 }

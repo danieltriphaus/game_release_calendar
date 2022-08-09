@@ -26,7 +26,7 @@
                     />
                 </b-button>
             </b-row>
-            <b-form-group 
+            <b-form-group
                 v-if="calendar.token"
                 class="mt-2"
                 label="Subscription Link"
@@ -55,32 +55,31 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+import axios from "axios";
 import { inject, ref, computed } from "vue";
 
 const USER_API_PATH = "/api/user/";
 
 const user = inject("user");
-const calendar = ref({list: "", token: ""});
+const calendar = ref({ list: "", token: "" });
 const isGettingLink = ref(false);
 
 const calendarLink = computed(() => {
     return window.location.protocol + "//" + window.location.host + USER_API_PATH + user.value.id + "/calendar?token=" + calendar.value.token;
 });
 
-async function getCalendarLink() 
-{
+async function getCalendarLink() {
     isGettingLink.value = true;
     let defaultCalendar = await getDefaultCalendar();
     if (!defaultCalendar) {
-        defaultCalendar = await createAndGetDefaultCalendar()
+        defaultCalendar = await createAndGetDefaultCalendar();
     }
     calendar.value = defaultCalendar;
     isGettingLink.value = false;
 }
 
 async function getDefaultCalendar() {
-    const response = await axios.get(USER_API_PATH + user.value.id + "/calendars", {params: {list: "default"}}).catch((error) => {
+    const response = await axios.get(USER_API_PATH + user.value.id + "/calendars", { params: { list: "default" } }).catch((error) => {
         console.log(error);
         if (error.response && error.response.status !== 404) {
             throw error;
@@ -88,9 +87,9 @@ async function getDefaultCalendar() {
     });
     return getCalendarFromResponse(response);
 }
-    
+
 async function createAndGetDefaultCalendar() {
-    const response = await axios.post(USER_API_PATH + user.value.id + "/calendar", {list: "default"});
+    const response = await axios.post(USER_API_PATH + user.value.id + "/calendar", { list: "default" });
     return getCalendarFromResponse(response);
 }
 

@@ -32,8 +32,10 @@ const emit = defineEmits(["delete-game"]);
 const props = defineProps({
     game: {
         type: Object,
-        default: () => { return {} }
-    }
+        default: () => {
+            return {};
+        },
+    },
 });
 </script>
 

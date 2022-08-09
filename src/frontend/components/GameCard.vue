@@ -26,8 +26,10 @@ import { computed } from "vue";
 const props = defineProps({
     game: {
         type: Object,
-        default: () => { return {} }
-    }
+        default: () => {
+            return {};
+        },
+    },
 });
 
 const hasCover = computed(() => {
@@ -35,7 +37,7 @@ const hasCover = computed(() => {
 });
 
 const coverUrl = computed(() => {
-    return props.game.cover.url.replace('thumb', 'cover_small')
+    return props.game.cover.url.replace("thumb", "cover_small");
 });
 
 const releaseDate = computed(() => {
@@ -43,7 +45,7 @@ const releaseDate = computed(() => {
         return "TBD";
     } else if (props.game.release_dates.find((date) => date.date === props.game.first_release_date).category === 0) {
         const releaseDateObject = new Date(props.game.first_release_date * 1000);
-        return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" })
+        return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" });
     } else {
         return props.game.release_dates[0].human;
     }
@@ -55,12 +57,12 @@ const developer = computed(() => {
 </script>
 
 <style scoped>
-    img {   
+    img {
         height: 100px;
     }
 
     .game-info {
-        
+
         padding-left: 10px;
     }
 

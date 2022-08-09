@@ -67,7 +67,7 @@ function addTemporaryGame() {
     temporaryGame.id = nanoid();
     axios.post("/api/game", temporaryGame);
     axios.post("/api/user/" + userId.value + "/games", [temporaryGame.id]);
-    emit("game-added", {...temporaryGame});
+    emit("game-added", { ...temporaryGame });
     endTemporaryGameInput();
 }
 

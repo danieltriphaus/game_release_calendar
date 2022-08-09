@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const query = 'search "{query}"; fields {fields}; where involved_companies.developer = true; limit 5;';
+const query = "search \"{query}\"; fields {fields}; where involved_companies.developer = true; limit 5;";
 
 export const searchGames = async (searchQuery, accessToken, fields) => {
     const finalQuery = query.replace("{fields}", fields.join(","));

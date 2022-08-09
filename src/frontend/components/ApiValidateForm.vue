@@ -15,7 +15,7 @@ import { onMounted, computed, ref } from "vue";
 const authKey = ref();
 
 const emit = defineEmits(["authenticated", "authentication-failed"]);
-    
+
 const nodeEnv = computed(() => import.meta.env.MODE);
 
 onMounted(async () => {
@@ -27,15 +27,15 @@ async function sendAuthKey() {
 }
 
 async function doAuthentication(axiosRequestConfig) {
-    const response=await axios.get("/api/access", axiosRequestConfig).catch((error) => {
-        if(!error.response || error.response.status!==401) {
+    const response = await axios.get("/api/access", axiosRequestConfig).catch((error) => {
+        if (!error.response || error.response.status !== 401) {
             throw error;
         }
-        if(error.response && error.response.status===401) {
+        if (error.response && error.response.status === 401) {
             emit("authentication-failed");
         }
     });
-    if(response && response.status===200) {
+    if (response && response.status === 200) {
         emit("authenticated", response.data);
     }
 }

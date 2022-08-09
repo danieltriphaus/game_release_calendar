@@ -19,7 +19,7 @@ it("add games to datastore", async () => {
     expect(upsertGameList).toHaveBeenCalledWith(
         "y1xx",
         expect.arrayContaining([...context.request.body, ...gameListGames]),
-        expect.stringContaining("")
+        expect.stringContaining(""),
     );
     expect(context.response.status).toHaveBeenCalledWith(200);
 });
@@ -34,7 +34,7 @@ it("create list and add games if no list could be found", async () => {
     expect(upsertGameList).toHaveBeenCalledWith(
         "y1xx",
         expect.arrayContaining(context.request.body),
-        expect.stringContaining("")
+        expect.stringContaining(""),
     );
 
     expect(context.response.status).toHaveBeenCalledWith(200);

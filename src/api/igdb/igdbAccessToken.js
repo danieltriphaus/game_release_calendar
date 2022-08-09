@@ -14,7 +14,7 @@ export const getIgdbAccessToken = async () => {
                     process.env.IGDB_API_CLIENT_ID +
                     "&client_secret=" +
                     process.env.IGDB_API_CLIENT_SECRET +
-                    "&grant_type=client_credentials"
+                    "&grant_type=client_credentials",
             )
             .catch((error) => {
                 console.warn("Warning: igdb Access Token could not be obtained");

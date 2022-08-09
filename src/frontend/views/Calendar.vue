@@ -30,7 +30,7 @@ import CalendarLink from "../components/CalendarLink";
 export default {
     name: "CalendarView",
     components: {
-        CalendarLink
+        CalendarLink,
     },
     inject: ["user"],
     data() {
@@ -53,7 +53,7 @@ export default {
                 this.calendarToken = response.data;
                 this.calendars.push({ token: this.calendarToken });
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>

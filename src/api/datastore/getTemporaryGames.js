@@ -16,7 +16,7 @@ export const getTemporaryGames = async (gameIds) => {
 export const convertFromDatastoreResult = (result) => {
     return result
         ? result.map((datastoreResult) => {
-              return { id: datastoreResult[Datastore.KEY].name, name: datastoreResult.name };
-          })
+            return { id: datastoreResult[Datastore.KEY].name, name: datastoreResult.name };
+        })
         : [];
 };

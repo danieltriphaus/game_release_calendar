@@ -11,19 +11,19 @@ export default {
     props: {
         calendar: {
             type: Object,
-            default() { 
+            default() {
                 return {
-                    token: ""
-                } 
-            }
-        }
+                    token: "",
+                };
+            },
+        },
     },
     computed: {
         calendarLink() {
-            return window.location.protocol + "//" + window.location.hostname 
-                + ( window.location.port !== 80 ? ":" + window.location.port : "" )
+            return window.location.protocol + "//" + window.location.hostname
+                + (window.location.port !== 80 ? ":" + window.location.port : "")
                 + "/api/user/" + this.user.id + "/calendar?token=" + this.calendar.token;
-        }
-    }
-}
+        },
+    },
+};
 </script>

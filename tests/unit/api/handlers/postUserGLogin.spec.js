@@ -33,7 +33,7 @@ it("should save google user in database if it does not exist", async () => {
             google_id: googleUser.sub,
             email_address: googleUser.email,
             auth_key: expect.stringContaining(""),
-        })
+        }),
     );
 });
 
@@ -49,7 +49,7 @@ it("should login user with auth_key", async () => {
     expect(context.response.cookie).toHaveBeenCalledWith(
         "auth_key",
         expect.stringContaining(""),
-        expect.objectContaining({})
+        expect.objectContaining({}),
     );
 });
 
@@ -63,6 +63,6 @@ it("should remove auth_key from result", async () => {
     await postUserGLogin(context, context.request, context.response);
 
     expect(context.response.json).not.toBeCalledWith(
-        expect.objectContaining({ auth_key: expect.stringContaining("") })
+        expect.objectContaining({ auth_key: expect.stringContaining("") }),
     );
 });

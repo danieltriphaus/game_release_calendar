@@ -13,7 +13,7 @@
             :class="'bi-' + accordionTabIcon('released-games')"
         />
     </div>
-    <b-collapse 
+    <b-collapse
         id="released-games"
         :visible="categoryAccordion.isVisible['released-games']"
         @hide="onCollapseStateChanged('released-games', false)"
@@ -45,7 +45,7 @@
     </div>
     <b-collapse
         id="unreleased-games"
-        :visible="categoryAccordion.isVisible['unreleased-games']" 
+        :visible="categoryAccordion.isVisible['unreleased-games']"
         @hide="onCollapseStateChanged('unreleased-games', false)"
         @show="onCollapseStateChanged('unreleased-games', true)"
     >
@@ -78,12 +78,12 @@ const emits = defineEmits(["loading", "loading-complete"]);
 const props = defineProps({
     userId: {
         type: String,
-        default: ""
+        default: "",
     },
     gameListId: {
         type: String,
-        default: "default"
-    }
+        default: "default",
+    },
 });
 
 const games = ref([]);
@@ -95,8 +95,8 @@ const categoryAccordion = reactive({
     },
     icons: {
         open: "caret-up-fill",
-        closed: "caret-down-fill"
-    }
+        closed: "caret-down-fill",
+    },
 });
 
 function onCollapseStateChanged(id, state) {
@@ -111,8 +111,8 @@ const accordionTabIcon = computed(() => {
         } else {
             return categoryAccordion.icons.closed;
         }
-    }
-})
+    };
+});
 
 async function populateGameList() {
     emits("loading");
@@ -143,8 +143,8 @@ async function deleteGame(id) {
 }
 
 const sortedGames = computed(() => {
-    const gamesCopy = [ ...games.value ];
-    
+    const gamesCopy = [...games.value];
+
     return gamesCopy.sort((a, b) => {
         if (a.first_release_date < b.first_release_date || !b.first_release_date) {
             return -1;
@@ -160,15 +160,15 @@ const sortedGames = computed(() => {
 
 const releasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(game.first_release_date * 1000) <= new Date()
+        return new Date(game.first_release_date * 1000) <= new Date();
     });
 });
 
 const unreleasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(game.first_release_date * 1000) > new Date() || !game.first_release_date
+        return new Date(game.first_release_date * 1000) > new Date() || !game.first_release_date;
     });
-})
+});
 </script>
 
 <style scoped>

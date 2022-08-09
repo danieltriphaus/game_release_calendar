@@ -10,7 +10,7 @@ describe("Calendar Tests", () => {
         cy.intercept("/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
         cy.intercept("https://accounts.google.com/gsi/client", {});
         cy.intercept({ method: "POST", url: "/api/user/*/calendar" }, { list: "default", token }).as(
-            "postUserCalendar"
+            "postUserCalendar",
         );
 
         cy.intercept({ url: "/api/user/*/calendars*", times: 1 }, { statusCode: 404 }).as("getUserCalendarNotFound");

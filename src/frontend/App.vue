@@ -49,7 +49,7 @@
                 @authentication-failed="onAuthenticationFailed"
             />
         </div>
-        
+
         <router-view v-if="isAuthenticated" />
     </div>
 </template>
@@ -65,10 +65,10 @@ export default {
     },
     provide() {
         return {
-            userId: computed(() => this.user.id ),
-            user: computed(() => this.user ),
-            isAuthenticated: computed(() => this.isAuthenticated)
-        }
+            userId: computed(() => this.user.id),
+            user: computed(() => this.user),
+            isAuthenticated: computed(() => this.isAuthenticated),
+        };
     },
     data() {
         return {
@@ -76,9 +76,9 @@ export default {
             isAuthenticated: false,
             gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
             user: {
-                id: ""
+                id: "",
             },
-        }
+        };
     },
     mounted() {
         const googleSignInScript = document.createElement("script");
@@ -87,11 +87,11 @@ export default {
         googleSignInScript.setAttribute("defer", "");
         document.head.appendChild(googleSignInScript);
 
-        window.onSignIn = async (response) => {  
+        window.onSignIn = async (response) => {
             const loginResponse = await axios.post("/api/user/g-login", { credential: response.credential });
             this.user = loginResponse.data;
             this.isAuthenticated = true;
-        }
+        };
     },
     methods: {
         onAuthenticated(user) {
@@ -108,8 +108,8 @@ export default {
                 await this.$router.push("/");
                 window.location.reload();
             }
-        }
-    }
+        },
+    },
 };
 </script>
 

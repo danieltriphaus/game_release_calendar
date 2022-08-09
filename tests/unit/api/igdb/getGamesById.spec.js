@@ -12,6 +12,6 @@ it("should add field array to query", async () => {
     expect(axios.post).toBeCalledWith(
         expect.stringContaining(""),
         expect.stringContaining(fields.join(",")),
-        expect.objectContaining({})
+        expect.objectContaining({}),
     );
 });

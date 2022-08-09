@@ -7,6 +7,5 @@ export const getGLoginPayload = async (credential) => {
         audience: process.env.VITE_GOOGLE_SIGN_IN_APP_ID,
     });
 
-    const payload = ticket.getPayload();
-    return payload;
+    return ticket.getPayload();
 };
