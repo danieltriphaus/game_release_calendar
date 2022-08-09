@@ -16,6 +16,8 @@ describe("add temporary game tests", () => {
         cy.wait("@getUserGames");
         cy.removeBootstrapOverlay();
 
+        cy.get("none");
+
         cy.get("[data-cy='add-temp-game']").click();
 
         cy.get("[data-cy='temp-game-name'").type("Temporary Test game");
