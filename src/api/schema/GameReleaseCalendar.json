@@ -384,6 +384,16 @@
           {
             "userAuth": []
           }
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "list",
+            "description": "ID of GameList calendar is attached to"
+          }
         ]
       },
       "parameters": [
@@ -450,6 +460,51 @@
           },
           "description": ""
         }
+      }
+    },
+    "/cron/resolve-temp-games": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "This request does not originate from Google App Engine"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "description": "External Service could not be reached"
+          }
+        },
+        "operationId": "cron-resolve-temp-games",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "header",
+            "name": "X-Appengine-Cron",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "userId",
+            "description": "The id of a user for which this Operation should be executed. If empty, it will be executed for all users"
+          }
+        ],
+        "description": "This endpoint will compare the temporary games against IGDB and add if it finds a correct match will add the IGDB game to the users list and delete the temporary game\n\nIt can only be called in development mode or from Google App Engine\nhttps://cloud.google.com/appengine/docs/flexible/nodejs/scheduling-jobs-with-cron-yaml#validating_cron_requests",
+        "security": [
+          {
+            "GAE_Cron": []
+          }
+        ]
       }
     }
   },
@@ -609,6 +664,11 @@
         "name": "User Auth Key from Database",
         "type": "apiKey",
         "in": "cookie"
+      },
+      "GAE_Cron": {
+        "name": "Endpoint called from Google App Engine Cron Service",
+        "type": "apiKey",
+        "in": "header"
       }
     },
     "requestBodies": {}

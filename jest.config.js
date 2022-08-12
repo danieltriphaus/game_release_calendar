@@ -7,4 +7,5 @@ module.exports = {
         "^@/(.*)$": "<rootDir>/src/$1",
     },
     testMatch: ["**/tests/unit/**/*.spec.js"],
+    setupFilesAfterEnv: ["./tests/unit/setup.js"],
 };

@@ -20,3 +20,9 @@ export const userAuth = async (context, req, res) => {
 export const calendarToken = async (context) => {
     return await getCalendar(context.request.params.user_id, context.request.query.token);
 };
+
+export const gaeCron = async () => {
+    if (process.env.NODE_ENV === "development") {
+        return true;
+    }
+};

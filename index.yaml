@@ -1,0 +1,4 @@
+indexes:
+- kind: game_list
+  properties:
+  - name: games

@@ -4,13 +4,14 @@ import { getCalendar } from "@/api/datastore/getCalendar";
 import axios from "axios";
 import { getContext } from "../expressMocks";
 import { getIgdbAccessToken } from "@/api/igdb/igdbAccessToken.js";
-import { convertFromDatastoreResult } from "@/api/datastore/getTemporaryGames.js";
+import { convertFromDatastoreResult } from "@/api/datastore/convertFromDatastoreResult.js";
 
 jest.mock("axios");
 jest.mock("@/api/datastore/getGameList");
 jest.mock("@/api/datastore/getCalendar");
 jest.mock("@/api/igdb/igdbAccessToken.js");
 jest.mock("@/api/datastore/getTemporaryGames.js");
+jest.mock("@/api/datastore/convertFromDatastoreResult.js");
 
 const gameList = {
     games: [119308, 112874, "6WjXhK3Iec1C9UwTBqJhH"],

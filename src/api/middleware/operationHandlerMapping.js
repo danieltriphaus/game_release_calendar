@@ -11,6 +11,8 @@ import { getGameSearch } from "../handlers/getGameSearch.js";
 import { postGame } from "../handlers/postGame.js";
 import { postUserGLogin } from "../handlers/postUserGLogin.js";
 
+import { resolveTempGames } from "../handlers/cron/resolveTempGames.js";
+
 export const operationHandlerMapping = {
     "get-game-search": getGameSearch,
     "post-game": postGame,
@@ -22,4 +24,5 @@ export const operationHandlerMapping = {
     "get-user-calendars": getUserCalendars,
     "post-user-g-login": postUserGLogin,
     "delete-access": deleteAccess,
+    "cron-resolve-temp-games": resolveTempGames,
 };

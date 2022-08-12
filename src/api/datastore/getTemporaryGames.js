@@ -13,10 +13,21 @@ export const getTemporaryGames = async (gameIds) => {
     }
 };
 
+export const getAllTemporaryGames = async () => {
+    const datastore = new Datastore();
+
+    const query = datastore.createQuery("game");
+
+    const [games] = await datastore.runQuery(query);
+    return games;
+};
+
 export const convertFromDatastoreResult = (result) => {
-    return result
-        ? result.map((datastoreResult) => {
-            return { id: datastoreResult[Datastore.KEY].name, name: datastoreResult.name };
-        })
-        : [];
+    if (result) {
+        return result
+            ? result.map((datastoreResult) => {
+                return { id: datastoreResult[Datastore.KEY].name, name: datastoreResult.name };
+            })
+            : [];
+    }
 };

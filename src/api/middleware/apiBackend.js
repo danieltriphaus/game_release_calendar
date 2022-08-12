@@ -1,7 +1,7 @@
 import { OpenAPIBackend } from "openapi-backend";
 
 import { operationHandlerMapping } from "./operationHandlerMapping.js";
-import { userAuth, calendarToken } from "./securityHandlers.js";
+import { userAuth, calendarToken, gaeCron } from "./securityHandlers.js";
 
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
@@ -26,6 +26,7 @@ const api = new OpenAPIBackend({
 
 api.registerSecurityHandler("userAuth", userAuth);
 api.registerSecurityHandler("token", calendarToken);
+api.registerSecurityHandler("GAE_Cron", gaeCron);
 
 api.init();
 
