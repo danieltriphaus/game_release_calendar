@@ -4,7 +4,7 @@ export async function upsertGameList(userId, games, listId) {
     const datastore = new Datastore();
 
     const gameListEntity = {
-        key: datastore.key(["user", userId, "game_list", listId]),
+        key: datastore.key(userId ? ["user", userId, "game_list", listId] : ["game_list", listId]),
         data: {
             games,
         },

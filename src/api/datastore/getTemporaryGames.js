@@ -16,7 +16,7 @@ export const getTemporaryGames = async (gameIds) => {
 export const getAllTemporaryGames = async () => {
     const datastore = new Datastore();
 
-    const query = datastore.createQuery("game");
+    const query = datastore.createQuery("game").filter("matched", "=", null);
 
     const [games] = await datastore.runQuery(query);
     return games;

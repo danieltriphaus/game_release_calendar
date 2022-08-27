@@ -9,13 +9,30 @@ export const getGameList = async (userId) => {
     return gameList;
 };
 
-export const getGameListsContainingGameIds = async (gameIds) => {
+export const getKeyFromDatastoreEntity = (entity) => {
+    const key = entity[Datastore.KEY];
+    if (!key.parent) {
+        return { id: key.id ? key.id : key.name };
+    } else {
+        return {
+            id: key.id ? key.id : key.name,
+            parent: key.parent.id ? key.parent.id : key.parent.name,
+        };
+    }
+};
+
+export const getGameListsContainingGameIds = async (gameIds, userId) => {
     const datastore = new Datastore();
 
     const gameIdChunks = chunkArray(gameIds, 10);
 
     const result = gameIdChunks.map(async (gameIdChunk) => {
-        const query = datastore.createQuery("game_list").filter("games", "IN", gameIdChunk);
+        const query = datastore.createQuery("game_list")
+            .select()
+            .filter("games", "IN", gameIdChunk);
+        if (userId) {
+            query.hasAncestor(datastore.key(["user", userId]));
+        }
         return await datastore.runQuery(query);
     });
     const [gameLists] = await Promise.all(result);

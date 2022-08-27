@@ -3,7 +3,7 @@ import { getFullQuery } from "@/api/igdb/getGamesWithMatchingTitle.js";
 it("should create valid query from given titles", () => {
 
     const titles = [
-        "Romeo and Juliett",
+        "Romeo Juliett",
         "The Tempest",
         "MacBeth",
     ];

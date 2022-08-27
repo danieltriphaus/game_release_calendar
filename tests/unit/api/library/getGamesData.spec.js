@@ -34,3 +34,13 @@ it("should combine the datasources and return one array with games", async () =>
 
     expect(games).toMatchObject([...igdbGames, ...datastoreOutput]);
 });
+
+it("should be able to work with undefined return from datastore", async () => {
+    getIgdbAccessToken.mockResolvedValueOnce("testtoken");
+    axios.post.mockResolvedValueOnce({ data: igdbGames });
+    getTemporaryGames.mockResolvedValueOnce(undefined);
+
+    const games = await getGamesData([123, 456], []);
+
+    expect(games).toMatchObject([...igdbGames]);
+});

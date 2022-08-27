@@ -61,6 +61,7 @@ const isTempGameInput = ref(false);
 const temporaryGame = reactive({
     id: "",
     name: "",
+    matched: null,
 });
 
 function addTemporaryGame() {

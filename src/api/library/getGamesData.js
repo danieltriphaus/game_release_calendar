@@ -20,5 +20,6 @@ export const getGamesData = async (gameIds, fields) => {
     ]);
 
     const temporaryGames = convertFromDatastoreResult(temporaryGamesDatastoreResult);
-    return [...igdbGames, ...temporaryGames];
+
+    return [...igdbGames, ...(temporaryGames ? temporaryGames : [])];
 };

@@ -1,13 +1,32 @@
 import axios from "axios";
 import { getIgdbAccessToken } from "./igdbAccessToken.js";
 
+//ToDo: write Tests
 export const getFullQuery = (titlesToMatch) => {
     const query = "fields id, name; where {where}; limit 500;";
     const queryWhereTemplate = "name ~ *\"{title}\"*";
     const queryWhereSeperator = " | ";
 
-    const queryWhere = titlesToMatch.reduce((where, title, index) => {
-        return where.concat(queryWhereTemplate.replace("{title}", title.trim()), index + 1 < titlesToMatch.length ? queryWhereSeperator : "");
+    const titlesWithoutFillWords = titlesToMatch.map((title) => {
+        if (/\b(the|and|or|of)\b/g.test(title)) {
+            return title
+                .replace(/\b(the|and|or|of)\b/g, "")
+                .replace(/\s+/g, " ");
+        }
+    }).filter((title) => title);
+
+    const titlesWitoutSpecialChars = titlesToMatch.map((title) => {
+        if ((new RegExp("[^a-zA-Z0-9 ]")).test(title)) {
+            return title
+                .replace(new RegExp("[^a-zA-Z0-9 ]"), "")
+                .replace(/\s+/g, " ");
+        }
+    }).filter((title) => title);
+
+    const titlesExtended = [...titlesToMatch, ...titlesWithoutFillWords, ...titlesWitoutSpecialChars];
+
+    const queryWhere = titlesExtended.reduce((where, title, index) => {
+        return where.concat(queryWhereTemplate.replace("{title}", title.trim()), index + 1 < titlesExtended.length ? queryWhereSeperator : "");
     }, "");
 
     return query.replace("{where}", queryWhere);
