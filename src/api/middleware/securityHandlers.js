@@ -25,7 +25,9 @@ export const gaeCron = async (context, req) => {
     if (process.env.NODE_ENV === "development") {
         return true;
     } else {
-        if (context.request.headers["X-Appengine-Cron"] === true && req.ip === "0.1.0.2") {
+        if (req.headers["x-appengine-cron"] === "true"
+            && req.headers["x-forwarded-for"]
+            && req.headers["x-forwarded-for"].startsWith("0.1.0.2")) {
             return true;
         }
     }

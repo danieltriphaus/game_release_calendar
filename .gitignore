@@ -13,6 +13,7 @@ coverage
 #google cloud files
 app.yaml
 .gcloudignore
+cron.yaml
 
 # Log files
 npm-debug.log*
@@ -31,3 +32,4 @@ pnpm-debug.log*
 
 # cypress
 tests/cypress/videos
+tests/cypress/screenshots
