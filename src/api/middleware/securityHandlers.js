@@ -21,8 +21,12 @@ export const calendarToken = async (context) => {
     return await getCalendar(context.request.params.user_id, context.request.query.token);
 };
 
-export const gaeCron = async () => {
+export const gaeCron = async (context, req) => {
     if (process.env.NODE_ENV === "development") {
         return true;
+    } else {
+        if (context.request.headers["X-Appengine-Cron"] === true && req.ip === "0.1.0.2") {
+            return true;
+        }
     }
 };
