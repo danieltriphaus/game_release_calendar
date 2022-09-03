@@ -2,7 +2,7 @@ import { Logging } from "@google-cloud/logging";
 
 export const writeLog = async ({ logName, message, severity, request, additionalData }) => {
     const logging = new Logging({ projectId: process.env.GOOGLE_CLOUD_PROJECT });
-    const log = logging.log(logName);
+    const log = logging.logSync(logName);
 
     const entry = log.entry({
         httpRequest: request,
