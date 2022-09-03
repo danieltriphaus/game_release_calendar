@@ -4,6 +4,7 @@ import { apiBackend } from "./middleware/apiBackend.js";
 import multer from "multer";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import { xss } from "express-xss-sanitizer";
 import { getIgdbAccessToken } from "./igdb/igdbAccessToken.js";
 
 import historyApiFallback from "connect-history-api-fallback";
@@ -20,6 +21,7 @@ router.use(express.json());
 router.use(cookieParser());
 router.use(multer().any());
 router.use(bodyParser.urlencoded({ extended: true }));
+router.use(xss());
 
 router.use(apiBackend());
 app.use("/api", router);

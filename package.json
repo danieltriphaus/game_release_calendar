@@ -28,6 +28,7 @@
     "core-js": "^3.8.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-xss-sanitizer": "^1.1.2",
     "google-auth-library": "^8.0.2",
     "ical-generator": "^3.2.1",
     "ics": "^2.35.0",
