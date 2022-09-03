@@ -3,6 +3,7 @@ import { getGamesData } from "../../library/getGamesData.js";
 import { displayFields } from "../../igdb/gamesFieldLists.js";
 
 export const getUserGames = async (context, req, res) => {
+    const test = req.something.something;
     const gameList = await getGameList(context.request.params.user_id);
 
     if (gameList) {

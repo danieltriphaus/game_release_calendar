@@ -3,6 +3,8 @@ import { OpenAPIBackend } from "openapi-backend";
 import { operationHandlerMapping } from "./operationHandlerMapping.js";
 import { userAuth, calendarToken, gaeCron } from "./securityHandlers.js";
 
+import { logError } from "../library/writeLog.js";
+
 const api = new OpenAPIBackend({
     definition: "src/api/schema/GameReleaseCalendar.json",
     handlers: {
@@ -31,5 +33,14 @@ api.registerSecurityHandler("GAE_Cron", gaeCron);
 api.init();
 
 export function apiBackend() {
-    return (req, res) => api.handleRequest(req, req, res);
+    return async (req, res) => {
+        try {
+            return await api.handleRequest(req, req, res);
+        } catch (error) {
+            logError(error, req, res);
+            if (process.env.NODE_ENV === "development") {
+                throw error;
+            }
+        }
+    };
 }
