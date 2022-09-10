@@ -14,6 +14,7 @@
     "start": "node src/api/app.js"
   },
   "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
     "@google-cloud/datastore": "^7.0.0",
     "@google-cloud/logging": "^10.1.6",
     "@popperjs/core": "^2.11.2",
@@ -44,10 +45,7 @@
     "@cypress/vite-dev-server": "^3.0.0",
     "@cypress/vue": "^4.0.0",
     "@cypress/webpack-dev-server": "^1.8.4",
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/vue": "^6.4.2",
     "@vue/test-utils": "^2.0.0-0",
-    "@vue/vue3-jest": "^27.0.0-alpha.1",
     "cypress": "^10.3.0",
     "eslint": "^8.19.0",
     "eslint-plugin-cypress": "^2.12.1",
