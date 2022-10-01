@@ -44,7 +44,6 @@ const props = defineProps({
         text-align: right;
         padding-left: 10px;
         margin-right: 0;
-        margin-left: auto;
     }
 
     .game-actions .btn {

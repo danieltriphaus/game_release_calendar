@@ -29,3 +29,12 @@ Cypress.Commands.add("removeBootstrapOverlay", () => {
         elemHtml.remove();
     });
 });
+
+Cypress.Commands.add("mockLoginRequests", () => {
+    cy.intercept("/api/access", { id: "y1xx" });
+    cy.intercept("https://accounts.google.com/gsi/client", {});
+});
+
+Cypress.Commands.add("mockGetGameListRequest", () => {
+    cy.intercept("/api/user/*/games", { fixture: "userGames.json" }).as("getUserGames");
+});

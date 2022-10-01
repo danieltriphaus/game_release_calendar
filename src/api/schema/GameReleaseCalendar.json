@@ -506,6 +506,21 @@
           }
         ]
       }
+    },
+    "/cron/migrate-game-list": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "cron-migrate-game-list",
+        "description": "Turn Game List Array of Numbers into Array of Objects",
+        "parameters": [],
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {

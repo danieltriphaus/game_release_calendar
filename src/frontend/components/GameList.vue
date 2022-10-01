@@ -69,6 +69,7 @@ async function deleteGame(id) {
     populateGameList();
 }
 
+//ToDo: Sorting should respect selected platform
 const sortedGames = computed(() => {
     const gamesCopy = [...games.value];
 

@@ -6,7 +6,8 @@ export const getUserGames = async (context, req, res) => {
     const gameList = await getGameList(context.request.params.user_id);
 
     if (gameList) {
-        const games = await getGamesData(gameList.games, displayFields);
+        const gameIds = gameList.games.map((game) => game.id);
+        const games = await getGamesData(gameIds, displayFields);
         res.status(200).json(games);
     } else {
         res.status(404).json({

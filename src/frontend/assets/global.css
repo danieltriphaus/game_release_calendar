@@ -11,4 +11,12 @@
 .btn-igdb:hover {
     color: #fff;
     background-color: #7313FF;
-  }
+}
+
+.platform-selector {
+    background-color: #00000063;
+}
+
+.platform-selector.selected {
+    background-color: #000000;
+}

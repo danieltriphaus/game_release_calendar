@@ -18,10 +18,25 @@
             {{ releaseDate }}
         </h6>
     </div>
+    <div
+        class="platforms"
+        :data-cy="'platforms-' + props.game.id"
+    >
+        <PlatformIcon
+            v-for="(platform) in platforms"
+            :key="platform.id"
+            :platform="platform.abbreviation"
+            :selected="platform.isSelected"
+            :title="platform.title"
+            @click="onSelectPlatform(platform.id)"
+        />
+    </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
+import PlatformIcon from "./PlatformIcon.vue";
+import platformsDisplay from "../assets/platforms.json";
 
 const props = defineProps({
     game: {
@@ -32,6 +47,18 @@ const props = defineProps({
     },
 });
 
+const platforms = ref([]);
+
+function onSelectPlatform(platformId) {
+    const selectedPlatform = platforms.value.find((platform) => platform.id === platformId);
+    if (selectedPlatform.isSelected === true) {
+        selectedPlatform.isSelected = false;
+    } else {
+        platforms.value.forEach((platform) => platform.isSelected = false);
+        selectedPlatform.isSelected = true;
+    }
+}
+
 const hasCover = computed(() => {
     return props.game.cover && props.game.cover.url;
 });
@@ -40,19 +67,43 @@ const coverUrl = computed(() => {
     return props.game.cover.url.replace("thumb", "cover_small");
 });
 
+//ToDo: Refactor
 const releaseDate = computed(() => {
+    const selectedPlatform = platforms.value.find((platform) => platform.isSelected);
+    let selectedReleaseDate;
+    if (selectedPlatform) {
+        selectedReleaseDate = props.game.release_dates.find((releaseDate) => releaseDate.platform.id === selectedPlatform.id);
+    } else {
+        selectedReleaseDate = props.game.release_dates.find((date) => date.date === props.game.first_release_date);
+    }
+
     if (!props.game.release_dates) {
         return "TBD";
-    } else if (props.game.release_dates.find((date) => date.date === props.game.first_release_date).category === 0) {
+    } else if (selectedReleaseDate.category === 0) {
         const releaseDateObject = new Date(props.game.first_release_date * 1000);
         return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" });
     } else {
-        return props.game.release_dates[0].human;
+        return selectedReleaseDate.human;
     }
 });
 
 const developer = computed(() => {
     return props.game.involved_companies ? props.game.involved_companies.find((company) => company.developer).company.name : "";
+});
+
+onMounted(() => {
+    platforms.value = props.game.release_dates.reduce((platformData, releaseDate) => {
+        const platformDisplay = platformsDisplay.find((element) => element.id === releaseDate.platform.id);
+        if (platformDisplay) {
+            platformData.push({
+                id: releaseDate.platform.id,
+                isSelected: false,
+                title: releaseDate.platform.name,
+                abbreviation: releaseDate.platform[platformDisplay.selector] ? releaseDate.platform[platformDisplay.selector] : platformDisplay.selector, //ToDo: custom selector needs to work as well
+            });
+        }
+        return platformData;
+    }, []);
 });
 </script>
 
@@ -72,5 +123,45 @@ const developer = computed(() => {
 
     .game-info h6 {
         font-size: 0.8rem;
+    }
+
+    .platforms {
+        text-align: right;
+        margin-right: 0;
+        margin-left: auto;
+        width: 120px;
+    }
+
+    .platform {
+        display: inline-block;
+        padding: 2px 4px;
+        margin-right: 1px;
+        margin-top: 1px;
+        border-radius: 4px;
+        color: #fff;
+    }
+
+    .platform.ps5 {
+        background-color:#30405080;
+    }
+
+    .platform.ps5.selected {
+        background-color: #304050;
+    }
+
+    .platform.xsx {
+        background-color: #107c1093;
+    }
+
+    .platform.xsx.selected {
+        background-color: #107C10;
+    }
+
+    .platform.ns {
+        background-color: #e6001370;
+    }
+
+    .platform.ns.selected {
+        background-color: #e60012;
     }
 </style>
