@@ -18,6 +18,8 @@ config();
         noCypressTests: process.argv.some((arg) => arg === "--no-cypress"),
     };
 
+    let appProcess;
+
     if (cmdArguments.buildForDevelopment) {
         process.env.NODE_ENV = "development";
     } else {
@@ -34,7 +36,7 @@ config();
 
         if (!(await isAppStarted())) {
             console.log("App not running attempting to start");
-            await startApp();
+            appProcess = await startApp();
             console.log("App started");
         }
 
@@ -68,7 +70,15 @@ config();
         console.log("Tests failed");
     }
 
-    exit();
+    if (appProcess) {
+        appProcess.on("exit", () => {
+            exit();
+        });
+
+        appProcess.kill("SIGINT");
+    } else {
+        exit();
+    }
 })();
 
 async function isAppStarted() {
@@ -92,7 +102,7 @@ async function startApp() {
         devServerChildProcess.stdout.on("data", (data) => {
             const message = data.toString();
             if (message.match("Listening on port " + process.env.PORT)) {
-                resolve(true);
+                resolve(devServerChildProcess);
             }
         });
     });
