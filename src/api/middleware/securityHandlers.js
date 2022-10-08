@@ -9,6 +9,10 @@ export const userAuth = async (context, req, res) => {
 
     const user = await getUserByAuthKey(req.cookies.auth_key);
 
+    if (process.env.NODE_ENV === "production" && user.test) {
+        return false;
+    }
+
     if (context.request.params.user_id && context.request.params.user_id === user.id) {
         return user;
     }
