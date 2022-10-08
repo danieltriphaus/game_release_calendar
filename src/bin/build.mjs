@@ -15,6 +15,7 @@ config();
 
     const cmdArguments = {
         buildForDevelopment: process.argv.some((arg) => arg === "--dev"),
+        noCypressTests: process.argv.some((arg) => arg === "--no-cypress"),
     };
 
     if (cmdArguments.buildForDevelopment) {
@@ -37,7 +38,7 @@ config();
             console.log("App started");
         }
 
-        if (await isAppStarted) {
+        if (await isAppStarted && !cmdArguments.noCypressTests) {
             console.log("App running");
             await spawnAsync("yarn", ["test:cypress"], { stdio: "inherit" });
             progress.hasRunTests = true;
@@ -59,7 +60,9 @@ config();
         console.log("dist/ could not be moved");
     }
 
-    if (progress.hasRunTests) {
+    if (cmdArguments.noCypressTests) {
+        console.log("No Tests were run");
+    } else if (progress.hasRunTests) {
         console.log("All Tests succeeded");
     } else {
         console.log("Tests failed");
