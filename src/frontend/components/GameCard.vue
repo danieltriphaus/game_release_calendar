@@ -48,6 +48,8 @@ const props = defineProps({
     },
 });
 
+const emit = defineEmits(["platform-selected"]);
+
 const user = inject("user");
 
 const platforms = ref([]);
@@ -63,6 +65,8 @@ function onSelectPlatform(platformId) {
         selectedPlatform.isSelected = true;
         axios.post("/api/user/" + user.value.id + "/games", [{ id: props.game.id, platform: platformId }]);
     }
+
+    emit("platform-selected", props.game.id, selectedPlatform.isSelected ? selectedPlatform.id : undefined);
 }
 
 const hasCover = computed(() => {
