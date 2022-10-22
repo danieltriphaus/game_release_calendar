@@ -4,6 +4,10 @@
         "selector": "abbreviation"
     },
     {
+        "id": 14,
+        "selector": "abbreviation"
+    },
+    {
         "id": 130,
         "selector": "alternative_name"
     },

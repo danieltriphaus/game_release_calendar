@@ -189,7 +189,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "type": "number"
+                  "$ref": "#/components/schemas/UserGame"
                 }
               }
             }
@@ -628,6 +628,24 @@
             "type": "string"
           }
         }
+      },
+      "UserGame": {
+        "title": "UserGame",
+        "x-stoplight": {
+          "id": "742h5esnxn0jy"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
       }
     },
     "responses": {

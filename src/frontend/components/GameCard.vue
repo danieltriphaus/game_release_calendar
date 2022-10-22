@@ -34,9 +34,10 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, inject } from "vue";
 import PlatformIcon from "./PlatformIcon.vue";
 import platformsDisplay from "../assets/platforms.json";
+import axios from "axios";
 
 const props = defineProps({
     game: {
@@ -47,15 +48,20 @@ const props = defineProps({
     },
 });
 
+const user = inject("user");
+
 const platforms = ref([]);
 
 function onSelectPlatform(platformId) {
     const selectedPlatform = platforms.value.find((platform) => platform.id === platformId);
+
     if (selectedPlatform.isSelected === true) {
         selectedPlatform.isSelected = false;
+        axios.post("/api/user/" + user.value.id + "/games", [{ id: props.game.id }]);
     } else {
         platforms.value.forEach((platform) => platform.isSelected = false);
         selectedPlatform.isSelected = true;
+        axios.post("/api/user/" + user.value.id + "/games", [{ id: props.game.id, platform: platformId }]);
     }
 }
 
@@ -97,9 +103,9 @@ onMounted(() => {
         if (platformDisplay) {
             platformData.push({
                 id: releaseDate.platform.id,
-                isSelected: false,
+                isSelected: props.game.selectedPlatform === releaseDate.platform.id,
                 title: releaseDate.platform.name,
-                abbreviation: releaseDate.platform[platformDisplay.selector] ? releaseDate.platform[platformDisplay.selector] : platformDisplay.selector, //ToDo: custom selector needs to work as well
+                abbreviation: releaseDate.platform[platformDisplay.selector] ? releaseDate.platform[platformDisplay.selector] : platformDisplay.selector,
             });
         }
         return platformData;
