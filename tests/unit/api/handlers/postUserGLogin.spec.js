@@ -7,6 +7,7 @@ import { upsertUser } from "@/api/datastore/upsertUser.js";
 jest.mock("@/api/library/getGLoginPayload.js");
 jest.mock("@/api/datastore/getUser.js");
 jest.mock("@/api/datastore/upsertUser.js");
+jest.mock("@/api/datastore/upsertGameList.js");
 
 const googleUser = {
     sub: "1234dwa",
