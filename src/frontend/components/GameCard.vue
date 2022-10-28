@@ -18,7 +18,9 @@
             {{ releaseDate }}
         </h6>
     </div>
+    <!-- ToDo: Move Platform Logic to Slot in GameListItem-->
     <div
+        v-if="showPlatforms"
         class="platforms"
         :data-cy="'platforms-' + props.game.id"
     >
@@ -45,6 +47,10 @@ const props = defineProps({
         default: () => {
             return {};
         },
+    },
+    showPlatforms: {
+        type: Boolean,
+        default: true,
     },
 });
 

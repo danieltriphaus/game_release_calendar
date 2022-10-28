@@ -5,7 +5,10 @@
             :data-cy="'result-' + result.id"
             @click="addGame(result.id)"
         >
-            <game-card :game="result" />
+            <game-card
+                :game="result"
+                :show-platforms="false"
+            />
         </div>
     </div>
 </template>
