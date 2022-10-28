@@ -7,7 +7,7 @@ export const deleteUserGames = async (context, req, res) => {
     const gameList = await getGameList(userId);
 
     req.body.forEach((gameId) => {
-        const deleteIndex = gameList.games.indexOf(gameId);
+        const deleteIndex = gameList.games.findIndex((game) => game.id === gameId);
         gameList.games.splice(deleteIndex, 1);
     });
 

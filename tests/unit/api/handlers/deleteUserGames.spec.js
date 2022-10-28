@@ -7,8 +7,8 @@ jest.mock("@/api/datastore/upsertGameList");
 jest.mock("@/api/datastore/getGameList");
 
 it("should delete game from datastore", async () => {
-    const gameListGames = ["6WjXhK3Iec1C9UwTBqJhH", 123, 132, 165, 789];
-    const gameListDeleted = [123, 789];
+    const gameListGames = [{ id: "6WjXhK3Iec1C9UwTBqJhH" }, { id: 123 }, { id: 132 }, { id: 165 }, { id: 789 }];
+    const gameListDeleted = [{ id: 123 }, { id: 789 }];
     getGameList.mockResolvedValueOnce({ games: gameListGames });
 
     const context = getContext();
