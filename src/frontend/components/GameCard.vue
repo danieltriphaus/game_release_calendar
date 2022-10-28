@@ -85,7 +85,11 @@ const coverUrl = computed(() => {
 
 //ToDo: Refactor
 const releaseDate = computed(() => {
-    const selectedPlatform = platforms.value.find((platform) => platform.isSelected);
+    if (!props.game.release_dates) {
+        return "TBD";
+    }
+
+    const selectedPlatform = platforms.value ? platforms.value.find((platform) => platform.isSelected) : undefined;
     let selectedReleaseDate;
     if (selectedPlatform) {
         selectedReleaseDate = props.game.release_dates.find((releaseDate) => releaseDate.platform.id === selectedPlatform.id);
@@ -93,9 +97,7 @@ const releaseDate = computed(() => {
         selectedReleaseDate = props.game.release_dates.find((date) => date.date === props.game.first_release_date);
     }
 
-    if (!props.game.release_dates) {
-        return "TBD";
-    } else if (selectedReleaseDate.category === 0) {
+    if (selectedReleaseDate.category === 0) {
         const releaseDateObject = new Date(props.game.first_release_date * 1000);
         return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" });
     } else {
@@ -108,18 +110,22 @@ const developer = computed(() => {
 });
 
 onMounted(() => {
-    platforms.value = props.game.release_dates.reduce((platformData, releaseDate) => {
-        const platformDisplay = platformsDisplay.find((element) => element.id === releaseDate.platform.id);
-        if (platformDisplay) {
-            platformData.push({
-                id: releaseDate.platform.id,
-                isSelected: props.game.selectedPlatform === releaseDate.platform.id,
-                title: releaseDate.platform.name,
-                abbreviation: releaseDate.platform[platformDisplay.selector] ? releaseDate.platform[platformDisplay.selector] : platformDisplay.selector,
-            });
-        }
-        return platformData;
-    }, []);
+    if (props.showPlatforms && props.game.release_dates) {
+        platforms.value = props.game.release_dates.reduce((platformData, releaseDate) => {
+            if (releaseDate.platform) {
+                const platformDisplay = platformsDisplay.find((element) => element.id === releaseDate.platform.id);
+                if (platformDisplay) {
+                    platformData.push({
+                        id: releaseDate.platform.id,
+                        isSelected: props.game.selectedPlatform === releaseDate.platform.id,
+                        title: releaseDate.platform.name,
+                        abbreviation: releaseDate.platform[platformDisplay.selector] ? releaseDate.platform[platformDisplay.selector] : platformDisplay.selector,
+                    });
+                }
+                return platformData;
+            }
+        }, []);
+    }
 });
 </script>
 

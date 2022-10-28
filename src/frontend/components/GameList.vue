@@ -78,8 +78,8 @@ const sortedGames = computed(() => {
     const gamesCopy = [...games.value];
 
     return gamesCopy.sort((a, b) => {
-        let selectedReleaseDateA = getSelectedReleaseDate(a);
-        let selectedReleaseDateB = getSelectedReleaseDate(b);
+        let selectedReleaseDateA = a.release_dates ? getSelectedReleaseDate(a) : undefined;
+        let selectedReleaseDateB = b.release_dates ? getSelectedReleaseDate(b) : undefined;
 
         if (selectedReleaseDateA < selectedReleaseDateB || !selectedReleaseDateB) {
             return -1;
@@ -95,13 +95,13 @@ const sortedGames = computed(() => {
 
 const releasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(getSelectedReleaseDate(game) * 1000) <= new Date();
+        return game.release_dates && new Date(getSelectedReleaseDate(game) * 1000) <= new Date();
     });
 });
 
 const unreleasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(getSelectedReleaseDate(game) * 1000) > new Date() || !game.first_release_date;
+        return !game.release_dates || new Date(getSelectedReleaseDate(game) * 1000) > new Date() || !game.first_release_date;
     });
 });
 
