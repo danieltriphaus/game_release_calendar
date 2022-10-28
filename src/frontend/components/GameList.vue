@@ -16,6 +16,7 @@
             <game-list-item
                 :game="game"
                 @delete-game="deleteGame"
+                @platform-selected="onPlatformSelected"
             />
         </div>
     </base-collapsable>
@@ -69,17 +70,24 @@ async function deleteGame(id) {
     populateGameList();
 }
 
+function onPlatformSelected(gameId, platform) {
+    games.value.find((game) => game.id === gameId).selectedPlatform = platform;
+}
+
 const sortedGames = computed(() => {
     const gamesCopy = [...games.value];
 
     return gamesCopy.sort((a, b) => {
-        if (a.first_release_date < b.first_release_date || !b.first_release_date) {
+        let selectedReleaseDateA = a.release_dates ? getSelectedReleaseDate(a) : undefined;
+        let selectedReleaseDateB = b.release_dates ? getSelectedReleaseDate(b) : undefined;
+
+        if (selectedReleaseDateA < selectedReleaseDateB || !selectedReleaseDateB) {
             return -1;
         }
-        if (a.first_release_date > b.first_release_date || !a.first_release_date) {
+        if (selectedReleaseDateA > selectedReleaseDateB || !selectedReleaseDateA) {
             return 1;
         }
-        if (a.first_release_date === b.first_release_date) {
+        if (selectedReleaseDateA === selectedReleaseDateB) {
             return 0;
         }
     });
@@ -87,13 +95,13 @@ const sortedGames = computed(() => {
 
 const releasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(game.first_release_date * 1000) <= new Date();
+        return game.release_dates && new Date(getSelectedReleaseDate(game) * 1000) <= new Date();
     });
 });
 
 const unreleasedGames = computed(() => {
     return sortedGames.value.filter((game) => {
-        return new Date(game.first_release_date * 1000) > new Date() || !game.first_release_date;
+        return !game.release_dates || new Date(getSelectedReleaseDate(game) * 1000) > new Date() || !game.first_release_date;
     });
 });
 
@@ -111,6 +119,16 @@ const categories = reactive([
         games: unreleasedGames,
     },
 ]);
+
+function getSelectedReleaseDate(game) {
+    let selectedReleaseDate;
+    if (game.selectedPlatform) {
+        selectedReleaseDate = game.release_dates.find((releaseDate) => releaseDate.platform.id === game.selectedPlatform);
+    } else {
+        selectedReleaseDate = game.release_dates.find((date) => date.date === game.first_release_date);
+    }
+    return selectedReleaseDate.date;
+}
 </script>
 
 <style scoped>

@@ -5,7 +5,10 @@
         data-testid="game"
         data-cy="game"
     >
-        <game-card :game="game" />
+        <game-card
+            :game="game"
+            @platform-selected="onPlatformSelected"
+        />
         <div class="game-actions">
             <a
                 :href="game.url"
@@ -27,7 +30,7 @@
 <script setup>
 import GameCard from "./GameCard.vue";
 
-const emit = defineEmits(["delete-game"]);
+const emit = defineEmits(["delete-game", "platform-selected"]);
 
 const props = defineProps({
     game: {
@@ -37,6 +40,10 @@ const props = defineProps({
         },
     },
 });
+
+function onPlatformSelected() {
+    emit("platform-selected", ...arguments);
+}
 </script>
 
 <style scoped>
@@ -44,7 +51,6 @@ const props = defineProps({
         text-align: right;
         padding-left: 10px;
         margin-right: 0;
-        margin-left: auto;
     }
 
     .game-actions .btn {

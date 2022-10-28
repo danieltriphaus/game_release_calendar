@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getIgdbAccessToken } from "./igdbAccessToken.js";
 
-//ToDo: write Tests
+//ToDo: Refactor
 export const getFullQuery = (titlesToMatch) => {
     const query = "fields id, name; where {where}; limit 500;";
     const queryWhereTemplate = "name ~ *\"{title}\"*";
