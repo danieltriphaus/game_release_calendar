@@ -7,6 +7,7 @@
                         v-model="temporaryGame.name"
                         type="text"
                         data-cy="temp-game-name"
+                        data-test="temp-game-name"
                         placeholder="Name"
                         class="form-control"
                     >
@@ -24,6 +25,7 @@
                         <button
                             type="button"
                             class="btn btn-outline-danger"
+                            data-test="cancel-input"
                             @click="endTemporaryGameInput"
                         >
                             <i class="bi bi-x" />
@@ -39,6 +41,7 @@
             <button
                 type="button"
                 data-cy="add-temp-game"
+                data-test="open-temp-game-control"
                 class="btn btn-outline-primary"
                 @click="isTempGameInput = true;"
             >

@@ -39,7 +39,7 @@ import axios from "axios";
 import { reactive, defineEmits, ref } from "vue";
 import { getDirective } from "vue-debounce";
 
-import SearchResult from "./SearchResult";
+import SearchResult from "./SearchResult.vue";
 
 const emit = defineEmits(["game-added"]);
 

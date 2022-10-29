@@ -98,7 +98,7 @@ const releaseDate = computed(() => {
     }
 
     if (selectedReleaseDate.category === 0) {
-        const releaseDateObject = new Date(props.game.first_release_date * 1000);
+        const releaseDateObject = new Date(selectedReleaseDate.date * 1000);
         return releaseDateObject.toLocaleDateString(navigator.language, { year: "numeric", month: "2-digit", day: "2-digit" });
     } else {
         return selectedReleaseDate.human;

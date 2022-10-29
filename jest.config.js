@@ -8,4 +8,9 @@ module.exports = {
     },
     testMatch: ["**/tests/unit/**/*.spec.js"],
     setupFilesAfterEnv: ["./tests/unit/setup.js"],
+    transform: {
+        "\\.[jt]sx?$": "babel-jest",
+        "^.+\\.vue$": "@vue/vue3-jest",
+    },
+    testEnvironment: "jsdom",
 };
