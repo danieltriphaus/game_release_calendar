@@ -19,6 +19,7 @@ describe("Calendar Tests", () => {
         cy.wait("@getUserGames");
         cy.removeBootstrapOverlay();
 
+        cy.get(".calendar-tab").click();
         cy.get("[data-cy='get-calendar']").click();
         cy.wait("@getUserCalendarNotFound");
         cy.wait("@postUserCalendar");

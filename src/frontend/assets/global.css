@@ -20,3 +20,21 @@
 .platform-selector.selected {
     background-color: #000000;
 }
+
+.nav-pills .nav-link.active {
+    background-color: #fff;
+    color: var(--bs-primary);
+    border-top: 0px;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0px;
+    border-width: 1px 0 3px 1px;
+    border-style: solid;
+}
+
+.nav-item:last-child .nav-link {
+    border-right: 1px solid;
+}
+
+

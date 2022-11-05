@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row mt-4">
+        <div class="row">
             <div class="col">
                 <input
                     v-model="search.query"

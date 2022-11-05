@@ -1,6 +1,40 @@
 <template>
-    <game-search @game-added="onGameAdded" />
-    <add-temporary-game @game-added="onGameAdded" />
+    <div>
+        <b-tabs
+            end
+            fill
+            pills
+        >
+            <b-tab
+                active
+                title-link-class="link-secondary"
+                :title-link-attributes="{ title: 'Search Games' }"
+            >
+                <template #title>
+                    <i class="bi bi-search" />
+                </template>
+                <game-search @game-added="onGameAdded" />
+            </b-tab>
+            <b-tab
+                title-link-class="link-secondary temporary-game-tab"
+                :title-link-attributes="{ title: 'Game not Found?'}"
+            >
+                <template #title>
+                    <i class="bi bi-plus-square" />
+                </template>
+                <add-temporary-game @game-added="onGameAdded" />
+            </b-tab>
+            <b-tab
+                title-link-class="link-secondary calendar-tab"
+                :title-link-attributes="{ title: 'Get Calendar' }"
+            >
+                <template #title>
+                    <i class="bi bi-calendar2-week" />
+                </template>
+                <calendar-control />
+            </b-tab>
+        </b-tabs>
+    </div>
     <base-collapsable
         v-for="category in categories"
         :key="category.key"
@@ -26,6 +60,7 @@
 import GameSearch from "./GameSearch.vue";
 import GameListItem from "./GameListItem.vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
+import CalendarControl from "../components/CalendarControl.vue";
 import BaseCollapsable from "./BaseCollapsable.vue";
 
 import { onMounted, ref, computed, inject, reactive } from "vue";

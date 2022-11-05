@@ -1,5 +1,5 @@
 <template>
-    <div class="row mt-2">
+    <div class="row">
         <template v-if="isTempGameInput">
             <div class="col">
                 <div class="input-group">
@@ -8,7 +8,7 @@
                         type="text"
                         data-cy="temp-game-name"
                         data-test="temp-game-name"
-                        placeholder="Name"
+                        placeholder="Add a temporary entry to your list"
                         class="form-control"
                     >
                     <div class="input-group-append">
@@ -59,7 +59,7 @@ import axios from "axios";
 const emit = defineEmits(["game-added"]);
 const userId = inject("userId");
 
-const isTempGameInput = ref(false);
+const isTempGameInput = ref(true);
 
 const temporaryGame = reactive({
     id: "",
@@ -76,7 +76,6 @@ function addTemporaryGame() {
 }
 
 function endTemporaryGameInput() {
-    isTempGameInput.value = false;
     temporaryGame.id = "";
     temporaryGame.name = "";
 }
