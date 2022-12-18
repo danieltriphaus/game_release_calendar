@@ -24,7 +24,7 @@ const props = defineProps({ result: { type: Object, default: () => {} } });
 const emit = defineEmits(["game-added"]);
 
 function addGame() {
-    axios.post("/api/user/" + userId.value + "/games", [props.result.id]);
+    axios.post("/api/user/" + userId.value + "/games", [{ id: props.result.id }]);
     emit("game-added", props.result.id);
 }
 </script>

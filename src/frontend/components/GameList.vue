@@ -33,6 +33,17 @@
                 </template>
                 <calendar-control />
             </b-tab>
+            <!--
+            <b-tab
+                title-link-class="link-secondary archive-tab"
+                :title-link-attributes="{ title: 'Archive Entries' }"
+            >
+                <template #title>
+                    <i class="bi bi-archive" />
+                </template>
+                <archive-control :games="games" />
+            </b-tab>
+            -->
         </b-tabs>
     </div>
     <base-collapsable
@@ -62,6 +73,7 @@ import GameListItem from "./GameListItem.vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
 import CalendarControl from "../components/CalendarControl.vue";
 import BaseCollapsable from "./BaseCollapsable.vue";
+// import ArchiveControl from "./ArchiveControl.vue";
 
 import { onMounted, ref, computed, inject, reactive } from "vue";
 import axios from "axios";
