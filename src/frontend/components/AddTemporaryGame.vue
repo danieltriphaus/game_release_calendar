@@ -70,7 +70,7 @@ const temporaryGame = reactive({
 function addTemporaryGame() {
     temporaryGame.id = nanoid();
     axios.post("/api/game", temporaryGame);
-    axios.post("/api/user/" + userId.value + "/games", [{ id: temporaryGame.id }]);
+    axios.post("/api/user/" + userId.value + "/games", { games: [{ id: temporaryGame.id }] });
     emit("game-added", { ...temporaryGame });
     endTemporaryGameInput();
 }

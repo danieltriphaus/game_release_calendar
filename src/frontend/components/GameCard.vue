@@ -65,11 +65,11 @@ function onSelectPlatform(platformId) {
 
     if (selectedPlatform.isSelected === true) {
         selectedPlatform.isSelected = false;
-        axios.post("/api/user/" + user.value.id + "/games", [{ id: props.game.id }]);
+        axios.post("/api/user/" + user.value.id + "/games", { games: [{ id: props.game.id }] });
     } else {
         platforms.value.forEach((platform) => platform.isSelected = false);
         selectedPlatform.isSelected = true;
-        axios.post("/api/user/" + user.value.id + "/games", [{ id: props.game.id, platform: platformId }]);
+        axios.post("/api/user/" + user.value.id + "/games", { games: [{ id: props.game.id, platform: platformId }] });
     }
 
     emit("platform-selected", props.game.id, selectedPlatform.isSelected ? selectedPlatform.id : undefined);

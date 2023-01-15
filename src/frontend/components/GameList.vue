@@ -117,6 +117,10 @@ async function deleteGame(id) {
     populateGameList();
 }
 
+/**
+ * @param {UserGame} game
+ * @param {PlatformID} platform
+ */
 function onPlatformSelected(gameId, platform) {
     games.value.find((game) => game.id === gameId).selectedPlatform = platform;
 }

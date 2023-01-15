@@ -151,7 +151,15 @@
           }
         },
         "operationId": "get-user-games",
-        "parameters": [],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "listId"
+          }
+        ],
         "description": "Get Users Saved Games",
         "security": [
           {
@@ -187,9 +195,15 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/UserGame"
+                "type": "object",
+                "properties": {
+                  "listId": {
+                    "type": "string",
+                    "default": "default"
+                  },
+                  "games": {
+                    "$ref": "#/components/schemas/UserGame"
+                  }
                 }
               }
             }
@@ -216,9 +230,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "integer"
+                "type": "object",
+                "properties": {
+                  "listId": {
+                    "type": "string"
+                  },
+                  "gameIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
                 }
               }
             }

@@ -3,7 +3,7 @@
         <div
             class="col result mt-2"
             :data-cy="'result-' + result.id"
-            @click="addGame(result.id)"
+            @click="addGame()"
         >
             <game-card
                 :game="result"
@@ -24,7 +24,7 @@ const props = defineProps({ result: { type: Object, default: () => {} } });
 const emit = defineEmits(["game-added"]);
 
 function addGame() {
-    axios.post("/api/user/" + userId.value + "/games", [{ id: props.result.id }]);
+    axios.post("/api/user/" + userId.value + "/games", { games: [{ id: props.result.id }] });
     emit("game-added", props.result.id);
 }
 </script>

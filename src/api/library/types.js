@@ -61,3 +61,9 @@
 /**
  * @typedef {IGDBGameData[]} IGDBGameAPIResponse
  */
+
+/**
+ * @typedef {Object} UserGame
+ * @property {GameID} id
+ * @property {PlatformID} platform
+ */

@@ -6,14 +6,21 @@ const GAME_VALIDATIONS = {
     platform: { key: "platform", types: ["number"], mandatory: false },
 };
 
+/**
+ * @param {*} context
+ * @param {Object} req
+ * @param {Object} req.body
+ * @param {UserGame[]} req.body.games
+ * @param {*} res
+ */
 export const postUserGames = async (context, req, res) => {
     const userId = context.request.params.user_id;
 
     const gameList = await getGameList(userId);
 
-    const games = req.body;
+    const games = req.body.games;
 
-    if (hasOnlyValidFields(games) && hasMandatoryFields(games) && fieldsAreValidType(games)) {
+    if (isValidRequest(req.body)) {
         if (gameList) {
             gameList.games.forEach((gameListEntry) => {
                 if (!games.find((game) => gameListEntry.id === game.id)) {
@@ -32,12 +39,29 @@ export const postUserGames = async (context, req, res) => {
     res.end();
 };
 
+
+function isValidRequest(requestBody) {
+    return isNotArrayAndNotString(requestBody)
+        && hasGamesProperty(requestBody)
+        && hasOnlyValidFields(requestBody.games)
+        && hasMandatoryFields(requestBody.games)
+        && fieldsAreValidType(requestBody.games);
+}
+
+/**
+ * @param {UserGame[]} games
+ * @returns {boolean}
+ */
 function hasOnlyValidFields(games) {
     return games.every((game) => {
         return Object.keys(game).every((key) => GAME_VALIDATIONS[key]);
     });
 }
 
+/**
+ * @param {UserGame[]} games
+ * @returns {boolean}
+ */
 function hasMandatoryFields(games) {
     return games.every((game) => {
         return Object.keys(GAME_VALIDATIONS).every((validationProperty) => {
@@ -46,9 +70,29 @@ function hasMandatoryFields(games) {
     });
 }
 
+/**
+ * @param {UserGame[]} games
+ * @returns {boolean}
+ */
 function fieldsAreValidType(games) {
     return games.every((game) => {
         return Object.keys(game).every((key) => GAME_VALIDATIONS[key].types.find((type) => typeof game.id == type));
     });
+}
+
+/**
+ * @param {Object} requestBody
+ * @returns {boolean}
+ */
+function isNotArrayAndNotString(requestBody) {
+    return !Array.isArray(requestBody) && typeof requestBody !== "string";
+}
+
+/**
+ * @param {Object} requestBody
+ * @returns {boolean}
+ */
+function hasGamesProperty(requestBody) {
+    return requestBody.games;
 }
 
