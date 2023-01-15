@@ -1,11 +1,19 @@
 import axios from "axios";
+/**
+ * @module igdb/igdbAccessToken
+ */
 
+/** @type {IGDBAccessToken} */
 let accessToken = {
     access_token: "",
     expires_in: 0,
     token_type: "",
 };
 
+/**
+ * @async
+ * @returns {Promise<IGDBAccessToken>}
+ */
 export const getIgdbAccessToken = async () => {
     if (accessToken.access_token.length === 0) {
         const response = await axios

@@ -1,3 +1,13 @@
+/**
+ * @module chunkArray
+ */
+
+/**
+ * Splits an array into multiple chunks
+ * @param {Array} inputArray
+ * @param {number} size
+ * @returns {Array[]}
+ */
 export const chunkArray = (inputArray, size) => {
     let result;
     if (size === 0) {

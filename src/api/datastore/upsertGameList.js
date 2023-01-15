@@ -1,5 +1,14 @@
 import { Datastore } from "@google-cloud/datastore";
+/**
+ * @module datastore/upsertGameList
+ */
 
+/**
+ * @async
+ * @param {UserID} userId
+ * @param {GameListEntry[]} games
+ * @param {GameListID} listId
+ */
 export async function upsertGameList(userId, games, listId) {
     const datastore = new Datastore();
 

@@ -1,5 +1,15 @@
 import { Datastore } from "@google-cloud/datastore";
+/**
+ * @module datastore/getCalendars
+ */
 
+
+/**
+ * Gets all calendars from a user
+ * @async
+ * @param {string} userId
+ * @returns {Promise<Array>}
+ */
 export const getCalendars = async (userId) => {
     const datastore = new Datastore();
 

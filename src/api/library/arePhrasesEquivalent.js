@@ -1,9 +1,17 @@
+/**
+ * @module arePhrasesEquivalent
+ */
+
 const REGEX = {
     nonAlhpanumericChars: new RegExp("[^a-zA-Z0-9 ]"),
     fillWords: /\b(the|and|or|of)\b/,
     extraSpaces: /\s+/,
 };
 
+/**
+ * @param {string[]} phrases
+ * @returns {boolean}
+ */
 export const arePhrasesEquivalent = (phrases) => {
     const normalizedPhrases = phrases.map((phrase) => {
         return phrase

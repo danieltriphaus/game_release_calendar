@@ -1,5 +1,13 @@
 import { Datastore } from "@google-cloud/datastore";
+/**
+ * @module datastore/getUser
+ */
 
+/**
+ * Get a user from id
+ * @param {UserId} userId
+ * @returns {Promise<Array>}
+ */
 export const getUser = async (userId) => {
     const datastore = new Datastore();
 
@@ -11,6 +19,11 @@ export const getUser = async (userId) => {
     return user;
 };
 
+/**
+ * get a user object by its email adress
+ * @param {EmailAddress} emailAddress
+ * @returns {Promise<Array>}
+ */
 export const getUsersByEmailAddress = async (emailAddress) => {
     const datastore = new Datastore();
 
@@ -24,6 +37,11 @@ export const getUsersByEmailAddress = async (emailAddress) => {
     return users;
 };
 
+/**
+ *
+ * @param {AuthKey} authKey
+ * @returns
+ */
 export const getUserByAuthKey = async (authKey) => {
     const datastore = new Datastore();
 
@@ -37,6 +55,11 @@ export const getUserByAuthKey = async (authKey) => {
     }
 };
 
+/**
+ * Get User ID from Datastore Result
+ * @param {any} user
+ * @returns {UserID}
+ */
 function getUserId(user) {
     return user[Datastore.KEY].name;
 }

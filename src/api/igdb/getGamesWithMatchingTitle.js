@@ -1,7 +1,16 @@
 import axios from "axios";
 import { getIgdbAccessToken } from "./igdbAccessToken.js";
+/**
+ * @module igdb/getGamesWithMatchingTitle
+ */
+
 
 //ToDo: Refactor
+/**
+ * Builds query for IGDB search endpoint and converts given titles for better searchability
+ * @param {string[]} titlesToMatch
+ * @returns {IGDBQuery}
+ */
 export const getFullQuery = (titlesToMatch) => {
     const query = "fields id, name; where {where}; limit 500;";
     const queryWhereTemplate = "name ~ *\"{title}\"*";
@@ -32,6 +41,10 @@ export const getFullQuery = (titlesToMatch) => {
     return query.replace("{where}", queryWhere);
 };
 
+/**
+ * @param {string[]} titlesToMatch
+ * @returns {IGDBGameAPIResponse}
+ */
 export const getGamesWithMatchingTitle = async (titlesToMatch) => {
     const finalQuery = getFullQuery(titlesToMatch);
 

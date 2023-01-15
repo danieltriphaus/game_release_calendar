@@ -1,5 +1,12 @@
 import { Datastore } from "@google-cloud/datastore";
+/**
+ * @module datastore/upsertGame
+ */
 
+/**
+ * @async
+ * @param {*} gameData
+ */
 export const upsertGame = async (gameData) => {
     const datastore = new Datastore();
 

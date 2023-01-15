@@ -1,6 +1,15 @@
 import { Datastore } from "@google-cloud/datastore";
 import { chunkArray } from "../library/chunkArray.js";
+/**
+ * @module datastore/getGameList
+ */
 
+/**
+ * get a users default game list
+ * @async
+ * @param {UserID} userId
+ * @returns {Promise<Array>}
+ */
 export const getGameList = async (userId) => {
     const datastore = new Datastore();
     const key = datastore.key(["user", userId, "game_list", "default"]);
@@ -9,6 +18,10 @@ export const getGameList = async (userId) => {
     return gameList;
 };
 
+/**
+ * @param {any} entity
+ * @returns
+ */
 export const getKeyFromDatastoreEntity = (entity) => {
     const key = entity[Datastore.KEY];
     if (!key.parent) {
@@ -21,6 +34,13 @@ export const getKeyFromDatastoreEntity = (entity) => {
     }
 };
 
+/**
+ * Get game lists which contain a specific game id
+ * @async
+ * @param {GameID[]} gameIds
+ * @param {UserID} userId
+ * @returns {Promise<Array>}
+ */
 export const getGameListsContainingGameIds = async (gameIds, userId) => {
     const datastore = new Datastore();
 

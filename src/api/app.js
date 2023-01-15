@@ -26,8 +26,6 @@ router.use(xss());
 router.use(apiBackend());
 app.use("/api", router);
 
-
-
 if (process.env.NODE_ENV === "production") {
     app.use(historyApiFallback());
     const __filename = fileURLToPath(import.meta.url);

@@ -1,7 +1,17 @@
 import axios from "axios";
+/**
+ * @module igdb/getGamesById
+ */
 
 const query = "fields {fields}; where id = ({gameIds}); limit 500;";
 
+/**
+ * Get games with data from IGDB
+ * @param {GameID[]} gameIds
+ * @param {string} accessToken
+ * @param {string[]} fields
+ * @returns {IGDBGameAPIResponse}
+ */
 export const getGamesById = async (gameIds, accessToken, fields) => {
     if (!gameIds || gameIds.length === 0) {
         return [];
