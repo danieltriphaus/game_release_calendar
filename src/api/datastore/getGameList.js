@@ -8,11 +8,16 @@ import { chunkArray } from "../library/chunkArray.js";
  * get a users default game list
  * @async
  * @param {UserID} userId
+ * @param {string} [listId="default"]
  * @returns {Promise<Array>}
  */
-export const getGameList = async (userId) => {
+export const getGameList = async (userId, listId) => {
+    if (!listId) {
+        listId = "default";
+    }
+
     const datastore = new Datastore();
-    const key = datastore.key(["user", userId, "game_list", "default"]);
+    const key = datastore.key(["user", userId, "game_list", listId]);
 
     const [gameList] = await datastore.get(key);
     return gameList;

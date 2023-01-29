@@ -29,6 +29,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+jsconfig.json
 
 # cypress
 tests/cypress/videos

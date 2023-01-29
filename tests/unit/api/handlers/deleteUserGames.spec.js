@@ -13,7 +13,7 @@ it("should delete game from datastore", async () => {
 
     const context = getContext();
     context.request.params.user_id = "y1xx";
-    context.request.body = ["6WjXhK3Iec1C9UwTBqJhH", 132, 165];
+    context.request.body = { games: [{ id: "6WjXhK3Iec1C9UwTBqJhH" }, { id: 132 }, { id: 165 }] };
 
     await deleteUserGames(context, context.request, context.response);
 

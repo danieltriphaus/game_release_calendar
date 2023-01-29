@@ -15,8 +15,9 @@ const GAME_VALIDATIONS = {
  */
 export const postUserGames = async (context, req, res) => {
     const userId = context.request.params.user_id;
+    const listId = req.body.listId || "default";
 
-    const gameList = await getGameList(userId);
+    const gameList = await getGameList(userId, listId);
 
     const games = req.body.games;
 
@@ -29,7 +30,7 @@ export const postUserGames = async (context, req, res) => {
             });
         }
 
-        await upsertGameList(userId, games, "default");
+        await upsertGameList(userId, games, listId);
 
         res.status(200);
     } else {
