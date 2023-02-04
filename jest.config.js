@@ -16,6 +16,8 @@ module.exports = {
     collectCoverageFrom: [
         "src/**/*.{js,vue}",
         "src/frontend/**/*.{js,vue}",
+        "!src/api/datastore/**",
+        "src/api/datastore/convertFromDatastoreResult.js",
         "!src/frontend/router/index.js",
         "!src/api/app.js",
         "!src/api/library/types.js",

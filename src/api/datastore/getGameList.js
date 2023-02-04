@@ -24,22 +24,6 @@ export const getGameList = async (userId, listId) => {
 };
 
 /**
- * @param {any} entity
- * @returns
- */
-export const getKeyFromDatastoreEntity = (entity) => {
-    const key = entity[Datastore.KEY];
-    if (!key.parent) {
-        return { id: key.id ? key.id : key.name };
-    } else {
-        return {
-            id: key.id ? key.id : key.name,
-            parent: key.parent.id ? key.parent.id : key.parent.name,
-        };
-    }
-};
-
-/**
  * Get game lists which contain a specific game id
  * @async
  * @param {GameID[]} gameIds

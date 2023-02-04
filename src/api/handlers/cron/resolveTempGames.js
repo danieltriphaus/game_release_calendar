@@ -1,6 +1,6 @@
 import { getAllTemporaryGames } from "../../datastore/getTemporaryGames.js";
-import { getGameListsContainingGameIds, getKeyFromDatastoreEntity } from "../../datastore/getGameList.js";
-import { convertFromDatastoreResult } from "../../datastore/convertFromDatastoreResult.js";
+import { getGameListsContainingGameIds } from "../../datastore/getGameList.js";
+import { convertFromDatastoreResult, getKeyFromDatastoreEntity } from "../../datastore/convertFromDatastoreResult.js";
 import { upsertGameList } from "../../datastore/upsertGameList.js";
 import { getGamesWithMatchingTitle as getIgdbGamesWithMatchingTitle } from "../../igdb/getGamesWithMatchingTitle.js";
 import { gameTitleMatcher } from "../../library/gameTitleMatcher.js";

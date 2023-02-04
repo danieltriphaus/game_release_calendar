@@ -19,3 +19,19 @@ export const convertFromDatastoreResult = (result) => {
             : [];
     }
 };
+
+/**
+ * @param {any} entity
+ * @returns
+ */
+export const getKeyFromDatastoreEntity = (entity) => {
+    const key = entity[Datastore.KEY];
+    if (!key.parent) {
+        return { id: key.id ? key.id : key.name };
+    } else {
+        return {
+            id: key.id ? key.id : key.name,
+            parent: key.parent.id ? key.parent.id : key.parent.name,
+        };
+    }
+};

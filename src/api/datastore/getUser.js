@@ -1,4 +1,6 @@
 import { Datastore } from "@google-cloud/datastore";
+import { convertFromDatastoreResult } from "./convertFromDatastoreResult.js";
+
 /**
  * @module datastore/getUser
  */
@@ -14,9 +16,9 @@ export const getUser = async (userId) => {
     const userKey = datastore.key(["user", userId]);
     const [user] = await datastore.get(userKey);
 
-    user.id = getUserId(user);
-
-    return user;
+    if (user.length > 0) {
+        return convertFromDatastoreResult(user)[0];
+    }
 };
 
 /**
@@ -30,11 +32,9 @@ export const getUsersByEmailAddress = async (emailAddress) => {
     const query = datastore.createQuery("user").filter("email_address", "=", emailAddress);
     const [users] = await datastore.runQuery(query);
 
-    users.forEach((user) => {
-        user.id = getUserId(user);
-    });
-
-    return users;
+    if (users.length > 0) {
+        return convertFromDatastoreResult(users);
+    }
 };
 
 /**
@@ -49,17 +49,6 @@ export const getUserByAuthKey = async (authKey) => {
     const [users] = await datastore.runQuery(query);
 
     if (users.length > 0) {
-        const user = { id: getUserId(users[0]), ...users[0] };
-        delete user[Datastore.KEY];
-        return user;
+        return convertFromDatastoreResult(users)[0];
     }
 };
-
-/**
- * Get User ID from Datastore Result
- * @param {any} user
- * @returns {UserID}
- */
-function getUserId(user) {
-    return user[Datastore.KEY].name;
-}

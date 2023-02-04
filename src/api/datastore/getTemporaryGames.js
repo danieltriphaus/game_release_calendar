@@ -36,19 +36,3 @@ export const getAllTemporaryGames = async () => {
     const [games] = await datastore.runQuery(query);
     return games;
 };
-
-/**
- * Convert From DS Result
- * @param {Array | undefined} result
- * @returns {Array | undefined}
- */
-export const convertFromDatastoreResult = (result) => {
-    if (result) {
-        return result
-            ? result.map((datastoreResult) => {
-                // @ts-ignore
-                return { id: datastoreResult[Datastore.KEY].name, name: datastoreResult.name };
-            })
-            : [];
-    }
-};
