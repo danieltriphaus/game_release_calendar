@@ -25,13 +25,8 @@ export const postUserGLogin = async (context, req, res) => {
             auth_key: nanoid(32),
         };
 
-        try {
-            await upsertUser(userData);
-            await upsertGameList(userData.id, [], "default");
-        } catch (error) {
-            console.error(error);
-            res.status(500).end();
-        }
+        await upsertUser(userData);
+        await upsertGameList(userData.id, [], "default");
     }
 
     res.cookie("auth_key", userData.auth_key, {

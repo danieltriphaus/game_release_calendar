@@ -13,4 +13,12 @@ module.exports = {
         "^.+\\.vue$": "@vue/vue3-jest",
     },
     testEnvironment: "jsdom",
+    collectCoverageFrom: [
+        "src/**/*.{js,vue}",
+        "src/frontend/**/*.{js,vue}",
+        "!src/frontend/router/index.js",
+        "!src/api/app.js",
+        "!src/api/library/types.js",
+        "!src/frontend/main.js",
+        "!src/api/views/**"],
 };

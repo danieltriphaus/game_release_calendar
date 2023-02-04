@@ -3,6 +3,7 @@ import { postUserGLogin } from "@/api/handlers/postUserGLogin.js";
 import { getContext } from "../expressMocks";
 import { getUsersByEmailAddress } from "@/api/datastore/getUser.js";
 import { upsertUser } from "@/api/datastore/upsertUser.js";
+import { upsertGameList } from "@/api/datastore/upsertGameList.js";
 
 jest.mock("@/api/library/getGLoginPayload.js");
 jest.mock("@/api/datastore/getUser.js");
@@ -20,7 +21,7 @@ const dbUser = {
     auth_key: "test_auth_key",
 };
 
-it("should save google user in database if it does not exist", async () => {
+it("should save google user in database and create game list if it does not exist", async () => {
     getGLoginPayload.mockResolvedValueOnce(googleUser);
     getUsersByEmailAddress.mockResolvedValueOnce([]);
 
@@ -36,6 +37,7 @@ it("should save google user in database if it does not exist", async () => {
             auth_key: expect.stringContaining(""),
         }),
     );
+    expect(upsertGameList).toBeCalledWith(expect.stringContaining(""), [], "default");
 });
 
 it("should login user with auth_key", async () => {
