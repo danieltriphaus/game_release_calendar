@@ -1,5 +1,4 @@
 import { Datastore } from "@google-cloud/datastore";
-import { chunkArray } from "../library/chunkArray.js";
 /**
  * @module datastore/getGameList
  */
@@ -26,25 +25,17 @@ export const getGameList = async (userId, listId) => {
 /**
  * Get game lists which contain a specific game id
  * @async
- * @param {GameID[]} gameIds
+
  * @param {UserID} userId
  * @returns {Promise<Array>}
  */
-export const getGameListsContainingGameIds = async (gameIds, userId) => {
+export const getAllGameLists = async (userId) => {
     const datastore = new Datastore();
 
-    const gameIdChunks = chunkArray(gameIds, 10);
-
-    const result = gameIdChunks.map(async (gameIdChunk) => {
-        const query = datastore.createQuery("game_list")
-            .select()
-            .filter("games", "IN", gameIdChunk);
-        if (userId) {
-            query.hasAncestor(datastore.key(["user", userId]));
-        }
-        return await datastore.runQuery(query);
-    });
-    const [gameLists] = await Promise.all(result);
-
-    return gameLists[0];
+    const query = datastore.createQuery("game_list").select();
+    if (userId) {
+        query.hasAncestor(datastore.key(["user", userId]));
+    }
+    const [gameLists] = await datastore.runQuery(query);
+    return gameLists;
 };

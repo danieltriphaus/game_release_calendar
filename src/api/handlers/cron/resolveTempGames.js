@@ -1,17 +1,23 @@
 import { getAllTemporaryGames } from "../../datastore/getTemporaryGames.js";
-import { getGameListsContainingGameIds } from "../../datastore/getGameList.js";
+import { getAllGameLists } from "../../datastore/getGameList.js";
 import { convertFromDatastoreResult, getKeyFromDatastoreEntity } from "../../datastore/convertFromDatastoreResult.js";
 import { upsertGameList } from "../../datastore/upsertGameList.js";
 import { getGamesWithMatchingTitle as getIgdbGamesWithMatchingTitle } from "../../igdb/getGamesWithMatchingTitle.js";
 import { gameTitleMatcher } from "../../library/gameTitleMatcher.js";
 import { upsertGame } from "../../datastore/upsertGame.js";
 
+
+//ToDo: fix this for new GameList Entry structure
 export const resolveTempGames = async (context, req, res) => {
     const temporaryGames = convertFromDatastoreResult(await getAllTemporaryGames());
-    const igdbGames = await getIgdbGamesWithMatchingTitle(temporaryGames.map((temporaryGame) => temporaryGame.name));
 
-    const temporaryGameIds = temporaryGames.map((game) => game.id);
-    const gameLists = await getGameListsContainingGameIds(temporaryGameIds, req.query.userId);
+    if (temporaryGames.length === 0) {
+        res.status(200).json({ message: "No temporary games to resolve" });
+        return;
+    }
+
+    const igdbGames = await getIgdbGamesWithMatchingTitle(temporaryGames.map((temporaryGame) => temporaryGame.name));
+    const gameLists = await getAllGameLists(req.query.userId);
 
     const gtm = gameTitleMatcher(temporaryGames);
     gtm.matchAgainst(igdbGames);
