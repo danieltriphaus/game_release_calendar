@@ -15,6 +15,7 @@
                         <button
                             type="button"
                             data-cy="add-temp-game-to-list"
+                            data-test="add-temp-game"
                             class="btn btn-outline-primary"
                             @click="addTemporaryGame"
                         >
@@ -69,7 +70,7 @@ const temporaryGame = reactive({
 
 function addTemporaryGame() {
     temporaryGame.id = nanoid();
-    axios.post("/api/game", temporaryGame);
+    axios.post("/api/game", { ...temporaryGame });
     axios.post("/api/user/" + userId.value + "/games", { games: [{ id: temporaryGame.id }] });
     emit("game-added", { ...temporaryGame });
     endTemporaryGameInput();

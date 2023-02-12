@@ -11,18 +11,18 @@ import { Datastore } from "@google-cloud/datastore";
  * @returns {Array | undefined}
  */
 export const convertFromDatastoreResult = (result) => {
-    if (result) {
-        return result
-            ? result.map((datastoreResult) => {
-                return { id: datastoreResult[Datastore.KEY].name ? datastoreResult[Datastore.KEY].name : datastoreResult[Datastore.KEY].id, ...datastoreResult };
-            })
-            : [];
-    }
+
+    return result
+        ? result.map((datastoreResult) => {
+            return { id: datastoreResult[Datastore.KEY].name ? datastoreResult[Datastore.KEY].name : datastoreResult[Datastore.KEY].id, ...datastoreResult };
+        })
+        : [];
+
 };
 
 /**
  * @param {any} entity
- * @returns
+ * @returns {{id: string, parent?: string}}
  */
 export const getKeyFromDatastoreEntity = (entity) => {
     const key = entity[Datastore.KEY];

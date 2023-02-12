@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getGamesById } from "@/api/igdb/getGamesById";
 import axios from "axios";
 
