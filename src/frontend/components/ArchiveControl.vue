@@ -1,6 +1,7 @@
 <template>
     <b-button
         variant="primary"
+        data-test="archive-year-2022"
         @click="onArchiveYear(2022)"
     >
         Archive 2022 Entries
@@ -8,6 +9,7 @@
 
     <b-button
         variant="primary"
+        data-test="archive-released"
         @click="onArchiveAllReleased"
     >
         Archive all released Entries
@@ -23,7 +25,7 @@
 <script setup>
 import axios from "axios";
 import { apiClient } from "../library/apiClient";
-import { inject } from "vue";
+import { inject, computed } from "vue";
 
 const user = inject("user");
 const emits = defineEmits(["delete-game"]);
@@ -35,11 +37,15 @@ const props = defineProps({
     },
 });
 
+const archivableGames = computed(() => {
+    return props.games.filter((game) => game.release_dates && game.release_dates.length > 0);
+});
+
 /**
  * @param {number} year
  */
 async function onArchiveYear(year) {
-    const gamesFromYear = props.games.filter((game) => {
+    const gamesFromYear = archivableGames.value.filter((game) => {
         const selectedReleaseDate = getSelectedReleaseDate(game);
 
         return selectedReleaseDate
@@ -51,7 +57,7 @@ async function onArchiveYear(year) {
 }
 
 async function onArchiveAllReleased() {
-    const releasedGames = props.games.filter((game) => {
+    const releasedGames = archivableGames.value.filter((game) => {
         const selectedReleaseDate = getSelectedReleaseDate(game);
         return selectedReleaseDate && selectedReleaseDate <= (new Date()).getTime() / 1000;
     });
