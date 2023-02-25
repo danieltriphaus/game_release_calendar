@@ -53,9 +53,12 @@
 </template>
 
 <script setup>
+//@ts-check
+
 import { ref, reactive, inject } from "vue";
 import { nanoid } from "nanoid";
 import axios from "axios";
+import { apiClient } from "../library/apiClient";
 
 const emit = defineEmits(["game-added"]);
 const userId = inject("userId");
@@ -71,7 +74,7 @@ const temporaryGame = reactive({
 function addTemporaryGame() {
     temporaryGame.id = nanoid();
     axios.post("/api/game", { ...temporaryGame });
-    axios.post("/api/user/" + userId.value + "/games", { games: [{ id: temporaryGame.id }] });
+    apiClient.user(userId.value).games.post([{ id: temporaryGame.id }]);
     emit("game-added", { ...temporaryGame });
     endTemporaryGameInput();
 }

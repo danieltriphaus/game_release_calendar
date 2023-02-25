@@ -22,6 +22,7 @@
 
 <script setup>
 import axios from "axios";
+import { apiClient } from "../library/apiClient";
 import { inject } from "vue";
 
 const user = inject("user");
@@ -83,7 +84,7 @@ async function archiveGames(games) {
     });
 
     await Promise.all([
-        axios.post("/api/user/" + user.value.id + "/games", { games: userGames, listId: "archive" }),
+        apiClient.user(user.value.id).games.post(userGames, "archive"),
         axios.delete("/api/user/" + user.value.id + "/games", { data: { games: userGames, listId: "default" } }),
     ]);
 

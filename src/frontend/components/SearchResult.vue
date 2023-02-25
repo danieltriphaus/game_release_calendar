@@ -14,9 +14,9 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { inject } from "vue";
 import GameCard from "./GameCard.vue";
+import { apiClient } from "../library/apiClient";
 
 const userId = inject("userId");
 
@@ -24,7 +24,7 @@ const props = defineProps({ result: { type: Object, default: () => {} } });
 const emit = defineEmits(["game-added"]);
 
 function addGame() {
-    axios.post("/api/user/" + userId.value + "/games", { games: [{ id: props.result.id }] });
+    apiClient.user(userId.value).games.post([{ id: props.result.id }]);
     emit("game-added", props.result.id);
 }
 </script>

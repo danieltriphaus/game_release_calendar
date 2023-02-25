@@ -65,5 +65,5 @@
 /**
  * @typedef {Object} UserGame
  * @property {GameID} id
- * @property {PlatformID} platform
+ * @property {PlatformID} [platform]
  */

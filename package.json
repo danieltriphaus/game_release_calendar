@@ -47,6 +47,7 @@
     "@cypress/vite-dev-server": "^3.0.0",
     "@cypress/vue": "^4.0.0",
     "@cypress/webpack-dev-server": "^1.8.4",
+    "@readme/openapi-parser": "^2.4.0",
     "@types/jest": "^29.2.6",
     "@vue/test-utils": "^2.2.1",
     "cypress": "^10.3.0",
@@ -56,6 +57,7 @@
     "eslint-plugin-vue": "^8.0.3",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.5",
+    "openapi-types": "^12.1.0",
     "webpack": "^5.73.0",
     "webpack-dev-server": "^4.9.3"
   }

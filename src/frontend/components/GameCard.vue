@@ -38,8 +38,8 @@
 <script setup>
 import { computed, ref, onMounted, inject } from "vue";
 import PlatformIcon from "./PlatformIcon.vue";
-import axios from "axios";
 import { platformHelper } from "../library/platform.js";
+import { apiClient } from "../library/apiClient";
 
 const props = defineProps({
     game: {
@@ -65,11 +65,11 @@ function onSelectPlatform(platformId) {
 
     if (selectedPlatform.isSelected === true) {
         selectedPlatform.isSelected = false;
-        axios.post("/api/user/" + user.value.id + "/games", { games: [{ id: props.game.id }] });
+        apiClient.user(user.value.id).games.post([{ id: props.game.id }]);
     } else {
         platforms.value.forEach((platform) => platform.isSelected = false);
         selectedPlatform.isSelected = true;
-        axios.post("/api/user/" + user.value.id + "/games", { games: [{ id: props.game.id, platform: platformId }] });
+        apiClient.user(user.value.id).games.post([{ id: props.game.id, platform: platformId }]);
     }
 
     emit("platform-selected", props.game.id, selectedPlatform.isSelected ? selectedPlatform.id : undefined);
