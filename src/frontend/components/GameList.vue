@@ -77,7 +77,7 @@ import BaseCollapsable from "./BaseCollapsable.vue";
 import ArchiveControl from "./ArchiveControl.vue";
 
 import { onMounted, ref, computed, inject, reactive } from "vue";
-import axios from "axios";
+import { apiClient } from "../library/apiClient";
 
 const user = inject("user");
 
@@ -102,10 +102,7 @@ const games = ref([]);
  */
 async function populateGameList() {
     emits("loading");
-    const response = await axios.get("/api/user/" + props.userId + "/games");
-    if (response) {
-        games.value = response.data;
-    }
+    games.value = await apiClient.user(props.userId).games.get();
     emits("loading-complete");
 }
 
@@ -118,7 +115,7 @@ function onGameAdded(game) {
 }
 
 async function deleteGame(id) {
-    await axios.delete("/api/user/" + user.value.id + "/games", { data: { games: [{ id }] } });
+    await apiClient.user(user.value.id).games.delete([{ id }]);
     populateGameList();
 }
 

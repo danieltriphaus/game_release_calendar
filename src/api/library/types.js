@@ -67,3 +67,32 @@
  * @property {GameID} id
  * @property {PlatformID} [platform]
  */
+
+/**
+ * @typedef {Object} IGDBGame IGDB API response for a single game
+ * @property {number} id
+ * @property {object} cover
+ * @property {number} cover.id
+ * @property {number} cover.height
+ * @property {string} cover.url
+ * @property {number} cover.width
+ * @property {number} first_release_date
+ * @property {object[]} involved_companies
+ * @property {number} involved_companies.id
+ * @property {object} involved_companies.company
+ * @property {number} involved_companies.company.id
+ * @property {string} involved_companies.company.name
+ * @property {boolean} involved_companies.developer
+ * @property {string} name
+ * @property {object[]} release_dates
+ * @property {number} release_dates.id
+ * @property {number} release_dates.category
+ * @property {number} release_dates.date
+ * @property {string} release_dates.human
+ * @property {object} release_dates.platform
+ * @property {number} release_dates.platform.id
+ * @property {string} release_dates.platform.abbreviation
+ * @property {string} release_dates.platform.alternative_name
+ * @property {string} release_dates.platform.name
+ * @property {string} url
+ */

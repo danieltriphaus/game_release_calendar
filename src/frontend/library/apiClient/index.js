@@ -17,7 +17,7 @@ apiClient.postUserGames(userId, games, listId);
 apiClient.userGames(userId).post(games, listId):
 apiClient.user(userId).games.post(games, listId);
 */
-
+//@ts-check
 import axios from "axios";
 
 const API_PATH_PREFIX = "/api";
@@ -39,6 +39,27 @@ export const apiClient = {
                  */
                 async post(games, listId) {
                     await axios.post(USER_API_PATH + userId + "/games", { listId: listId, games: games });
+                },
+
+                /**
+                 * Get user's game list
+                 * @async
+                 * @returns {Promise<IGDBGame[]|undefined>}
+                 */
+                async get() {
+                    const response = await axios.get("/api/user/" + userId + "/games");
+                    if (response) {
+                        return response.data;
+                    }
+                },
+
+                /**
+                 * Delete games from user's game list
+                 * @param {UserGame[]} games
+                 * @param {string} [listId]
+                 */
+                async delete(games, listId) {
+                    await axios.delete(USER_API_PATH + userId + "/games", { data: { listId: listId, games: games } });
                 },
             },
         };

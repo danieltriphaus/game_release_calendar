@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { apiClient } from "../library/apiClient";
 import { inject, computed } from "vue";
 
@@ -91,7 +90,7 @@ async function archiveGames(games) {
 
     await Promise.all([
         apiClient.user(user.value.id).games.post(userGames, "archive"),
-        axios.delete("/api/user/" + user.value.id + "/games", { data: { games: userGames, listId: "default" } }),
+        apiClient.user(user.value.id).games.delete(userGames, "default"),
     ]);
 
     emits("delete-game");
