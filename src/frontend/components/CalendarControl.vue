@@ -55,8 +55,8 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { inject, ref, computed } from "vue";
+import { apiClient } from "../library/apiClient";
 
 const USER_API_PATH = "/api/user/";
 
@@ -70,32 +70,28 @@ const calendarLink = computed(() => {
 
 async function getCalendarLink() {
     isGettingLink.value = true;
-    let defaultCalendar = await getDefaultCalendar();
-    if (!defaultCalendar) {
-        defaultCalendar = await createAndGetDefaultCalendar();
+    let defaultCalendar;
+    try {
+        defaultCalendar = await getDefaultCalendar();
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            defaultCalendar = await createAndGetDefaultCalendar();
+        } else {
+            throw error;
+        }
     }
+
     calendar.value = defaultCalendar;
     isGettingLink.value = false;
 }
 
 async function getDefaultCalendar() {
-    const response = await axios.get(USER_API_PATH + user.value.id + "/calendars", { params: { list: "default" } }).catch((error) => {
-        console.log(error);
-        if (error.response && error.response.status !== 404) {
-            throw error;
-        }
-    });
-    return getCalendarFromResponse(response);
+    const calendars = await apiClient.user(user.value.id).calendars.get();
+    return calendars[0];
 }
 
 async function createAndGetDefaultCalendar() {
-    const response = await axios.post(USER_API_PATH + user.value.id + "/calendar", { list: "default" });
-    return getCalendarFromResponse(response);
+    return await apiClient.user(user.value.id).calendar.post();
 }
 
-function getCalendarFromResponse(response) {
-    if (response) {
-        return response.data[0] ? response.data[0] : response.data;
-    }
-}
 </script>

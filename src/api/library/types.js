@@ -23,6 +23,9 @@
 
 /**
  * @typedef {Object} TemporaryGame
+ * @property {TemporaryGameID} id
+ * @property {Date} matched
+ * @property {string} name
  */
 
 /**
@@ -95,4 +98,11 @@
  * @property {string} release_dates.platform.alternative_name
  * @property {string} release_dates.platform.name
  * @property {string} url
+ */
+
+/**
+ * @typedef {Object} Calendar
+ * @property {Date} createdAt
+ * @property {Date} list
+ * @property {string} token
  */

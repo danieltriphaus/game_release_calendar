@@ -57,7 +57,6 @@
 
 import { ref, reactive, inject } from "vue";
 import { nanoid } from "nanoid";
-import axios from "axios";
 import { apiClient } from "../library/apiClient";
 
 const emit = defineEmits(["game-added"]);
@@ -73,7 +72,7 @@ const temporaryGame = reactive({
 
 function addTemporaryGame() {
     temporaryGame.id = nanoid();
-    axios.post("/api/game", { ...temporaryGame });
+    apiClient.game.post({ ...temporaryGame });
     apiClient.user(userId.value).games.post([{ id: temporaryGame.id }]);
     emit("game-added", { ...temporaryGame });
     endTemporaryGameInput();

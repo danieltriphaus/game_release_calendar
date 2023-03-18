@@ -18,6 +18,9 @@ it("should display user games", async () => {
                 userId: "y1xx",
             },
         },
+        props: {
+            userId: "y1xx",
+        },
     });
 
     expect(wrapper).toBeTruthy();

@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import axios from "axios";
+import { apiClient } from "../library/apiClient";
 
 import { reactive, defineEmits, ref } from "vue";
 import { getDirective } from "vue-debounce";
@@ -54,8 +54,7 @@ const isSearchInProgress = ref(false);
 
 async function searchGames() {
     isSearchInProgress.value = true;
-    const response = await axios.get("/api/game/search", { params: { q: search.query } });
-    search.results = response.data;
+    search.results = await apiClient.game.search.get(search.query);
     isSearchInProgress.value = false;
 }
 

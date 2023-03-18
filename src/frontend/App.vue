@@ -56,7 +56,7 @@
 
 <script>
 import ApiValidateForm from "./components/ApiValidateForm";
-import axios from "axios";
+import { apiClient } from "./library/apiClient";
 import { computed } from "vue";
 
 export default {
@@ -88,9 +88,10 @@ export default {
         document.head.appendChild(googleSignInScript);
 
         window.onSignIn = async (response) => {
-            const loginResponse = await axios.post("/api/user/g-login", { credential: response.credential });
-            this.user = loginResponse.data;
-            this.isAuthenticated = true;
+            this.user = await apiClient.user().gLogin.post(response.credential);
+            if (this.user.id) {
+                this.isAuthenticated = true;
+            }
         };
     },
     methods: {
@@ -103,8 +104,7 @@ export default {
             this.authenticationFailed = true;
         },
         async signOut() {
-            const response = await axios.delete("/api/access");
-            if (response.status === 200) {
+            if (await apiClient.access.delete()) {
                 await this.$router.push("/");
                 window.location.reload();
             }

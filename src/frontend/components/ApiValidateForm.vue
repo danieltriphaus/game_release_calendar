@@ -9,7 +9,8 @@
 </template>
 
 <script setup>
-import axios from "axios";
+//ts-check
+import { apiClient } from "../library/apiClient";
 import { onMounted, computed, ref } from "vue";
 
 const authKey = ref();
@@ -23,20 +24,18 @@ onMounted(async () => {
 });
 
 async function sendAuthKey() {
-    await doAuthentication({ params: { auth_key: authKey.value } });
+    await doAuthentication(authKey.value);
 }
 
-async function doAuthentication(axiosRequestConfig) {
-    const response = await axios.get("/api/access", axiosRequestConfig).catch((error) => {
-        if (!error.response || error.response.status !== 401) {
-            throw error;
-        }
-        if (error.response && error.response.status === 401) {
-            emit("authentication-failed");
-        }
-    });
-    if (response && response.status === 200) {
-        emit("authenticated", response.data);
+/**
+ * @param {string} [authKey]
+ */
+async function doAuthentication(authKey) {
+    const user = await apiClient.access.get(authKey);
+    if (user) {
+        emit("authenticated", user);
+    } else {
+        emit("authentication-failed");
     }
 }
 </script>
