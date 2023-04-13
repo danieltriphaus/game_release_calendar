@@ -3,6 +3,9 @@
  * @property {UserID} id
  * @property {AuthKey} auth_key
  * @property {EmailAddress} email_address
+ * @property {string} google_id
+ * @property {Date} auth_key_expires_at
+ * @property {boolean} test
  */
 
 /**

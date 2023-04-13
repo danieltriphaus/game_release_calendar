@@ -25,7 +25,7 @@
             v-if="!isAuthenticated"
             class="row mt-4"
         >
-            <template v-if="authenticationFailed">
+            <div v-show="authenticationFailed">
                 <div
                     id="g_id_onload"
                     :data-client_id="gsiAppId"
@@ -33,23 +33,23 @@
                     data-ux_mode="popup"
                     data-callback="onSignIn"
                 />
+
                 <div
                     class="g_id_signin"
                     data-type="standard"
-                    data-size="large"
-                    data-theme="outline"
-                    data-text="sign_in_with"
                     data-shape="rectangular"
-                    data-csrf_token="token"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
                     data-logo_alignment="left"
                 />
-            </template>
+            </div>
+
             <api-validate-form
                 @authenticated="onAuthenticated"
                 @authentication-failed="onAuthenticationFailed"
             />
         </div>
-
         <router-view v-if="isAuthenticated" />
     </div>
 </template>

@@ -35,6 +35,7 @@ it("should save google user in database and create game list if it does not exis
             google_id: googleUser.sub,
             email_address: googleUser.email,
             auth_key: expect.stringContaining(""),
+            auth_key_expires_at: expect.any(Date),
         }),
     );
     expect(upsertGameList).toBeCalledWith(expect.stringContaining(""), [], "default");
@@ -42,7 +43,7 @@ it("should save google user in database and create game list if it does not exis
 
 it("should login user with auth_key", async () => {
     getGLoginPayload.mockResolvedValueOnce(googleUser);
-    getUsersByEmailAddress.mockResolvedValueOnce([dbUser]);
+    getUsersByEmailAddress.mockResolvedValueOnce([{ ...dbUser }]);
 
     const context = getContext();
     context.request.body = { credential: "test" };
@@ -51,14 +52,20 @@ it("should login user with auth_key", async () => {
 
     expect(context.response.cookie).toHaveBeenCalledWith(
         "auth_key",
-        expect.stringContaining(""),
+        expect.not.stringContaining(dbUser.auth_key),
         expect.objectContaining({}),
+    );
+
+    expect(upsertUser).toBeCalledWith(
+        expect.objectContaining({
+            auth_key_expires_at: expect.any(Date),
+        }),
     );
 });
 
 it("should remove auth_key from result", async () => {
     getGLoginPayload.mockResolvedValueOnce(googleUser);
-    getUsersByEmailAddress.mockResolvedValueOnce([dbUser]);
+    getUsersByEmailAddress.mockResolvedValueOnce([{ ...dbUser }]);
 
     const context = getContext();
     context.request.body = { credential: "test" };
@@ -69,3 +76,19 @@ it("should remove auth_key from result", async () => {
         expect.objectContaining({ auth_key: expect.stringContaining("") }),
     );
 });
+
+// it("should generate new auth_key with expiry_date in 30 days", async () => {
+//     getGLoginPayload.mockResolvedValueOnce(googleUser);
+//     getUsersByEmailAddress.mockResolvedValueOnce([dbUser]);
+
+//     const context = getContext();
+//     context.request.body = { credential: "test" };
+
+//     await postUserGLogin(context, context.request, context.response);
+
+//     expect(upsertUser).not.toBeCalledWith(
+//         expect.objectContaining({
+//             auth_key: dbUser.auth_key,
+//         }),
+//     );
+// });

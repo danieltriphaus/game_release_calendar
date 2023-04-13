@@ -9,16 +9,22 @@ export const userAuth = async (context, req, res) => {
 
     const user = await getUserByAuthKey(req.cookies.auth_key);
 
+    let result;
     if (process.env.NODE_ENV === "production" && user.test) {
-        return false;
+        result = false;
+    } else if (!user.test && (!user.auth_key_expires_at || user.auth_key_expires_at < new Date())) {
+        result = false;
+    } else if (context.request.params.user_id && context.request.params.user_id === user.id) {
+        result = user;
+    } else if (!context.request.params.user_id && user) {
+        result = user;
     }
 
-    if (context.request.params.user_id && context.request.params.user_id === user.id) {
-        return user;
+    if (!result) {
+        res.clearCookie("auth_key");
     }
-    if (!context.request.params.user_id && user) {
-        return user;
-    }
+
+    return result;
 };
 
 export const calendarToken = async (context) => {

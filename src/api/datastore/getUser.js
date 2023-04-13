@@ -40,7 +40,7 @@ export const getUsersByEmailAddress = async (emailAddress) => {
 /**
  *
  * @param {AuthKey} authKey
- * @returns
+ * @returns {Promise<User>}
  */
 export const getUserByAuthKey = async (authKey) => {
     const datastore = new Datastore();
