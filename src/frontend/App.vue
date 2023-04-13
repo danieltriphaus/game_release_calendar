@@ -22,10 +22,10 @@
             </div>
         </div>
         <div
-            v-if="!isAuthenticated"
+            v-show="!isAuthenticated"
             class="row mt-4"
         >
-            <div v-show="authenticationFailed">
+            <div v-if="authenticationFailed">
                 <div
                     id="g_id_onload"
                     :data-client_id="gsiAppId"
