@@ -52,7 +52,7 @@ it("should login user with auth_key", async () => {
 
     expect(context.response.cookie).toHaveBeenCalledWith(
         "auth_key",
-        expect.not.stringContaining(dbUser.auth_key),
+        dbUser.auth_key,
         expect.objectContaining({}),
     );
 
@@ -76,19 +76,3 @@ it("should remove auth_key from result", async () => {
         expect.objectContaining({ auth_key: expect.stringContaining("") }),
     );
 });
-
-// it("should generate new auth_key with expiry_date in 30 days", async () => {
-//     getGLoginPayload.mockResolvedValueOnce(googleUser);
-//     getUsersByEmailAddress.mockResolvedValueOnce([dbUser]);
-
-//     const context = getContext();
-//     context.request.body = { credential: "test" };
-
-//     await postUserGLogin(context, context.request, context.response);
-
-//     expect(upsertUser).not.toBeCalledWith(
-//         expect.objectContaining({
-//             auth_key: dbUser.auth_key,
-//         }),
-//     );
-// });
