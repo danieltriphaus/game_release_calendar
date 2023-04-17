@@ -1,24 +1,28 @@
 <template>
     <div
-        v-b-toggle="props.collapseId"
         class="list-category"
     >
-        <h5 class="list-heading mt-4">
-            {{ props.heading }}
-        </h5>
-        <i
-            class="list-icon mt-4"
-            :class="'bi-' + accordionTabIcon"
-        />
+        <div
+            v-b-toggle="props.collapseId"
+            class="list-category-heading"
+        >
+            <h5 class="list-heading">
+                {{ props.heading }}
+            </h5>
+            <i
+                class="list-icon"
+                :class="'bi-' + accordionTabIcon"
+            />
+        </div>
+        <b-collapse
+            :id="props.collapseId"
+            :visible="categoryAccordion.isVisible"
+            @hide="onCollapseStateChanged(false)"
+            @show="onCollapseStateChanged(true)"
+        >
+            <slot />
+        </b-collapse>
     </div>
-    <b-collapse
-        :id="props.collapseId"
-        :visible="categoryAccordion.isVisible"
-        @hide="onCollapseStateChanged(false)"
-        @show="onCollapseStateChanged(true)"
-    >
-        <slot />
-    </b-collapse>
 </template>
 
 <script setup>
@@ -60,6 +64,14 @@ const accordionTabIcon = computed(() => {
 
 <style scoped>
     .list-category {
+        margin-top: 20px;
+    }
+
+    .list-category:first-child {
+        margin-top: 0;
+    }
+
+    .list-category-heading {
         display: flex;
     }
 

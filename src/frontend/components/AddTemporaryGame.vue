@@ -4,11 +4,12 @@
             <div class="col">
                 <div class="input-group">
                     <input
+                        id="temp-game-name"
                         v-model="temporaryGame.name"
                         type="text"
                         data-cy="temp-game-name"
                         data-test="temp-game-name"
-                        placeholder="Add a temporary entry to your list"
+                        placeholder="Add a temporary entry"
                         class="form-control"
                     >
                     <div class="input-group-append">
@@ -83,3 +84,7 @@ function endTemporaryGameInput() {
     temporaryGame.name = "";
 }
 </script>
+
+<style scoped>
+
+</style>

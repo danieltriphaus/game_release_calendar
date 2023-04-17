@@ -142,7 +142,7 @@ export const apiClient = {
          * @returns {Promise<User|undefined>}
          */
         async get(authKey) {
-            const response = await axios.get(ACCESS_API_PATH, { params: { authKey } }).catch((error) => {
+            const response = await axios.get(ACCESS_API_PATH, { params: { auth_key: authKey } }).catch((error) => {
                 if (error.response && error.response.status === 401) {
                     return;
                 }

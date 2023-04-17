@@ -1,25 +1,27 @@
 <template>
-    <b-button
-        variant="primary"
-        data-test="archive-year-2022"
-        @click="onArchiveYear(2022)"
-    >
-        Archive 2022 Entries
-    </b-button>
+    <div>
+        <b-button
+            variant="primary"
+            data-test="archive-year-2022"
+            @click="onArchiveYear(2022)"
+        >
+            Archive 2022 Entries
+        </b-button>
 
-    <b-button
-        variant="primary"
-        data-test="archive-released"
-        @click="onArchiveAllReleased"
-    >
-        Archive all released Entries
-    </b-button>
+        <b-button
+            variant="primary"
+            data-test="archive-released"
+            @click="onArchiveAllReleased"
+        >
+            Archive all released Entries
+        </b-button>
 
     <!-- <b-button
         variant="primary"
     >
         Archive Up To Date
     </b-button> -->
+    </div>
 </template>
 
 <script setup>
