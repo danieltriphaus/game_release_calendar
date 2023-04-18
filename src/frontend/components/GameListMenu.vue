@@ -101,7 +101,7 @@ function onListMenuClick(event) {
     font-size: 0.8rem;
     color: white;
     font-weight: bold;
-    transition: background-color 1s linear;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .list-actions li.active {

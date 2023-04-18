@@ -1,63 +1,52 @@
 <template>
     <div>
-        <b-button
-            v-b-modal.calendar-control
-            variant="primary"
-            data-cy="get-calendar"
+        <b-row class="mt-2">
+            <b-col class="text-center">
+                <b-spinner
+                    v-if="isGettingLink"
+                />
+            </b-col>
+        </b-row>
+        <b-form-group
+            v-if="calendar.token"
+            label="Subscription Link"
+            label-for="calendar-link"
         >
-            Get Calendar
-        </b-button>
-        <b-modal
-            id="calendar-control"
-            hide-footer
-            @show="getCalendarLink"
-        >
-            <b-container fluid>
-                <b-row class="mt-2">
+            <b-input-group>
+                <b-form-input
+                    id="calendar-link"
+                    v-model="calendarLink"
+                    disabled
+                    data-cy="calendar-link"
+                />
+                <template #append>
                     <b-button
-                        v-if="!calendar.token"
                         variant="secondary"
-                        data-cy="get-calendar-link"
-                        @click="getCalendarLink"
+                        @click="copyCalendarLink"
                     >
-                        <i class="bi bi-link me-2" />Get a Link
-                        <b-spinner
-                            v-if="isGettingLink"
-                            small
-                        />
+                        <i class="bi bi-clipboard" />
                     </b-button>
-                </b-row>
-                <b-form-group
+                </template>
+            </b-input-group>
+        </b-form-group>
+        <b-row class="mt-2">
+            <b-col>
+                <b-button
                     v-if="calendar.token"
-                    class="mt-2"
-                    label="Subscription Link"
-                    label-for="calendar-link"
+                    :href="calendarLink"
+                    variant="secondary"
+                    download
+                    data-cy="download-calendar"
                 >
-                    <b-form-input
-                        id="calendar-link"
-                        v-model="calendarLink"
-                        disabled
-                        data-cy="calendar-link"
-                    />
-                </b-form-group>
-                <b-row class="mt-2">
-                    <b-button
-                        v-if="calendar.token"
-                        :href="calendarLink"
-                        variant="secondary"
-                        download
-                        data-cy="download-calendar"
-                    >
-                        <i class="bi bi-file-earmark-arrow-down me-2" />Download
-                    </b-button>
-                </b-row>
-            </b-container>
-        </b-modal>
+                    <i class="bi bi-file-earmark-arrow-down me-2" />Download
+                </b-button>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
 <script setup>
-import { inject, ref, computed } from "vue";
+import { inject, ref, computed, onMounted } from "vue";
 import { apiClient } from "../library/apiClient";
 
 const USER_API_PATH = "/api/user/";
@@ -68,6 +57,10 @@ const isGettingLink = ref(false);
 
 const calendarLink = computed(() => {
     return window.location.protocol + "//" + window.location.host + USER_API_PATH + user.value.id + "/calendar?token=" + calendar.value.token;
+});
+
+onMounted(() => {
+    getCalendarLink();
 });
 
 async function getCalendarLink() {
@@ -85,6 +78,10 @@ async function getCalendarLink() {
 
     calendar.value = defaultCalendar;
     isGettingLink.value = false;
+}
+
+function copyCalendarLink() {
+    navigator.clipboard.writeText(calendarLink.value);
 }
 
 async function getDefaultCalendar() {
