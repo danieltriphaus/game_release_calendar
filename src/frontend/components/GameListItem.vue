@@ -49,7 +49,7 @@ function onPlatformSelected() {
 <style scoped>
     .game-actions {
         text-align: right;
-        padding-left: 10px;
+        padding: 5px;
         margin-right: 0;
     }
 
@@ -63,7 +63,6 @@ function onPlatformSelected() {
 
     .game {
         border-bottom: 1px solid #6A9CCD;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 0;
     }
 </style>

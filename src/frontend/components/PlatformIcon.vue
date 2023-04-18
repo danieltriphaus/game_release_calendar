@@ -31,12 +31,24 @@ const props = defineProps({
 <style scoped>
     .platform {
         display: inline-block;
-        padding: 2px 4px;
+        padding: 1px 2px;
         margin-right: 1px;
         margin-top: 1px;
         border-radius: 4px;
         color: #fff;
         cursor: pointer;
+    }
+
+    @media (max-width: 424px) and (min-width: 320px) {
+        .platform {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .platform {
+            font-size: 0.8rem;
+        }
     }
 
     .platform.PS5 {

@@ -129,12 +129,11 @@ onMounted(() => {
 
 <style scoped>
     img {
-        height: 100px;
+        max-height: 130px;
     }
 
     .game-info {
-
-        padding-left: 10px;
+        padding: 5px 0 5px 5px;
     }
 
     .game-info h5 {
@@ -150,6 +149,7 @@ onMounted(() => {
         margin-right: 0;
         margin-left: auto;
         width: 120px;
+        padding: 5px;
     }
 
     .platform {
