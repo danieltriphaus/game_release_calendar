@@ -63,6 +63,5 @@ function onPlatformSelected() {
 
     .game {
         border-bottom: 1px solid #6A9CCD;
-        padding: 0;
     }
 </style>

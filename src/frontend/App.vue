@@ -5,20 +5,7 @@
             class="row"
         >
             <div class="col-3 offset-9 text-end">
-                <b-dropdown
-                    id="user-menu"
-                    variant="primary"
-                >
-                    <template #button-content>
-                        <i class="bi-person-circle" />
-                    </template>
-                    <b-dropdown-item
-                        variant="danger"
-                        @click="signOut"
-                    >
-                        <i class="bi-door-open me-2" />Sign Out
-                    </b-dropdown-item>
-                </b-dropdown>
+                <!-- <UserMenu /> -->
             </div>
         </div>
         <div
@@ -58,10 +45,12 @@
 import ApiValidateForm from "./components/ApiValidateForm";
 import { apiClient } from "./library/apiClient";
 import { computed } from "vue";
+import UserMenu from "./components/UserMenu";
 
 export default {
     components: {
         ApiValidateForm,
+        UserMenu,
     },
     provide() {
         return {
@@ -103,14 +92,12 @@ export default {
             this.isAuthenticated = false;
             this.authenticationFailed = true;
         },
-        async signOut() {
-            if (await apiClient.access.delete()) {
-                await this.$router.push("/");
-                window.location.reload();
-            }
-        },
+        // async signOut() {
+        //     if (await apiClient.access.delete()) {
+        //         await this.$router.push("/");
+        //         window.location.reload();
+        //     }
+        // },
     },
 };
 </script>
-
-
