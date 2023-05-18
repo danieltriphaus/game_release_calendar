@@ -6,7 +6,15 @@ const temporaryGameMenuItem = "[data-test='list-actions'] #temporary_game";
 const temporaryGameMenu = "[data-test='add-temp-game']";
 
 it("should show components if clicked", async () => {
-    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: test } }, plugins: [BootstrapVue3] } });
+    const wrapper = mount(GameListMenu, {
+        global: {
+            plugins: [BootstrapVue3],
+            provide: {
+                user: { value: { id: "y1xx" } },
+                userId: "y1xx",
+            },
+        },
+    });
 
     await wrapper.get(temporaryGameMenuItem).trigger("click");
 
@@ -22,7 +30,7 @@ it("should show components if clicked", async () => {
 });
 
 it("should hide component if active item is clicked again", async () => {
-    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: test } }, plugins: [BootstrapVue3] } });
+    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: "test" } }, plugins: [BootstrapVue3] } });
 
     await wrapper.get(temporaryGameMenuItem).trigger("click");
 

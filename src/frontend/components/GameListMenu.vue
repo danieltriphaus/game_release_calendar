@@ -1,47 +1,59 @@
 <template>
-    <ul
-        class="list-actions"
-        data-test="list-actions"
-        @click="onListMenuClick"
-    >
-        <li
-            id="temporary_game"
-            :class="{ active: listMenu.temporary_game }"
+    <div>
+        <ul
+            class="list-actions"
+            data-test="list-actions"
+            @click="onListMenuClick"
         >
-            Game not found?
-        </li>
-        <li
-            id="calendar"
-            :class="{ active: listMenu.calendar }"
-        >
-            Calendar
-        </li>
-        <li
-            id="archive"
-            :class="{ active: listMenu.archive }"
-        >
-            Archive
-        </li>
-    </ul>
+            <li
+                id="temporary_game"
+                :class="{ active: listMenu.temporary_game }"
+            >
+                Game not found?
+            </li>
+            <li
+                id="calendar"
+                :class="{ active: listMenu.calendar }"
+            >
+                Calendar
+            </li>
+            <li
+                id="archive"
+                :class="{ active: listMenu.archive }"
+            >
+                Archive
+            </li>
+            <li
+                id="grouping"
+                :class="{ active: listMenu.grouping }"
+            >
+                Grouping
+            </li>
+        </ul>
 
-    <div
-        class="list-actions-content"
-    >
-        <AddTemporaryGame
-            v-if="listMenu.temporary_game"
-            data-test="add-temp-game"
-            @game-added="$emit('game-added')"
-        />
-        <CalendarControl
-            v-else-if="listMenu.calendar"
-            data-test="calendar-control"
-        />
-        <ArchiveControl
-            v-else-if="listMenu.archive"
-            data-test="archive-control"
-            :games="games"
-            @delete-game="$emit('delete-game')"
-        />
+        <div
+            class="list-actions-content"
+        >
+            <AddTemporaryGame
+                v-if="listMenu.temporary_game"
+                data-test="add-temp-game"
+                @game-added="$emit('game-added')"
+            />
+            <CalendarControl
+                v-else-if="listMenu.calendar"
+                data-test="calendar-control"
+            />
+            <ArchiveControl
+                v-else-if="listMenu.archive"
+                data-test="archive-control"
+                :games="games"
+                @delete-game="$emit('delete-game')"
+            />
+            <GameListGrouping
+                v-else-if="listMenu.grouping"
+                @change-grouping="$emit('change-grouping', $event)"
+            />
+        </div>
     </div>
 </template>
 
@@ -50,6 +62,7 @@ import { ref } from "vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
 import CalendarControl from "./CalendarControl.vue";
 import ArchiveControl from "./ArchiveControl.vue";
+import GameListGrouping from "./GameListGrouping.vue";
 
 defineProps({
     games: {
@@ -58,12 +71,13 @@ defineProps({
     },
 });
 
-defineEmits(["game-added", "delete-game"]);
+defineEmits(["game-added", "delete-game", "change-grouping"]);
 
 const listMenu = ref({
     temporary_game: false,
     calendar: false,
     archive: false,
+    grouping: false,
 });
 
 function onListMenuClick(event) {

@@ -42,6 +42,7 @@ const categoryAccordion = reactive({
 });
 
 function onCollapseStateChanged(state) {
+    console.log("onCollapseStateChanged", state);
     categoryAccordion.isVisible = state;
     localStorage.setItem(props.collapseId + "ExpandCollapse", JSON.stringify(categoryAccordion.isVisible));
 }
