@@ -12,6 +12,12 @@
         >
             Released & Unreleased
         </b-button>
+        <b-button
+            data-test="no-grouping"
+            @click="setGrouping('no-grouping')"
+        >
+            No Grouping
+        </b-button>
     </div>
 </template>
 

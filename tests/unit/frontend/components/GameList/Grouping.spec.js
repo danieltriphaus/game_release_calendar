@@ -33,6 +33,7 @@ function renderGameList(grouping) {
 
 beforeEach(() => {
     jest.useFakeTimers().setSystemTime(new Date("2023-06-01T00:00:00.000Z"));
+    window.localStorage.clear();
 });
 
 it("should display released_unreleased grouping", async () => {
@@ -91,6 +92,15 @@ it("should filter categories without games", async () => {
     await flushPromises();
 
     expect(wrapper.find("#july").exists()).toBe(false);
+});
+
+it("should not show groups if it is disabled", async () => {
+    axios.get.mockResolvedValueOnce({ data: [testData.juneGame] });
+    const wrapper = renderGameList("no-grouping");
+
+    await flushPromises();
+
+    expect(wrapper.find("#june").exists()).toBe(false);
 });
 
 

@@ -10,7 +10,20 @@
         />
     </div>
     <div>
-        <template v-if="categories.length > 0">
+        <template v-if="currentGrouping === 'no-grouping'">
+            <div
+                v-for="game in sortedGames"
+                :key="game.id"
+                class="row"
+            >
+                <game-list-item
+                    :game="game"
+                    @delete-game="deleteGame"
+                    @platform-selected="onPlatformSelected"
+                />
+            </div>
+        </template>
+        <template v-else-if="categories.length > 0">
             <base-collapsable
                 v-for="category in categories"
                 :key="category.id"
@@ -74,7 +87,10 @@ async function populateGameList() {
 
 onMounted(async () => {
     await populateGameList();
-    categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+
+    if (currentGrouping.value !== "no-grouping") {
+        categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+    }
 });
 
 function onGameAdded(game) {
@@ -98,7 +114,9 @@ const currentGrouping = ref(localStorage.getItem("grouping") ? localStorage.getI
 
 function setGrouping(grouping) {
     currentGrouping.value = grouping;
-    categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+    if (currentGrouping.value !== "no-grouping") {
+        categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+    }
     localStorage.setItem("grouping", grouping);
 }
 
