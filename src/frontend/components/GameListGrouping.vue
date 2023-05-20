@@ -8,7 +8,7 @@
         </b-button>
         <b-button
             data-test="released-grouping"
-            @click="setGrouping('released-unreleased')"
+            @click="setGrouping('released_unreleased')"
         >
             Released & Unreleased
         </b-button>

@@ -32,24 +32,24 @@ export const setDefaultGrouping = (grouping) => {
 export const getCurrentCategories = (currentGrouping, sortedGames) => {
     const categories = config.groupings[currentGrouping];
 
-    const categoriesMap = {};
+    const initialValue = {};
 
     categories.forEach((category) => {
-        categoriesMap[category.id] = [];
+        initialValue[category.id] = [];
     });
 
-    sortedGames.forEach(config.sorting[currentGrouping](categoriesMap));
+    const categoriesMap = sortedGames.reduce(config.sorting[currentGrouping](), initialValue);
 
     categories.forEach((category) => {
         category.games = categoriesMap[category.id];
     });
 
-    return categories;
+    return categories.filter((category) => category.games.length > 0);
 };
 
 
-function releasedUnreleased(categoriesMap) {
-    return (game) => {
+function releasedUnreleased() {
+    return (categoriesMap, game) => {
         const selectedReleaseDate = getSelectedReleaseDate(game);
         const releaseDate = new Date(selectedReleaseDate.date * 1000);
 
@@ -58,12 +58,13 @@ function releasedUnreleased(categoriesMap) {
         } else {
             categoriesMap["unreleased-games"].push(game);
         }
+        return categoriesMap;
     };
 }
 
-function monthly(categoriesMap) {
+function monthly() {
     const currentYear = new Date().getFullYear();
-    return (game) => {
+    return (categoriesMap, game) => {
         const selectedReleaseDate = getSelectedReleaseDate(game);
         const releaseDate = new Date(selectedReleaseDate.date * 1000);
 
@@ -80,6 +81,7 @@ function monthly(categoriesMap) {
             const month = releaseDate.toLocaleString("en", { month: "long" }).toLowerCase();
             categoriesMap[month].push(game);
         }
+        return categoriesMap;
     };
 }
 

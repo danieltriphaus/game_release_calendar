@@ -94,11 +94,12 @@ function onPlatformSelected(gameId, platform) {
     games.value.find((game) => game.id === gameId).selectedPlatform = platform;
 }
 
-const currentGrouping = ref(getDefaultGrouping());
+const currentGrouping = ref(localStorage.getItem("grouping") ? localStorage.getItem("grouping") : getDefaultGrouping());
 
 function setGrouping(grouping) {
     currentGrouping.value = grouping;
     categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+    localStorage.setItem("grouping", grouping);
 }
 
 const sortedGames = computed(() => {

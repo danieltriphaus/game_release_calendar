@@ -8,6 +8,12 @@ import axios from "axios";
 
 jest.mock("axios");
 
+jest.mock("vue-router", () => ({
+    useRouter: () => ({
+        push: jest.fn(),
+    }),
+}));
+
 function renderGameList(grouping) {
     setDefaultGrouping(grouping);
 
@@ -24,6 +30,10 @@ function renderGameList(grouping) {
         },
     });
 }
+
+beforeEach(() => {
+    jest.useFakeTimers().setSystemTime(new Date("2023-06-01T00:00:00.000Z"));
+});
 
 it("should display released_unreleased grouping", async () => {
     axios.get.mockResolvedValueOnce({ data: [testData.unreleasedGame, testData.releasedGame] });
@@ -47,7 +57,6 @@ it("should display monthly grouping", async () => {
 });
 
 it("should group edge cases correctly", async () => {
-    jest.useFakeTimers().setSystemTime(new Date("2023-06-01T00:00:00.000Z"));
     axios.get.mockResolvedValueOnce({ data: [testData.pastGame, testData.futureGame, testData.nextYearGame, testData.thisYearGame, testData.tdbGame] });
     const wrapper = renderGameList("months");
 
@@ -73,6 +82,15 @@ it("should switch grouping when user changes it", async () => {
     await wrapper.find("[data-test='monthly-grouping']").trigger("click");
 
     expect(wrapper.find("#june").exists()).toBe(true);
+});
+
+it("should filter categories without games", async () => {
+    axios.get.mockResolvedValueOnce({ data: [testData.juneGame] });
+    const wrapper = renderGameList("months");
+
+    await flushPromises();
+
+    expect(wrapper.find("#july").exists()).toBe(false);
 });
 
 
