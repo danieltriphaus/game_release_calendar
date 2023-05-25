@@ -60,10 +60,11 @@ export const apiClient = {
                 /**
                  * Get user's game list
                  * @async
+                 * @param {string} [listId]
                  * @returns {Promise<IGDBGame[]|undefined>}
                  */
-                async get() {
-                    const response = await axios.get("/api/user/" + userId + "/games");
+                async get(listId) {
+                    const response = await axios.get("/api/user/" + userId + "/games", { params: { listId } });
                     if (response) {
                         return response.data;
                     }

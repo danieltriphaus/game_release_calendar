@@ -48,6 +48,7 @@
                 data-test="archive-control"
                 :games="games"
                 @delete-game="$emit('delete-game')"
+                @show-archive="$emit('show-archive')"
             />
             <GameListGrouping
                 v-else-if="listMenu.grouping"
@@ -71,7 +72,7 @@ defineProps({
     },
 });
 
-defineEmits(["game-added", "delete-game", "change-grouping"]);
+defineEmits(["game-added", "delete-game", "change-grouping", "show-archive"]);
 
 const listMenu = ref({
     temporary_game: false,

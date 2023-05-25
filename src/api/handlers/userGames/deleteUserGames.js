@@ -14,7 +14,7 @@ export const deleteUserGames = async (context, req, res) => {
         gameList.games.splice(deleteIndex, 1);
     });
 
-    await upsertGameList(userId, gameList.games, "default");
+    await upsertGameList(userId, gameList.games, req.body.listId ? req.body.listId : "default");
 
     res.status(200).end();
 };

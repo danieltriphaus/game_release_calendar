@@ -16,11 +16,17 @@
             Archive all released Entries
         </b-button>
 
-    <!-- <b-button
+        <!-- <b-button
         variant="primary"
     >
         Archive Up To Date
     </b-button> -->
+        <b-button
+            variant="primary"
+            @click="showArchive"
+        >
+            Show Archive
+        </b-button>
     </div>
 </template>
 
@@ -29,7 +35,7 @@ import { apiClient } from "../library/apiClient";
 import { inject, computed } from "vue";
 
 const user = inject("user");
-const emits = defineEmits(["delete-game"]);
+const emits = defineEmits(["delete-game", "show-archive"]);
 
 const props = defineProps({
     games: {
@@ -96,5 +102,9 @@ async function archiveGames(games) {
     ]);
 
     emits("delete-game");
+}
+
+function showArchive() {
+    emits("show-archive");
 }
 </script>

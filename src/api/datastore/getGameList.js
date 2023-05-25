@@ -10,11 +10,7 @@ import { Datastore } from "@google-cloud/datastore";
  * @param {string} [listId="default"]
  * @returns {Promise<Array>}
  */
-export const getGameList = async (userId, listId) => {
-    if (!listId) {
-        listId = "default";
-    }
-
+export const getGameList = async (userId, listId = "default") => {
     const datastore = new Datastore();
     const key = datastore.key(["user", userId, "game_list", listId]);
 

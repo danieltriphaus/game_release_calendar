@@ -23,10 +23,12 @@ function renderGameList(grouping) {
             provide: {
                 user: { value: { id: "y1xx" } },
                 userId: "y1xx",
+                gameListId: "default",
             },
         },
         props: {
             userId: "y1xx",
+            gameListId: "default",
         },
     });
 }

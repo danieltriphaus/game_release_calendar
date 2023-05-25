@@ -7,10 +7,22 @@
             @game-added="onGameAdded"
             @delete-game="populateGameList"
             @change-grouping="setGrouping"
+            @show-archive="emits('change-list', 'archive')"
         />
     </div>
     <div>
-        <template v-if="currentGrouping === 'no-grouping'">
+        <template v-if="gameListId === 'archive'">
+            <h2>
+                Archive
+            </h2>
+            <b-button
+                data-test="change-list-default"
+                @click="emits('change-list', 'default')"
+            >
+                Back to List
+            </b-button>
+        </template>
+        <template v-if="currentGrouping === 'no-grouping' || gameListId === 'archive'">
             <div
                 v-for="game in sortedGames"
                 :key="game.id"
@@ -55,12 +67,12 @@ import GameListMenu from "./GameListMenu.vue";
 import { getDefaultGrouping, getCurrentCategories } from "../library/groupings";
 import { getSelectedReleaseDate } from "../library/releaseDate";
 
-import { onMounted, ref, computed, inject } from "vue";
+import { onMounted, ref, computed, inject, watch } from "vue";
 import { apiClient } from "../library/apiClient";
 
 const user = inject("user");
 
-const emits = defineEmits(["loading", "loading-complete"]);
+const emits = defineEmits(["loading", "loading-complete", "show-archive", "show-default", "change-list"]);
 
 const props = defineProps({
     userId: {
@@ -75,22 +87,22 @@ const props = defineProps({
 
 const games = ref([]);
 
+watch(() => props.gameListId, async () => {
+    await populateGameList();
+});
+
 /**
  * @async
  * @function populateGameList
  */
 async function populateGameList() {
     emits("loading");
-    games.value = await apiClient.user(props.userId).games.get();
+    games.value = await apiClient.user(props.userId).games.get(props.gameListId);
     emits("loading-complete");
 }
 
 onMounted(async () => {
     await populateGameList();
-
-    if (currentGrouping.value !== "no-grouping") {
-        categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
-    }
 });
 
 function onGameAdded(game) {
@@ -98,7 +110,7 @@ function onGameAdded(game) {
 }
 
 async function deleteGame(id) {
-    await apiClient.user(user.value.id).games.delete([{ id }]);
+    await apiClient.user(user.value.id).games.delete([{ id }], props.gameListId);
     populateGameList();
 }
 
@@ -114,11 +126,12 @@ const currentGrouping = ref(localStorage.getItem("grouping") ? localStorage.getI
 
 function setGrouping(grouping) {
     currentGrouping.value = grouping;
-    if (currentGrouping.value !== "no-grouping") {
-        categories.value = getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
-    }
     localStorage.setItem("grouping", grouping);
 }
+
+const categories = computed(() => {
+    return getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+});
 
 const sortedGames = computed(() => {
     const gamesCopy = [...games.value];
@@ -138,8 +151,6 @@ const sortedGames = computed(() => {
         }
     });
 });
-
-const categories = ref([]);
 </script>
 
 <style scoped>
