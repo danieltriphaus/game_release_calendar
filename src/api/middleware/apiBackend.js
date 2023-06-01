@@ -10,7 +10,6 @@ const api = new OpenAPIBackend({
     handlers: {
         ...operationHandlerMapping,
         "get-access": (context, req, res) => {
-            // eslint-disable-next-line no-unused-vars
             const { auth_key, ...publicUserData } = context.security.userAuth;
             res.status(200).json(publicUserData);
         },

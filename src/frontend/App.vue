@@ -13,6 +13,12 @@
             class="row mt-4"
         >
             <div v-if="authenticationFailed">
+                <b-button
+                    :href="signInUrl"
+                    variant="primary"
+                >
+                    Sign in with Google
+                </b-button>
                 <div
                     id="g_id_onload"
                     :data-client_id="gsiAppId"
@@ -45,12 +51,10 @@
 import ApiValidateForm from "./components/ApiValidateForm";
 import { apiClient } from "./library/apiClient";
 import { computed } from "vue";
-import UserMenu from "./components/UserMenu";
 
 export default {
     components: {
         ApiValidateForm,
-        UserMenu,
     },
     provide() {
         return {
@@ -68,6 +72,11 @@ export default {
                 id: "",
             },
         };
+    },
+    computed: {
+        signInUrl() {
+            return `http://localhost:3000/login/google`;
+        },
     },
     mounted() {
         const googleSignInScript = document.createElement("script");
