@@ -8,7 +8,7 @@ export const getUserCalendar = async (context, req, res) => {
     const calendar = await getCalendar(context.request.params.user_id, req.query.token);
     if (calendar) {
         const gameList = await getGameList(context.request.params.user_id);
-        const games = await getGamesData(gameList.games, calendarFields);
+        const games = await getGamesData(gameList.games.map((game) => game.id), calendarFields);
 
         const outputCalendar = ical({ name: "Game Release Calendar" });
 
