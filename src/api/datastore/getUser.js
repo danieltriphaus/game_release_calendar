@@ -38,6 +38,22 @@ export const getUsersByEmailAddress = async (emailAddress) => {
 };
 
 /**
+ * get a user object by its email adress
+ * @param {string} googleId
+ * @returns {Promise<Array>}
+ */
+export const getUsersByGoogleId = async (googleId) => {
+    const datastore = new Datastore();
+
+    const query = datastore.createQuery("user").filter("google_id", "=", googleId);
+    const [users] = await datastore.runQuery(query);
+
+    if (users.length > 0) {
+        return convertFromDatastoreResult(users);
+    }
+};
+
+/**
  *
  * @param {AuthKey} authKey
  * @returns {Promise<User>}

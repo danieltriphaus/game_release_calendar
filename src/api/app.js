@@ -12,6 +12,8 @@ import historyApiFallback from "connect-history-api-fallback";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
+import { initPassport } from "./middleware/initPassport.js";
+
 dotenv.config();
 
 const app = express();
@@ -22,6 +24,8 @@ router.use(cookieParser());
 router.use(multer().any());
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(xss());
+
+initPassport(app);
 
 router.use(apiBackend());
 app.use("/api", router);
