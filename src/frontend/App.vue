@@ -1,14 +1,6 @@
 <template>
     <div class="container">
         <div
-            v-if="isAuthenticated"
-            class="row"
-        >
-            <div class="col-3 offset-9 text-end">
-                <!-- <UserMenu /> -->
-            </div>
-        </div>
-        <div
             v-show="!isAuthenticated"
             class="row mt-4"
         >
@@ -19,43 +11,17 @@
                 >
                     Sign in with Google
                 </b-button>
-                <div
-                    id="g_id_onload"
-                    :data-client_id="gsiAppId"
-                    data-context="signin"
-                    data-ux_mode="popup"
-                    data-callback="onSignIn"
-                />
-
-                <div
-                    class="g_id_signin"
-                    data-type="standard"
-                    data-shape="rectangular"
-                    data-theme="outline"
-                    data-text="signin_with"
-                    data-size="large"
-                    data-logo_alignment="left"
-                />
             </div>
-
-            <api-validate-form
-                @authenticated="onAuthenticated"
-                @authentication-failed="onAuthenticationFailed"
-            />
         </div>
         <router-view v-if="isAuthenticated" />
     </div>
 </template>
 
 <script>
-import ApiValidateForm from "./components/ApiValidateForm";
-import { apiClient } from "./library/apiClient";
 import { computed } from "vue";
+import { useAuthentication } from "./composables/authentication";
 
 export default {
-    components: {
-        ApiValidateForm,
-    },
     provide() {
         return {
             userId: computed(() => this.user.id),
@@ -75,38 +41,18 @@ export default {
     },
     computed: {
         signInUrl() {
-            return `http://localhost:3000/login/google`;
-        },
-    },
-    mounted() {
-        const googleSignInScript = document.createElement("script");
-        googleSignInScript.setAttribute("src", "https://accounts.google.com/gsi/client");
-        googleSignInScript.setAttribute("async", "");
-        googleSignInScript.setAttribute("defer", "");
-        document.head.appendChild(googleSignInScript);
-
-        window.onSignIn = async (response) => {
-            this.user = await apiClient.user().gLogin.post(response.credential);
-            if (this.user.id) {
-                this.isAuthenticated = true;
+            if (import.meta.env.MODE === "production") {
+                return "/login/google";
+            } else {
+                return "http://localhost:3000/login/google";
             }
-        };
+        },
     },
-    methods: {
-        onAuthenticated(user) {
-            this.isAuthenticated = true;
-            this.user = user;
-        },
-        onAuthenticationFailed() {
-            this.isAuthenticated = false;
-            this.authenticationFailed = true;
-        },
-        // async signOut() {
-        //     if (await apiClient.access.delete()) {
-        //         await this.$router.push("/");
-        //         window.location.reload();
-        //     }
-        // },
+    async mounted() {
+        const { isAuthenticated, authenticationFailed, user } = await useAuthentication();
+        this.isAuthenticated = isAuthenticated;
+        this.authenticationFailed = authenticationFailed;
+        this.user = user;
     },
 };
 </script>

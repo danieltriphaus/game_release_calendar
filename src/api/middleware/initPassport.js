@@ -3,9 +3,11 @@ import GoogleStrategy from "passport-google-oidc";
 import session from "express-session";
 import { getUsersByGoogleId } from "../datastore/getUser.js";
 import { upsertUser } from "../datastore/upsertUser.js";
+import { upsertGameList } from "../datastore/upsertGameList.js";
 import { nanoid } from "nanoid";
 import { Datastore } from "@google-cloud/datastore";
 import { DatastoreStore } from "@google-cloud/connect-datastore";
+import { logError } from "../library/writeLog.js";
 
 /**
  * @param {import('express').Express} app
@@ -62,7 +64,6 @@ function initSession(app) {
 
     passport.deserializeUser(function (user, cb) {
         process.nextTick(function () {
-            console.log(user);
             return cb(null, user);
         });
     });
@@ -73,26 +74,32 @@ function initStrategy() {
         {
             clientID: process.env["GOOGLE_CLIENT_ID"],
             clientSecret: process.env["GOOGLE_CLIENT_SECRET"],
-            callbackURL: "http://localhost:3000/oauth2/redirect",
+            callbackURL: process.env.NODE_ENV === "development" ? "http://localhost:3000/oauth2/redirect" : process.env.APP_URL + "/oauth2/redirect",
         },
         async function verify(issuer, profile, cb) {
-            const users = await getUsersByGoogleId(profile.id);
+            try {
+                const users = await getUsersByGoogleId(profile.id);
 
-            if (users.length >= 1) {
-                // The account at Google has previously logged in to the app.  Get the
-                // user record associated with the Google account and log the user in.
-                return cb(null, users[0]);
-            } else {
-                // The account at Google has not logged in to this app before.  Create a
-                // new user record and associate it with the Google account.
-                const userData = {
-                    id: nanoid(),
-                    google_id: profile.id,
-                };
+                if (users && users.length >= 1) {
+                    return cb(null, users[0]);
+                } else {
+                    const userData = {
+                        id: nanoid(),
+                        google_id: profile.id,
+                    };
 
-                upsertUser(userData);
-                return cb(null, userData);
+                    await upsertUser(userData);
+                    await upsertGameList(userData.id, [], "default");
+
+                    return cb(null, userData);
+                }
+            } catch (error) {
+                logError(error);
+                return cb(error);
             }
         },
     ));
 }
+
+
+
