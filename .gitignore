@@ -4,6 +4,7 @@ node_modules
 src/api/views
 grc-6732-62f6819d4df8.json
 coverage
+src/api/dist
 
 # local env files
 .env.local

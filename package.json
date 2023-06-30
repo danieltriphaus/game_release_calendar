@@ -54,6 +54,7 @@
     "@readme/openapi-parser": "^2.4.0",
     "@types/jest": "^29.2.6",
     "@vue/test-utils": "^2.2.1",
+    "cors": "^2.8.5",
     "cypress": "^10.3.0",
     "eslint": "^8.19.0",
     "eslint-plugin-cypress": "^2.12.1",

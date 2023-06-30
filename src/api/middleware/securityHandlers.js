@@ -1,7 +1,7 @@
 //import { getUserByAuthKey } from "../datastore/getUser.js";
 import { getCalendar } from "../datastore/getCalendar.js";
 
-export const userAuth = async (context, req, res) => {
+export const userAuth = async (context, req) => {
     if (req.isAuthenticated()) {
         return req.user;
     }
