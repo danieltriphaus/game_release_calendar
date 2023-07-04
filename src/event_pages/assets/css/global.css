@@ -1,0 +1,80 @@
+:root {
+	--border-color: #6A9CCD;
+	--bg-color: #fff;
+	--link-color: #6A9CCD;
+}
+
+body {
+	background-color: var(--bg-color);
+}
+
+.btn {
+    border-radius: 0;
+    box-shadow: 2px 2px;
+}
+
+.btn-igdb {
+    color: #7313FF;
+    border-color: #7313FF;
+}
+
+.btn-igdb:hover {
+    color: #fff;
+    background-color: #7313FF;
+}
+
+.register-top-link {
+	color: var(--link-color);
+	text-decoration: none;
+}
+
+.register-top-link:hover {
+	text-decoration: underline;
+}
+
+.game {
+	display: flex;
+	min-height: 120px;
+	margin: 0;
+	padding: 0;
+}
+
+.game-cover.img {
+	max-height: 130px;
+}
+
+.game-info {
+	padding: 5px 0 5px 5px;
+	width: 100%;
+}
+
+.game-info h5 {
+	font-size: 1rem;
+}
+
+.game-info h6 {
+	font-size: 0.8rem;
+}
+
+.game-details {
+	margin-bottom: 10px;
+	padding: 10px;
+}
+
+.game {
+	border-bottom: 1px solid var(--border-color);
+}
+
+.game-list .row:last-child .game {
+	border-bottom: none;
+}
+
+.game-actions .btn {
+	font-size: 1.3rem;
+}
+
+.game-actions {
+	text-align: right;
+	padding: 5px;
+	margin-right: 0;
+}

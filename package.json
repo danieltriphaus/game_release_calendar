@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "vite --host",
-    "build": "node src/bin/build.mjs",
+    "dev:event_pages": "vite ./src/event_pages --host",
+    "build": "vite build",
+    "build:event_pages": "vite build ./src/event_pages",
     "server": "vite preview",
     "test:unit": "jest --runInBand",
     "test:cypressOpen": "yarn run cypress open --project tests",
@@ -63,6 +65,7 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.0.5",
     "openapi-types": "^12.1.0",
+    "vite-plugin-handlebars": "^1.6.0",
     "webpack": "^5.73.0",
     "webpack-dev-server": "^4.9.3"
   }

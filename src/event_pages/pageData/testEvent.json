@@ -1,0 +1,122 @@
+[
+	{
+		"id": 185246,
+		"cover": {
+			"id": 304947,
+			"height": 1600,
+			"url": "//images.igdb.com/igdb/image/upload/t_cover_small/co6jar.jpg",
+			"width": 1200
+		},
+		"first_release_date": 1697500800,
+		"involved_companies": [
+			{
+				"id": 158595,
+				"company": {
+					"id": 305,
+					"name": "Remedy Entertainment"
+				},
+				"developer": true
+			},
+			{
+				"id": 203403,
+				"company": {
+					"id": 17463,
+					"name": "Epic Games"
+				},
+				"developer": false
+			},
+			{
+				"id": 216914,
+				"company": {
+					"id": 46613,
+					"name": "Sweet Baby Inc."
+				},
+				"developer": false
+			}
+		],
+		"name": "Alan Wake II",
+		"release_dates": [
+			{
+				"id": 477974,
+				"category": 0,
+				"date": 1697500800,
+				"human": "Oct 17, 2023",
+				"platform": {
+					"id": 6,
+					"abbreviation": "PC",
+					"alternative_name": "mswin",
+					"name": "PC (Microsoft Windows)"
+				}
+			},
+			{
+				"id": 477975,
+				"category": 0,
+				"date": 1697500800,
+				"human": "Oct 17, 2023",
+				"platform": {
+					"id": 167,
+					"abbreviation": "PS5",
+					"alternative_name": "PS5",
+					"name": "PlayStation 5"
+				}
+			},
+			{
+				"id": 477976,
+				"category": 0,
+				"date": 1697500800,
+				"human": "Oct 17, 2023",
+				"platform": {
+					"id": 169,
+					"abbreviation": "Series X",
+					"alternative_name": "XSX",
+					"name": "Xbox Series X|S"
+				}
+			}
+		],
+		"url": "https://www.igdb.com/games/alan-wake-ii"
+	},
+	{
+		"id": 127044,
+		"cover": {
+			"id": 308749,
+			"height": 2160,
+			"url": "//images.igdb.com/igdb/image/upload/t_thumb/co6m8d.jpg",
+			"width": 1620
+		},
+		"first_release_date": 1697760000,
+		"involved_companies": [
+			{
+				"id": 148077,
+				"company": {
+					"id": 834,
+					"name": "Insomniac Games"
+				},
+				"developer": true
+			},
+			{
+				"id": 196216,
+				"company": {
+					"id": 10100,
+					"name": "Sony Interactive Entertainment"
+				},
+				"developer": false
+			}
+		],
+		"name": "Marvel's Spider-Man 2",
+		"release_dates": [
+			{
+				"id": 481925,
+				"category": 0,
+				"date": 1697760000,
+				"human": "Oct 20, 2023",
+				"platform": {
+					"id": 167,
+					"abbreviation": "PS5",
+					"alternative_name": "PS5",
+					"name": "PlayStation 5"
+				}
+			}
+		],
+		"url": "https://www.igdb.com/games/marvels-spider-man-2"
+	}
+]
