@@ -1,0 +1,25 @@
+#tga2023 {
+	--border-color: #D43F10;
+	--bg-color: #111111;
+	--link-color: #D43F10;
+	--add-button-color: #D43F10;
+	color: #fff;
+	background: linear-gradient(180deg, #171717, #000000);
+}
+
+#tga2023 .btn-outline-primary {
+	color: var(--add-button-color);
+	border-color: var(--add-button-color);
+}
+
+#tga2023 .btn-outline-primary:hover {
+	background-color: #ffdbd0;
+	color: var(--add-button-color);
+
+}
+
+#tga2023 .btn-igdb:hover {
+	border-color: var(--igdb-color);
+	color: var(--igdb-color);
+	background-color: #ffdbd0;
+}

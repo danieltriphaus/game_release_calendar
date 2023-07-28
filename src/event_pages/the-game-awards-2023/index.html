@@ -2,15 +2,15 @@
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<script type="module" src="../main.js"></script>
+		<link rel="stylesheet" href="../assets/css/tga2023.css" />
 	</head>
-	<body>
+	<body id="tga2023">
 		<div id="alert-wrapper"></div>
-		
 		<div class="container">
 			<div class="text-center">
-				<h1>Event Title</h1>
+				<h1>The Game Awards 2023</h1>
 				<p>Some Text Describing the Event</p>
-				<p><a id="register-top-link" href="/login/google">Register now to keep track of these upcoming games and more</a></p>
+				<p><a id="register-top-link" href="/login/google?redirect={{ redirect }}">Register now to keep track of these upcoming games and more</a></p>
 				<div class="game-list">
 					{{> gameList games=games redirect=redirect }}
 				</div>

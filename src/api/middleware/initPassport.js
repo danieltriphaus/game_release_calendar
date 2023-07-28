@@ -9,6 +9,10 @@ import { Datastore } from "@google-cloud/datastore";
 import { DatastoreStore } from "@google-cloud/connect-datastore";
 import { logError } from "../library/writeLog.js";
 
+const VALID_REDIRECTS = [
+    /\/app/g, /\/events\/.*\//g,
+];
+
 /**
  * @param {import('express').Express} app
  */
@@ -24,12 +28,25 @@ export const initPassport = (app) => {
  * @param {import('express').Express} app
  */
 function initRoutes(app) {
-    app.get("/login/google", passport.authenticate("google"));
+    app.get("/login/google", (req, res, next) => {
+        if (req.query.redirect) {
+            const redirect = VALID_REDIRECTS.reduce((acc, regex) => {
+                const match = req.query.redirect.match(regex);
+                if (match) {
+                    return match[0];
+                }
+            });
+            res.cookie("redirect", redirect, { maxAge: 60000, httpOnly: true });
+        }
+        next();
+    }, passport.authenticate("google"));
     app.get("/oauth2/redirect", passport.authenticate("google", { failureRedirect: "/", failureMessage: true }), (req, res) => {
+        const redirect = req.cookies?.redirect ?? "";
+        res.clearCookie("redirect");
         if (process.env.NODE_ENV === "production") {
-            res.redirect("/");
+            res.redirect(redirect.trimLeft("/"));
         } else {
-            res.redirect("http://localhost:8080");
+            res.redirect("http://localhost:8080" + redirect);
         }
     });
 }

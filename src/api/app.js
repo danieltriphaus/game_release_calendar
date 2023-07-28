@@ -21,6 +21,7 @@ const router = express.Router();
 if (process.env.NODE_ENV === "development") {
     router.use(cors());
 }
+app.use(cookieParser());
 
 router.use(express.json());
 router.use(cookieParser());
