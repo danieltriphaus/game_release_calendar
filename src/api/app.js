@@ -35,6 +35,19 @@ router.use(apiBackend());
 app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
+    app.get("*.js", function (req, res, next) {
+        req.url = req.url + ".gz";
+        res.set("Content-Encoding", "gzip");
+        res.set("Content-Type", "text/javascript");
+        next();
+    });
+    app.get("*.css", function (req, res, next) {
+        req.url = req.url + ".gz";
+        res.set("Content-Encoding", "gzip");
+        res.set("Content-Type", "text/css");
+        next();
+    });
+
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false, fallthrough: true }));

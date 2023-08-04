@@ -14,7 +14,7 @@ jest.mock("@/api/datastore/getTemporaryGames.js");
 jest.mock("@/api/datastore/convertFromDatastoreResult.js");
 
 const gameList = {
-    games: [119308, 112874, "6WjXhK3Iec1C9UwTBqJhH"],
+    games: [{ id: 119308 }, { id: 112874 }, { id: "6WjXhK3Iec1C9UwTBqJhH" }],
 };
 
 const calendar = {
@@ -56,9 +56,9 @@ it("should add gameIds as string to igdb request", async () => {
     expect(axios.post).toHaveBeenCalledWith(
         expect.stringContaining("/games"),
         expect.stringContaining(
-            gameList.games[0].toString(),
-            gameList.games[1].toString(),
-            gameList.games[2].toString(),
+            gameList.games[0].id.toString(),
+            gameList.games[1].id.toString(),
+            gameList.games[2].id.toString(),
         ),
         expect.objectContaining({
             headers: expect.objectContaining({ Authorization: "Bearer " + igdbAccessToken.access_token }),

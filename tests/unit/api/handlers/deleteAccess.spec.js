@@ -4,6 +4,7 @@ import { getContext } from "../expressMocks";
 
 it("should delete cookie and return 200", () => {
     const context = getContext("deleteAccess");
+    context.request.logout = jest.fn().mockImplementationOnce((cb) => cb(null));
 
     deleteAccess(context, context.request, context.response);
 

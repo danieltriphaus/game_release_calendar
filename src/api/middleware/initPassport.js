@@ -41,7 +41,7 @@ function initRoutes(app) {
         next();
     }, passport.authenticate("google"));
     app.get("/oauth2/redirect", passport.authenticate("google", { failureRedirect: "/", failureMessage: true }), (req, res) => {
-        const redirect = req.cookies?.redirect ?? "";
+        const redirect = req.cookies?.redirect ?? "/";
         res.clearCookie("redirect");
         if (process.env.NODE_ENV === "production") {
             res.redirect(redirect.trimLeft("/"));

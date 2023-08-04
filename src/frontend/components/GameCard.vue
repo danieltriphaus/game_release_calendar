@@ -1,6 +1,7 @@
 <template>
     <img
         v-if="hasCover"
+        loading="lazy"
         :src="coverUrl"
         class="game-cover"
         :data-testid="'game-' + props.game.id + '-cover'"
