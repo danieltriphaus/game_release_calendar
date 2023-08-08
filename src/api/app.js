@@ -35,13 +35,13 @@ router.use(apiBackend());
 app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
-    app.get("*.js", function (req, res, next) {
+    app.get("/app/*.js", function (req, res, next) {
         req.url = req.url + ".gz";
         res.set("Content-Encoding", "gzip");
         res.set("Content-Type", "text/javascript");
         next();
     });
-    app.get("*.css", function (req, res, next) {
+    app.get("/app/*.css", function (req, res, next) {
         req.url = req.url + ".gz";
         res.set("Content-Encoding", "gzip");
         res.set("Content-Type", "text/css");
@@ -50,11 +50,23 @@ if (process.env.NODE_ENV === "production") {
 
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
-    app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false, fallthrough: true }));
+    app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false }));
+    app.use("/app", (req, res, next) => {
+        if (!req.user) {
+            res.redirect("/");
+        } else {
+            next();
+        }
+    });
     app.use("/app", express.static(__dirname + "/dist/frontend/", { etag: false, lastModified: false }));
+    app.use("/landingpage", express.static(__dirname + "/dist/landingpage", { etag: false, lastModified: false }));
 
     app.get("/", (req, res) => {
-        res.redirect("/app");
+        if (req.user) {
+            res.redirect("/app");
+        } else {
+            res.sendFile(__dirname	+ "/dist/landingpage/index.html");
+        }
     });
 }
 

@@ -7,6 +7,7 @@
     "dev:event_pages": "vite ./src/event_pages --host",
     "build": "vite build",
     "build:event_pages": "vite build ./src/event_pages",
+    "build:landingpage": "vite build ./src/landingpage",
     "server": "vite preview",
     "test:unit": "jest --runInBand",
     "test:cypressOpen": "yarn run cypress open --project tests",
