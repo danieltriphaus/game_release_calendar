@@ -41,7 +41,6 @@ window.addEventListener("load", async () => {
 
 function changeLinksForAuthenticatedUser() {
     const topLink = document.getElementById("register-top-link");
-    topLink.setAttribute("href", "/app");
     topLink.innerHTML = "Go to app";
     [...document.getElementsByClassName("add-game")].forEach((element) => {
         element.removeAttribute("href");

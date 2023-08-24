@@ -41,10 +41,18 @@ export default {
     },
     computed: {
         signInUrl() {
+            let url = "";
             if (import.meta.env.MODE === "production") {
-                return "/login/google";
+                url = "/login/google";
             } else {
-                return "http://localhost:3000/login/google";
+                url = "http://localhost:3000/login/google";
+            }
+            const redirectSegment = window.location.search ? new URLSearchParams(window.location.search).get("redirect") : undefined;
+
+            if (redirectSegment && redirectSegment !== "/") {
+                return url + "?redirect=" + redirectSegment;
+            } else {
+                return url;
             }
         },
     },

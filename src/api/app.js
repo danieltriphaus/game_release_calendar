@@ -51,13 +51,6 @@ if (process.env.NODE_ENV === "production") {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
     app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false }));
-    app.use("/app", (req, res, next) => {
-        if (!req.user) {
-            res.redirect("/");
-        } else {
-            next();
-        }
-    });
     app.use("/app", express.static(__dirname + "/dist/frontend/", { etag: false, lastModified: false }));
     app.use("/landingpage", express.static(__dirname + "/dist/landingpage", { etag: false, lastModified: false }));
 
