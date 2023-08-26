@@ -2,7 +2,7 @@
 node_modules
 /dist
 src/api/views
-grc-6732-62f6819d4df8.json
+google_app_credentials.json
 coverage
 src/api/dist
 
