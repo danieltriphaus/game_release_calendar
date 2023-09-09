@@ -18,6 +18,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, "index.html"),
                 imprint: resolve(__dirname, "/imprint/index.html"),
+                privacy: resolve(__dirname, "/privacy_notice/index.html"),
             },
         },
     },
