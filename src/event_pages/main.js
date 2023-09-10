@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/css/global.css";
 import axios from "axios";
@@ -22,7 +21,7 @@ if (import.meta.env.MODE === "development") {
     });
 }
 
-document.getElementById("to-top-button").addEventListener("click", () => {
+document.getElementById("to-top-button")?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
