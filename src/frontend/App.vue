@@ -5,9 +5,15 @@
             class="row mt-4"
         >
             <div v-if="authenticationFailed">
+                <input
+                    id="privacy"
+                    v-model="hasAcceptedPrivacyNotice"
+                    type="checkbox"
+                > <label for="privacy">I Have read and accept the <a href="/landingpage/privacy_notice/">Privacy Notice</a></label><br>
                 <b-button
                     :href="signInUrl"
                     variant="primary"
+                    :disabled="!hasAcceptedPrivacyNotice"
                 >
                     Sign in with Google
                 </b-button>
@@ -47,6 +53,7 @@ export default {
         return {
             authenticationFailed: false,
             isAuthenticated: false,
+            hasAcceptedPrivacyNotice: false,
             gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
             user: {
                 id: "",
