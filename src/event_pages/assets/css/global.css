@@ -10,6 +10,19 @@ body {
 	background-color: var(--bg-color);
 }
 
+.text-bg-light {
+    color: #000!important;
+    background-color: RGBA(248,249,250,var(--bs-bg-opacity,1))!important;
+}
+
+.footer .nav-link {
+    color: var(--bs-nav-link-color) !important;
+}
+
+.footer .nav-link:hover {
+    color: var(--bs-nav-link-hover-color) !important;
+}
+
 #alert-wrapper {
 	position: fixed;
 	top: 0;
