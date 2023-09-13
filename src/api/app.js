@@ -37,7 +37,7 @@ app.use("/api", router);
 if (process.env.NODE_ENV === "production") {
     app.all(/.*/, function (req, res, next) {
         var host = req.header("host");
-        if (host.match(/^www\..*/i)) {
+        if (!process.env.APP_URL.match(/^www\..*/i) || host.match(/^www\..*/i)) {
             next();
         } else {
             res.redirect(301, req.protocol + "://www." + host);
