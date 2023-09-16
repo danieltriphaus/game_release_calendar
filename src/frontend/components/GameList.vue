@@ -105,8 +105,8 @@ onMounted(async () => {
     await populateGameList();
 });
 
-function onGameAdded(game) {
-    games.value.push(game);
+async function onGameAdded() {
+    await populateGameList();
 }
 
 async function deleteGame(id) {

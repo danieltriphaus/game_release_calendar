@@ -1,0 +1,39 @@
+:root {
+	--playstation-blue: #0072C3;
+	--border-color: #0072C3 !important;
+	--bg-color: #fff;
+	--link-color: #0072C3 !important;
+	--igdb-color: #7313FF;
+	--add-button-color: #0072C3 !important;
+}
+
+body {
+	background: rgb(1,6,27);
+	background: linear-gradient(356deg, rgba(1,6,27,1) 0%, rgba(0,91,228,1) 100%);
+}
+
+#sony-logo {
+	width: 300px;
+}
+
+#sony-sop {
+	background-color: var(--playstation-blue);
+}
+
+#sony-sop .container {
+	
+}
+
+#sony-sop h1 {
+	color: var(--playstation-blue);
+	font-size: 2rem;
+}
+
+#sony-sop .btn-outline-primary {
+	color: var(--playstation-blue);
+	border-color: var(--playstation-blue);
+}
+
+#sony-sop .btn-outline-primary:hover {
+	color: fff;
+}

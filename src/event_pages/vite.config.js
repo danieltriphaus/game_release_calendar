@@ -15,7 +15,7 @@ export default defineConfig({
             partialDirectory: resolve(__dirname, "partials"),
             helpers: {
                 getDeveloper(game) {
-                    return game.involved_companies ? game.involved_companies.find((company) => company.developer)?.company.name : "";
+                    return game.involved_companies ? game.involved_companies.find((company) => company.developer)?.company?.name : "";
                 },
                 getReleaseDate(game) {
                     if (!game.first_release_date || !game.release_dates || !game.release_dates.length) {
@@ -50,6 +50,7 @@ export default defineConfig({
                 main: resolve(__dirname, "index.html"),
                 testEvent: resolve(__dirname, "/test-event/index.html"),
                 tga2023: resolve(__dirname, "/the-game-awards-2023/index.html"),
+                sonySoP202308: resolve(__dirname, "/state-of-play-september-2023/index.html"),
             },
         },
     },

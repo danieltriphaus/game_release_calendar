@@ -50,13 +50,17 @@ export const getCurrentCategories = (currentGrouping, sortedGames) => {
 
 function releasedUnreleased() {
     return (categoriesMap, game) => {
-        const selectedReleaseDate = getSelectedReleaseDate(game);
-        const releaseDate = new Date(selectedReleaseDate.date * 1000);
-
-        if (releaseDate <= new Date()) {
-            categoriesMap["released-games"].push(game);
-        } else {
+        if (!game.release_dates || !game.release_dates.length) {
             categoriesMap["unreleased-games"].push(game);
+        } else {
+            const selectedReleaseDate = getSelectedReleaseDate(game);
+            const releaseDate = new Date(selectedReleaseDate.date * 1000);
+
+            if (releaseDate <= new Date()) {
+                categoriesMap["released-games"].push(game);
+            } else {
+                categoriesMap["unreleased-games"].push(game);
+            }
         }
         return categoriesMap;
     };

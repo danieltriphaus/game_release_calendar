@@ -73,9 +73,12 @@ const temporaryGame = reactive({
 
 function addTemporaryGame() {
     temporaryGame.id = nanoid();
-    apiClient.game.post({ ...temporaryGame });
-    apiClient.user(userId.value).games.post([{ id: temporaryGame.id }]);
-    emit("game-added", { ...temporaryGame });
+    Promise.all([
+        apiClient.game.post({ ...temporaryGame }),
+        apiClient.user(userId.value).games.post([{ id: temporaryGame.id }]),
+    ]).then(() => {
+        emit("game-added");
+    });
     endTemporaryGameInput();
 }
 

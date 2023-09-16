@@ -71,7 +71,6 @@ body {
 
 .game {
 	display: flex;
-	min-height: 120px;
 	margin: 0;
 	padding: 0;
 }

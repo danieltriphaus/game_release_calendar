@@ -1,3 +1,4 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/css/global.css";
 import axios from "axios";
@@ -50,7 +51,7 @@ function addEventListenerToButtons(userId) {
     [...document.getElementsByClassName("add-game")].forEach((element) => {
         element.addEventListener("click", async (event) => {
             const parentNode = event.target.parentNode;
-            await apiClient.user(userId).games.post([{ id: parentNode.getAttribute("data-game-id") }], "default");
+            await apiClient.user(userId).games.post([{ id: parseInt(parentNode.getAttribute("data-game-id")) }]);
             parentNode.classList.add("disabled");
             const title = parentNode.closest(".game").querySelector(".game-info h5").textContent;
             document.getElementById("alert-wrapper").innerHTML = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">" + title + " added to your list<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";

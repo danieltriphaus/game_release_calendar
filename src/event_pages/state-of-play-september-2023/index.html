@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<script type="module" src="../main.js"></script>
+	<link rel="stylesheet" href="../assets/css/sony_sop.css">
+	<title>Sony State of Play September 2023 - New looks at Final Fantasy VII Rebirth, Resident Evil 4 VR Mode, Avatar:
+		Frontiers of Pandora and many more.</title>
+	<meta name="description"
+		content="Register now for free to add the games of Sonys September 2023 State of Play show to your list.">
+</head>
+
+<body id="sony-sop">
+	<div id="alert-wrapper"></div>
+	<div class="container p-0">
+		<div class="text-center">
+			<div class="bg-white">
+				<img src="../assets/img/sony-sop-logo.jpeg" alt="Sony Logo" id="sony-logo">
+				<h1>Sony State of Play September 2023 <br> New looks at Final Fantasy VII Rebirth, Resident Evil 4 VR
+					Mode, Avatar: Frontiers of Pandora and many more.</h1>
+				<p><a id="register-top-link" href="/app/?redirect={{ redirect }}">Register now to keep track of these
+						upcoming games and more</a></p>
+			</div>
+			<div class="game-list-spacer"></div>
+			<div class="bg-white">
+				<div class="game-list">
+					{{> gameList games=games redirect=redirect }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<button type="button" id="to-top-button" class="btn btn-outline-secondary" title="Back to Top"><i
+			class="bi bi-arrow-up-square" alt="Back to Top"></i></button>
+	<nav class="navbar navbar-expand-lg text-bg-light bottom-0 w-100 footer">
+		<div class="container-fluid">
+			<div class="navbar-nav flex-row">
+				<a class="nav-link p-2" href="/landingpage/imprint/">Imprint</a>
+				<a class="nav-link p-2" href="/landingpage/privacy_notice/">Privacy</a>
+			</div>
+		</div>
+	</nav>
+</body>
+
+</html>
