@@ -28,10 +28,11 @@ export const getGameList = async (userId, listId = "default") => {
 export const getAllGameLists = async (userId) => {
     const datastore = new Datastore();
 
-    const query = datastore.createQuery("game_list").select();
+    const query = datastore.createQuery("game_list").select("__key__");
     if (userId) {
         query.hasAncestor(datastore.key(["user", userId]));
     }
     const [gameLists] = await datastore.runQuery(query);
+
     return gameLists;
 };

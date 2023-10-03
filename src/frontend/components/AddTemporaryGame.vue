@@ -62,6 +62,7 @@ import { apiClient } from "../library/apiClient";
 
 const emit = defineEmits(["game-added"]);
 const userId = inject("userId");
+const { gameListId } = inject("gameListId");
 
 const isTempGameInput = ref(true);
 
@@ -75,7 +76,7 @@ function addTemporaryGame() {
     temporaryGame.id = nanoid();
     Promise.all([
         apiClient.game.post({ ...temporaryGame }),
-        apiClient.user(userId.value).games.post([{ id: temporaryGame.id }]),
+        apiClient.user(userId.value).games.post([{ id: temporaryGame.id }], gameListId.value),
     ]).then(() => {
         emit("game-added");
     });

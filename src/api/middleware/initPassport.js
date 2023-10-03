@@ -75,7 +75,12 @@ function initSession(app) {
 
     passport.serializeUser(function (user, cb) {
         process.nextTick(function () {
-            cb(null, { id: user.id, email: user.email_address, google_id: user.google_id });
+            cb(null, {
+                id: user.id,
+                email: user.email_address,
+                google_id: user.google_id,
+                event_admin: user.event_admin,
+            });
         });
     });
 

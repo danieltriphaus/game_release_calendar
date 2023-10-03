@@ -202,7 +202,10 @@
                     "default": "default"
                   },
                   "games": {
-                    "$ref": "#/components/schemas/UserGame"
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserGame"
+                    }
                   }
                 }
               }
@@ -543,6 +546,70 @@
           }
         ]
       }
+    },
+    "/user/{user_id}/lists": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "user_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GameList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-user-lists",
+        "description": "",
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-user-lists",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GameList"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "userAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -668,6 +735,18 @@
         "required": [
           "id"
         ]
+      },
+      "GameList": {
+        "title": "GameList",
+        "x-stoplight": {
+          "id": "7sdz79ru3rp8d"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
       }
     },
     "responses": {

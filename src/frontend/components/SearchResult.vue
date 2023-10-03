@@ -19,12 +19,13 @@ import GameCard from "./GameCard.vue";
 import { apiClient } from "../library/apiClient";
 
 const userId = inject("userId");
+const { gameListId } = inject("gameListId");
 
 const props = defineProps({ result: { type: Object, default: () => {} } });
 const emit = defineEmits(["game-added"]);
 
-function addGame() {
-    apiClient.user(userId.value).games.post([{ id: props.result.id }]);
+async function addGame() {
+    await apiClient.user(userId.value).games.post([{ id: props.result.id }], gameListId.value);
     emit("game-added", props.result.id);
 }
 </script>

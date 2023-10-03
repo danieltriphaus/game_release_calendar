@@ -109,3 +109,9 @@
  * @property {Date} list
  * @property {string} token
  */
+
+/**
+ * @typedef {Object} UserList
+ * @property {string} id
+ * @property {string} name
+ */

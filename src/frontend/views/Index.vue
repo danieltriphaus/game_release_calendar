@@ -19,7 +19,11 @@ import { inject, ref, provide } from "vue";
 const user = inject("user");
 const isAuthenticated = inject("isAuthenticated");
 const gameListId = ref("default");
-provide("gameListId", gameListId);
+function changeGameListId(newGameListId) {
+    gameListId.value = newGameListId;
+}
+
+provide("gameListId", { gameListId, changeGameListId });
 
 const gameListLoading = ref(false);
 </script>

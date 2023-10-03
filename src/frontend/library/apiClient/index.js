@@ -79,6 +79,24 @@ export const apiClient = {
                     await axios.delete(USER_API_PATH + userId + "/games", { data: { listId: listId, games: games } });
                 },
             }, PROXY_HANDLER_USERID_REQUIRED),
+            lists: new Proxy({
+                /**
+                 * @returns {Promise<UserList|undefined>}
+                 */
+                async get() {
+                    const response = await axios.get(USER_API_PATH + userId + "/lists");
+                    if (response) {
+                        return response.data;
+                    }
+                },
+
+                /**
+                 * @param {Array<UserList>} lists
+                 */
+                async post(lists) {
+                    await axios.post(USER_API_PATH + userId + "/lists", lists);
+                },
+            }, PROXY_HANDLER_USERID_REQUIRED),
             /**
              * @type {Object}
              * @property {function} get

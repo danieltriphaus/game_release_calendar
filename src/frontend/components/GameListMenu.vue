@@ -29,6 +29,13 @@
             >
                 Grouping
             </li>
+            <li
+                v-if="user.event_admin"
+                id="events"
+                :class="{ active: listMenu.events }"
+            >
+                Events
+            </li>
         </ul>
 
         <div
@@ -54,16 +61,21 @@
                 v-else-if="listMenu.grouping"
                 @change-grouping="$emit('change-grouping', $event)"
             />
+            <EventLists
+                v-else-if="listMenu.events && user.event_admin"
+                data-test="events-control"
+            />
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject } from "vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
 import CalendarControl from "./CalendarControl.vue";
 import ArchiveControl from "./ArchiveControl.vue";
 import GameListGrouping from "./GameListGrouping.vue";
+import EventLists from "./EventLists.vue";
 
 defineProps({
     games: {
@@ -72,6 +84,8 @@ defineProps({
     },
 });
 
+const user = inject("user");
+
 defineEmits(["game-added", "delete-game", "change-grouping", "show-archive"]);
 
 const listMenu = ref({
@@ -79,6 +93,7 @@ const listMenu = ref({
     calendar: false,
     archive: false,
     grouping: false,
+    events: false,
 });
 
 function onListMenuClick(event) {

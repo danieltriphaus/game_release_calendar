@@ -36,6 +36,7 @@ import { inject, computed } from "vue";
 
 const user = inject("user");
 const emits = defineEmits(["delete-game", "show-archive"]);
+const { gameListId } = inject("gameListId");
 
 const props = defineProps({
     games: {
@@ -98,7 +99,7 @@ async function archiveGames(games) {
 
     await Promise.all([
         apiClient.user(user.value.id).games.post(userGames, "archive"),
-        apiClient.user(user.value.id).games.delete(userGames, "default"),
+        apiClient.user(user.value.id).games.delete(userGames, gameListId.value),
     ]);
 
     emits("delete-game");

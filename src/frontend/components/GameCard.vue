@@ -58,6 +58,7 @@ const props = defineProps({
 const emit = defineEmits(["platform-selected"]);
 
 const user = inject("user");
+const { gameListId } = inject("gameListId");
 
 const platforms = ref([]);
 
@@ -66,11 +67,11 @@ function onSelectPlatform(platformId) {
 
     if (selectedPlatform.isSelected === true) {
         selectedPlatform.isSelected = false;
-        apiClient.user(user.value.id).games.post([{ id: props.game.id }]);
+        apiClient.user(user.value.id).games.post([{ id: props.game.id }], gameListId.value);
     } else {
         platforms.value.forEach((platform) => platform.isSelected = false);
         selectedPlatform.isSelected = true;
-        apiClient.user(user.value.id).games.post([{ id: props.game.id, platform: platformId }]);
+        apiClient.user(user.value.id).games.post([{ id: props.game.id, platform: platformId }], gameListId.value);
     }
 
     emit("platform-selected", props.game.id, selectedPlatform.isSelected ? selectedPlatform.id : undefined);
