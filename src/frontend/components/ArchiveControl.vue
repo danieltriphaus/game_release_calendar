@@ -105,6 +105,7 @@ async function archiveGames(games) {
     emits("delete-game");
 }
 
+//ToDo: use top level changing logic
 function showArchive() {
     emits("show-archive");
 }

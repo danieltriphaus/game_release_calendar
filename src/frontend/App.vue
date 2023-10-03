@@ -41,6 +41,10 @@
 import { computed } from "vue";
 import { useAuthentication } from "./composables/authentication";
 
+//ToDo: SetUp Snapshot Testing
+//ToDo: Convert into Composition API
+//ToDo: Move Footer and Authentication into separate components
+
 export default {
     provide() {
         return {
