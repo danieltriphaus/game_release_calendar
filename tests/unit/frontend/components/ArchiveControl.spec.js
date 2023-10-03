@@ -9,7 +9,7 @@ it("should archive games even with entries without release dates", async () => {
     const wrapper = mount(ArchiveControl, {
         global: {
             plugins: [BootstrapVue3],
-            provide: { user: { value: { id: "123" } } },
+            provide: { user: { value: { id: "123" } }, gameListId: { gameListId: "test" } },
         },
         props: {
             games: [

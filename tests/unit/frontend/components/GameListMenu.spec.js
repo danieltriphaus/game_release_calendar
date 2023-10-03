@@ -12,6 +12,7 @@ it("should show components if clicked", async () => {
             provide: {
                 user: { value: { id: "y1xx" } },
                 userId: "y1xx",
+                gameListId: { gameListId: "test" },
             },
         },
     });
@@ -30,7 +31,7 @@ it("should show components if clicked", async () => {
 });
 
 it("should hide component if active item is clicked again", async () => {
-    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: "test" } }, plugins: [BootstrapVue3] } });
+    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: "test" }, gameListId: { gameListId: "test" } }, plugins: [BootstrapVue3] } });
 
     await wrapper.get(temporaryGameMenuItem).trigger("click");
 

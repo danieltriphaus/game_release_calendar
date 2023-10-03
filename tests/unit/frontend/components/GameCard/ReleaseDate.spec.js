@@ -112,7 +112,7 @@ async function mountGameCard(game) {
             game,
         },
         global: {
-            provide: { user: { value: { id: "y1xx" } } },
+            provide: { user: { value: { id: "y1xx" } }, gameListId: { gameListId: "test" } },
         },
     });
 }

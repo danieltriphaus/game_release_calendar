@@ -14,7 +14,7 @@ const CONTROLS = {
 };
 
 it("cancel button should clear input", async () => {
-    const wrapper = mount(AddTemporaryGame);
+    const wrapper = mount(AddTemporaryGame, { global: { provide: { gameListId: { gameListId: "test" } } } });
 
     const nameInput = wrapper.get(CONTROLS.nameInput);
     await nameInput.setValue("test name");
@@ -32,7 +32,7 @@ it("cancel button should clear input", async () => {
 it("should make api requests to add temporary game and add entry to game list", async () => {
     nanoid.mockReturnValue("TestID");
 
-    const wrapper = mount(AddTemporaryGame, { global: { provide: { userId: { value: "y1xx" } } } });
+    const wrapper = mount(AddTemporaryGame, { global: { provide: { userId: { value: "y1xx" }, gameListId: { gameListId: "test" } } } });
 
     const nameInput = wrapper.get(CONTROLS.nameInput);
     await nameInput.setValue("test name");
@@ -47,7 +47,7 @@ it("should make api requests to add temporary game and add entry to game list", 
 it("should emit game-added event and clear name input", async () => {
     nanoid.mockReturnValue("TestID");
 
-    const wrapper = mount(AddTemporaryGame, { global: { provide: { userId: { value: "y1xx" } } } });
+    const wrapper = mount(AddTemporaryGame, { global: { provide: { userId: { value: "y1xx" }, gameListId: { gameListId: "test" } } } });
 
     const nameInput = wrapper.get(CONTROLS.nameInput);
     await nameInput.setValue("test name");

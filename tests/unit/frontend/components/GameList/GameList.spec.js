@@ -18,6 +18,7 @@ it("should display user games", async () => {
             provide: {
                 user: { id: "y1xx" },
                 userId: "y1xx",
+                gameListId: { gameListId: "test" },
             },
         },
         props: {
@@ -45,6 +46,7 @@ it("should display games from given list", async () => {
             provide: {
                 user: { id: "y1xx" },
                 userId: "y1xx",
+                gameListId: { gameListId: "test" },
             },
         },
         props: {
@@ -63,6 +65,7 @@ it("should display games from given list", async () => {
             provide: {
                 user: { id: "y1xx" },
                 userId: "y1xx",
+                gameListId: { gameListId: "test" },
             },
         },
         props: {
@@ -85,6 +88,7 @@ it("should display button 'Back To List' in archive which switches list to defau
             provide: {
                 user: { id: "y1xx" },
                 userId: "y1xx",
+                gameListId: { gameListId: "test" },
             },
         },
         props: {
