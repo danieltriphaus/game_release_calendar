@@ -37,54 +37,42 @@
     </nav>
 </template>
 
-<script>
-import { computed } from "vue";
-import { useAuthentication } from "./composables/authentication";
-
-//ToDo: SetUp Snapshot Testing
-//ToDo: Convert into Composition API
+<script setup>
 //ToDo: Move Footer and Authentication into separate components
 
-export default {
-    provide() {
-        return {
-            userId: computed(() => this.user.id),
-            user: computed(() => this.user),
-            isAuthenticated: computed(() => this.isAuthenticated),
-        };
-    },
-    data() {
-        return {
-            authenticationFailed: false,
-            isAuthenticated: false,
-            hasAcceptedPrivacyNotice: false,
-            user: {
-                id: "",
-            },
-        };
-    },
-    computed: {
-        signInUrl() {
-            let url = "";
-            if (import.meta.env.MODE === "production") {
-                url = "/login/google";
-            } else {
-                url = "http://localhost:3000/login/google";
-            }
-            const redirectSegment = window.location.search ? new URLSearchParams(window.location.search).get("redirect") : undefined;
+import { computed, ref, onMounted, provide } from "vue";
+import { useAuthentication } from "./composables/authentication";
 
-            if (redirectSegment && redirectSegment !== "/") {
-                return url + "?redirect=" + redirectSegment;
-            } else {
-                return url;
-            }
-        },
-    },
-    async mounted() {
-        const { isAuthenticated, authenticationFailed, user } = await useAuthentication();
-        this.isAuthenticated = isAuthenticated;
-        this.authenticationFailed = authenticationFailed;
-        this.user = user;
-    },
-};
+const authenticationFailed = ref(false);
+const isAuthenticated = ref(false);
+const hasAcceptedPrivacyNotice = ref(false);
+const user = ref({ id: "" });
+
+provide("userId", computed(() => user.value.id));
+provide("user", computed(() => user.value));
+provide("isAuthenticated", computed(() => isAuthenticated.value));
+
+
+const signInUrl = computed(() => {
+    let url = "";
+    if (import.meta.env.MODE === "production") {
+        url = "/login/google";
+    } else {
+        url = "http://localhost:3000/login/google";
+    }
+    const redirectSegment = window.location.search ? new URLSearchParams(window.location.search).get("redirect") : undefined;
+
+    if (redirectSegment && redirectSegment !== "/") {
+        return url + "?redirect=" + redirectSegment;
+    } else {
+        return url;
+    }
+});
+
+onMounted(async () => {
+    const auth = await useAuthentication();
+    isAuthenticated.value = auth.isAuthenticated.value;
+    authenticationFailed.value = auth.authenticationFailed.value;
+    user.value = auth.user.value;
+});
 </script>
