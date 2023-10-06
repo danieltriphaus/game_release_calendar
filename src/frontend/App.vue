@@ -58,7 +58,6 @@ export default {
             authenticationFailed: false,
             isAuthenticated: false,
             hasAcceptedPrivacyNotice: false,
-            gsiAppId: import.meta.env.VITE_GOOGLE_SIGN_IN_APP_ID,
             user: {
                 id: "",
             },

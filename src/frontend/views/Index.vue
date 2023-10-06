@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import GameList from "../components/GameList";
+import GameList from "../components/GameList.vue";
 import { inject, ref, provide } from "vue";
 
 //ToDo: Move list changing into GameList component

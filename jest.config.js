@@ -23,4 +23,9 @@ module.exports = {
         "!src/api/library/types.js",
         "!src/frontend/main.js",
         "!src/api/views/**"],
+    globals: {
+        "@vue/vue3-jest": {
+            babelConfig: true,
+        },
+    },
 };
