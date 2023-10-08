@@ -1,6 +1,8 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { mount } from "@vue/test-utils";
+import { mount, flushPromises } from "@vue/test-utils";
 import GameCard from "@/frontend/components/GameCard.vue";
+import GameListItem from "@/frontend/components/GameListItem.vue";
+import { BootstrapVue3 } from "bootstrap-vue-3";
 
 jest.mock("axios");
 
@@ -73,7 +75,7 @@ it("should display platforms with release dates", async () => {
         ],
     };
 
-    const wrapper = await mountGameCard(game);
+    const wrapper = await mountGameListItem(game);
 
     const platformsList = wrapper.find(".platforms").text();
     expect(platformsList).toContain("XSX");
@@ -93,7 +95,7 @@ it("should display selected platform release date", async () => {
         ],
     };
 
-    const wrapper = await mountGameCard(game);
+    const wrapper = await mountGameListItem(game);
 
     expect(wrapper.find(".release-date").text()).toBe(getFormattedDate(new Date(game.release_dates[0].date * 1000)));
 
@@ -107,7 +109,7 @@ it("should display selected platform release date", async () => {
 });
 
 async function mountGameCard(game) {
-    return await mount(GameCard, {
+    const wrapper = await mount(GameCard, {
         props: {
             game,
         },
@@ -115,6 +117,31 @@ async function mountGameCard(game) {
             provide: { user: { value: { id: "y1xx" } }, gameListId: { gameListId: "test" } },
         },
     });
+
+    await flushPromises();
+    return wrapper;
+}
+
+async function mountGameListItem(game) {
+    const wrapper = await mount(GameListItem, {
+        global: {
+            plugins: [BootstrapVue3],
+            provide: {
+                user: { value: { id: "y1xx" } },
+                userId: "y1xx",
+                gameListId: { gameListId: "test" },
+            },
+        },
+        props: {
+            userId: "y1xx",
+            gameListId: "default",
+            game,
+        },
+    });
+
+    await flushPromises();
+
+    return wrapper;
 }
 
 function getFormattedDate(date) {
