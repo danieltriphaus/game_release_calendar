@@ -1,0 +1,453 @@
+{
+  "id": "e11bea25-2000-49b6-8b1e-4dd51187a679",
+  "version": "2.0",
+  "name": "Gamestache Tests",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "81e7b8cf-1965-4483-bde5-b05d37d6fe80",
+    "name": "Search, Add and Delete Game",
+    "commands": [{
+      "id": "03fe58b4-2ead-470b-a69f-6c88244f2eb0",
+      "comment": "",
+      "command": "open",
+      "target": "/app/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f52c1298-c392-4504-97cd-407ccc4059f2",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6ba650b2-8e99-46f0-9f93-9e833dd77899",
+      "comment": "",
+      "command": "click",
+      "target": "name=search-games",
+      "targets": [
+        ["name=search-games", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@name='search-games']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5f284b9e-4e53-405d-8f86-93c3d735202f",
+      "comment": "",
+      "command": "type",
+      "target": "name=search-games",
+      "targets": [
+        ["name=search-games", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@name='search-games']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "God of war"
+    }, {
+      "id": "763339d5-f7b1-4e7c-b37a-0678907938b0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.results:nth-child(2) h6:nth-child(2)",
+      "targets": [
+        ["css=.results:nth-child(2) h6:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div[2]/div/div/div/h6", "xpath:idRelative"],
+        ["xpath=//h6", "xpath:position"],
+        ["xpath=//h6[contains(.,'SIE Santa Monica Studio')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fca47dfa-4206-4482-bd6d-d512ce488a11",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "id=game-19560",
+      "targets": [
+        ["id=game-19560", "id"],
+        ["css=#game-19560", "css:finder"],
+        ["xpath=//div[@id='game-19560']", "xpath:attributes"],
+        ["xpath=//div[@id='released-games']/div/div", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div/div", "xpath:position"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "a29ade7f-687b-443f-ac5e-0d517e1051df",
+      "comment": "",
+      "command": "click",
+      "target": "css=#game-19560 .btn-outline-danger > .bi",
+      "targets": [
+        ["css=#game-19560 .btn-outline-danger > .bi", "css:finder"],
+        ["xpath=//div[@id='game-19560']/div[3]/button/i", "xpath:idRelative"],
+        ["xpath=//div[3]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "860bc4dc-a9ab-4116-add2-490e1989ebe2",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=#game-19560 .btn-outline-danger",
+      "targets": [
+        ["css=#game-19560 .btn-outline-danger", "css:finder"],
+        ["xpath=(//button[@type='button'])[3]", "xpath:attributes"],
+        ["xpath=//div[@id='game-19560']/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e3957823-a79b-4e64-8ec6-b5dafa3ec154",
+      "comment": "",
+      "command": "waitForElementNotPresent",
+      "target": "id=game-19560",
+      "targets": [],
+      "value": "30000"
+    }]
+  }, {
+    "id": "0f2a60c9-2f4c-4294-a510-d05902d00a2b",
+    "name": "Authentication",
+    "commands": [{
+      "id": "0ea7b8b0-d51e-4ee2-848f-0a8a7cc151c7",
+      "comment": "",
+      "command": "open",
+      "target": "/app/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "67eed91f-be0d-48ff-af21-bce000fad891",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "810486fc-0ab2-4543-bd8a-a02364b185a2",
+      "comment": "",
+      "command": "click",
+      "target": "css=label",
+      "targets": [
+        ["css=label", "css:finder"],
+        ["xpath=//div[@id='app']/div/div/div/label", "xpath:idRelative"],
+        ["xpath=//label", "xpath:position"],
+        ["xpath=//label[contains(.,'I Have read and accept the Privacy Notice')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7df9973-ae7d-4c46-9e4b-ca4a3ff4c6e2",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Sign in with Google",
+      "targets": [
+        ["linkText=Sign in with Google", "linkText"],
+        ["css=.btn", "css:finder"],
+        ["xpath=//div[@id='app']/div/div/div/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://localhost:3000/login/google']", "xpath:href"],
+        ["xpath=//div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Sign in with Google')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "146a52dc-9488-44d2-9067-03d86bd88645",
+      "comment": "",
+      "command": "click",
+      "target": "css=.JDAKTe:nth-child(2) .w1I7fb",
+      "targets": [
+        ["css=.JDAKTe:nth-child(2) .w1I7fb", "css:finder"],
+        ["xpath=//div[@id='view_container']/div/div/div[2]/div/div/div/form/span/section/div/div/div/div/ul/li[2]/div/div/div/div[2]/div", "xpath:idRelative"],
+        ["xpath=//li[2]/div/div/div/div[2]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "39bcf668-11dd-4cc9-ba8b-35188d4ed658",
+      "comment": "",
+      "command": "click",
+      "target": "name=search-games",
+      "targets": [
+        ["name=search-games", "name"],
+        ["css=.form-control", "css:finder"],
+        ["xpath=//input[@name='search-games']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3ac116a3-78c1-428f-a016-7853ed9c70d3",
+    "name": "Change Release Date with Platform",
+    "commands": [{
+      "id": "c3766946-277a-413d-b474-d03ce289f68e",
+      "comment": "",
+      "command": "open",
+      "target": "/app/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b43f132-7d48-4ddc-b05c-bb0a3d4808dc",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "610ffc31-139b-4b5a-aee5-a315696a3aa7",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=#game-204350 .release-date",
+      "targets": [
+        ["css=#game-204350 .release-date", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div/h6[2]", "xpath:idRelative"],
+        ["xpath=//h6[2]", "xpath:position"],
+        ["xpath=//h6[contains(.,'28.03.2023')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "3942a9b7-c73b-4047-9644-115aac83b2e4",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#game-204350 .release-date",
+      "targets": [
+        ["css=#game-204350 .release-date", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div/h6[2]", "xpath:idRelative"],
+        ["xpath=//h6[2]", "xpath:position"],
+        ["xpath=//h6[contains(.,'01.09.2022')]", "xpath:innerText"]
+      ],
+      "value": "01.09.2022"
+    }, {
+      "id": "e64cc7ed-b243-4922-b406-7df1f1fa188a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.PC:nth-child(2)",
+      "targets": [
+        ["css=.PC:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div[2]/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1ba81dd0-250c-4177-88be-f67cb8853a3c",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#game-204350 .release-date",
+      "targets": [
+        ["css=#game-204350 .release-date", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div/h6[2]", "xpath:idRelative"],
+        ["xpath=//h6[2]", "xpath:position"],
+        ["xpath=//h6[contains(.,'01.09.2022')]", "xpath:innerText"]
+      ],
+      "value": "28.03.2023"
+    }, {
+      "id": "061f1804-a8ff-424b-a8ab-946dbd827118",
+      "comment": "",
+      "command": "click",
+      "target": "css=.PC:nth-child(2)",
+      "targets": [
+        ["css=.PC:nth-child(2)", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div[2]/span[2]", "xpath:idRelative"],
+        ["xpath=//span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c510de03-5345-4bf4-ad1a-e9ea9be036c2",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=#game-204350 .release-date",
+      "targets": [
+        ["css=#game-204350 .release-date", "css:finder"],
+        ["xpath=//div[@id='game-204350']/div/h6[2]", "xpath:idRelative"],
+        ["xpath=//h6[2]", "xpath:position"],
+        ["xpath=//h6[contains(.,'01.09.2022')]", "xpath:innerText"]
+      ],
+      "value": "01.09.2022"
+    }]
+  }, {
+    "id": "e26540f1-d6cb-4512-95b9-7ffb98b000ac",
+    "name": "Add Temporary Game Entry",
+    "commands": [{
+      "id": "fcf7f45b-36b8-4bcb-95ab-52a91528d9ec",
+      "comment": "",
+      "command": "open",
+      "target": "/app/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0961bf2b-56bc-4a6b-9209-a4a9500c33de",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c5e3f53d-5309-4f20-9c00-9252cddd73b4",
+      "comment": "",
+      "command": "click",
+      "target": "id=temporary_game",
+      "targets": [
+        ["id=temporary_game", "id"],
+        ["css=#temporary_game", "css:finder"],
+        ["xpath=//li[@id='temporary_game']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div[2]/ul/li", "xpath:idRelative"],
+        ["xpath=//div[2]/ul/li", "xpath:position"],
+        ["xpath=//li[contains(.,'Game not found?')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "af3addc2-4923-412b-8e6c-2b478766c766",
+      "comment": "",
+      "command": "click",
+      "target": "css=*[data-test=\"temp-game-name\"]",
+      "targets": [
+        ["css=*[data-test=\"temp-game-name\"]", "css:data-attr"],
+        ["id=temp-game-name", "id"],
+        ["css=#temp-game-name", "css:finder"],
+        ["xpath=//input[@id='temp-game-name']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb77fc12-9997-4b85-a9b1-b782ca50efe0",
+      "comment": "",
+      "command": "type",
+      "target": "css=*[data-test=\"temp-game-name\"]",
+      "targets": [
+        ["css=*[data-test=\"temp-game-name\"]", "css:data-attr"],
+        ["id=temp-game-name", "id"],
+        ["css=#temp-game-name", "css:finder"],
+        ["xpath=//input[@id='temp-game-name']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div[2]/div/div/div/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/input", "xpath:position"]
+      ],
+      "value": "Temporary Entry"
+    }, {
+      "id": "b7bddc9f-494f-4e6e-9e14-8b193730f26a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.bi-check2-square",
+      "targets": [
+        ["css=.bi-check2-square", "css:finder"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div[2]/div/div/div/div/div/button/i", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div/div/div/div/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "da2d3ce8-527e-4f53-8821-fadc935bb06d",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.game-info:nth-child(1) > h5",
+      "targets": [
+        ["css=.game-info:nth-child(1) > h5", "css:finder"],
+        ["xpath=//div[@id='game-Ur-A_Jk0CUvoTncuL9a1M']/div/h5", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Temporary Entry')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "d41998f1-5100-4812-a2d2-9b872a505006",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.game-info:nth-child(1) > h5",
+      "targets": [
+        ["css=.game-info:nth-child(1) > h5", "css:finder"],
+        ["xpath=//div[@id='game-Ur-A_Jk0CUvoTncuL9a1M']/div/h5", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Temporary Entry')]", "xpath:innerText"]
+      ],
+      "value": "Temporary Entry"
+    }, {
+      "id": "944eb18e-7fa3-4f63-be5c-025f66b1f85a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.game-actions:nth-child(3) > .btn-outline-danger > .bi",
+      "targets": [
+        ["css=.game-actions:nth-child(3) > .btn-outline-danger > .bi", "css:finder"],
+        ["xpath=//div[@id='game-iUNrb-njytZvbyJgmVENJ']/div[3]/button/i", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[3]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "544c7877-7b4d-4110-ad29-fe9fba3f8451",
+      "comment": "",
+      "command": "waitForElementVisible",
+      "target": "css=.b-overlay",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "33796a6b-f4fd-44d7-a256-608d3b16543b",
+      "comment": "",
+      "command": "waitForElementNotPresent",
+      "target": "css=.b-overlay",
+      "targets": [
+        ["css=.game-info:nth-child(1) > h5", "css:finder"],
+        ["xpath=//div[@id='game-Ur-A_Jk0CUvoTncuL9a1M']/div/h5", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Temporary Entry')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "d5b36342-eb72-4827-b17a-c52aee5ce740",
+      "comment": "",
+      "command": "assertNotText",
+      "target": "css=.game-info:nth-child(1) > h5",
+      "targets": [
+        ["css=.game-info:nth-child(1) > h5", "css:finder"],
+        ["xpath=//div[@id='game-Ur-A_Jk0CUvoTncuL9a1M']/div/h5", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div/h5", "xpath:position"],
+        ["xpath=//h5[contains(.,'Temporary Entry')]", "xpath:innerText"]
+      ],
+      "value": "Temporary Entry"
+    }]
+  }, {
+    "id": "7d3637e2-820d-4ef5-92f0-449129c90f66",
+    "name": "Sign Out",
+    "commands": [{
+      "id": "b5a1b30d-7cf2-40a5-975e-50f40fc0e757",
+      "comment": "",
+      "command": "open",
+      "target": "/app/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "524d63e7-7daa-4e88-a86b-cf43718328ea",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1848x1040",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5a2130a8-6afa-4ff9-8bb9-fe7eccded26a",
+      "comment": "",
+      "command": "click",
+      "target": "id=user-menu",
+      "targets": [
+        ["id=user-menu", "id"],
+        ["css=#user-menu", "css:finder"],
+        ["xpath=//button[@id='user-menu']", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div/div/div/div/button", "xpath:idRelative"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4482a4f3-0f5e-4700-b29f-66af1c4e446b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.dropdown-item",
+      "targets": [
+        ["css=.dropdown-item", "css:finder"],
+        ["xpath=(//button[@type='button'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='app']/div/div[2]/span/div/div/div/div/div/div/ul/li/button", "xpath:idRelative"],
+        ["xpath=//li/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Sign Out')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "1d7bca97-dfa1-4dc2-bae0-d84338ebd3d2",
+    "name": "Gamestache Tests",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["0f2a60c9-2f4c-4294-a510-d05902d00a2b", "e26540f1-d6cb-4512-95b9-7ffb98b000ac", "81e7b8cf-1965-4483-bde5-b05d37d6fe80", "3ac116a3-78c1-428f-a016-7853ed9c70d3", "7d3637e2-820d-4ef5-92f0-449129c90f66"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

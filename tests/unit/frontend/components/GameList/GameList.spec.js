@@ -82,13 +82,15 @@ it("should display games from given list", async () => {
 });
 
 it("should display button 'Back To List' in archive which switches list to default", async () => {
+    const changeGameListId = jest.fn();
+
     const wrapper = await mount(GameList, {
         global: {
             plugins: [BootstrapVue3],
             provide: {
                 user: { id: "y1xx" },
                 userId: "y1xx",
-                gameListId: { gameListId: "test" },
+                gameListId: { gameListId: "test", changeGameListId },
             },
         },
         props: {
@@ -102,8 +104,7 @@ it("should display button 'Back To List' in archive which switches list to defau
     expect(wrapper.find("[data-test='change-list-default']").exists()).toBeTruthy();
     wrapper.find("[data-test='change-list-default']").trigger("click");
 
-    expect(wrapper.emitted("change-list")).toBeTruthy();
-    expect(wrapper.emitted("change-list")[0]).toStrictEqual(["default"]);
+    expect(changeGameListId).toHaveBeenCalledWith("default");
 });
 
 

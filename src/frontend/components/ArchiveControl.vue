@@ -23,7 +23,7 @@
     </b-button> -->
         <b-button
             variant="primary"
-            @click="showArchive"
+            @click="changeGameListId('archive')"
         >
             Show Archive
         </b-button>
@@ -36,7 +36,7 @@ import { inject, computed } from "vue";
 
 const user = inject("user");
 const emits = defineEmits(["delete-game", "show-archive"]);
-const { gameListId } = inject("gameListId");
+const { gameListId, changeGameListId } = inject("gameListId");
 
 const props = defineProps({
     games: {
@@ -103,10 +103,5 @@ async function archiveGames(games) {
     ]);
 
     emits("delete-game");
-}
-
-//ToDo: use top level changing logic
-function showArchive() {
-    emits("show-archive");
 }
 </script>

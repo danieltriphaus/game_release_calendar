@@ -7,7 +7,6 @@
             @game-added="onGameAdded"
             @delete-game="populateGameList"
             @change-grouping="setGrouping"
-            @show-archive="emits('change-list', 'archive')"
         />
     </div>
     <div>
@@ -17,7 +16,7 @@
             </h2>
             <b-button
                 data-test="change-list-default"
-                @click="emits('change-list', 'default')"
+                @click="changeGameListId('default')"
             >
                 Back to List
             </b-button>
@@ -72,7 +71,9 @@ import { apiClient } from "../library/apiClient";
 
 const user = inject("user");
 
-const emits = defineEmits(["loading", "loading-complete", "show-archive", "show-default", "change-list"]);
+const { changeGameListId } = inject("gameListId");
+
+const emits = defineEmits(["loading", "loading-complete", "show-archive", "show-default"]);
 
 const props = defineProps({
     userId: {

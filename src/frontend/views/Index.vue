@@ -16,8 +16,6 @@
 import GameList from "../components/GameList.vue";
 import { inject, ref, provide } from "vue";
 
-//ToDo: Move list changing into GameList component
-
 const user = inject("user");
 const isAuthenticated = inject("isAuthenticated");
 const gameListId = ref("default");
