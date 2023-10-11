@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import GameList from "../components/GameList.vue";
+import GameList from "../components/game_list/GameList.vue";
 import { inject, ref, provide } from "vue";
 
 const user = inject("user");

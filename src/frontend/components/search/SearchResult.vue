@@ -15,8 +15,8 @@
 
 <script setup>
 import { inject } from "vue";
-import GameCard from "./GameCard.vue";
-import { apiClient } from "../library/apiClient";
+import GameCard from "../game_list/GameCard.vue";
+import { apiClient } from "../../library/apiClient";
 
 const userId = inject("userId");
 const { gameListId } = inject("gameListId");

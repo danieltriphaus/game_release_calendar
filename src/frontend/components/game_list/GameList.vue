@@ -59,15 +59,15 @@
 </template>
 
 <script setup>
-import GameSearch from "./GameSearch.vue";
+import GameSearch from "../search/GameSearch.vue";
 import GameListItem from "./GameListItem.vue";
-import BaseCollapsable from "./BaseCollapsable.vue";
-import GameListMenu from "./GameListMenu.vue";
-import { getDefaultGrouping, getCurrentCategories } from "../library/groupings";
-import { getSelectedReleaseDate } from "../library/releaseDate";
+import BaseCollapsable from "../BaseCollapsable.vue";
+import GameListMenu from "../game_list_menu/GameListMenu.vue";
+import { getDefaultGrouping, getCurrentCategories } from "../../library/groupings";
+import { getSelectedReleaseDate } from "../../library/releaseDate";
 
 import { onMounted, ref, computed, inject, watch } from "vue";
-import { apiClient } from "../library/apiClient";
+import { apiClient } from "../../library/apiClient";
 
 const user = inject("user");
 

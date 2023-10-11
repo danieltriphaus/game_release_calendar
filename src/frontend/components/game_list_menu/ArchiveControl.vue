@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { apiClient } from "../library/apiClient";
+import { apiClient } from "../../library/apiClient";
 import { inject, computed } from "vue";
 
 const user = inject("user");

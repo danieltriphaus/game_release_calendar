@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { mount, flushPromises } from "@vue/test-utils";
-import GameCard from "@/frontend/components/GameCard.vue";
-import GameListItem from "@/frontend/components/GameListItem.vue";
+import GameCard from "@/frontend/components/game_list/GameCard.vue";
+import GameListItem from "@/frontend/components/game_list/GameListItem.vue";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 
 jest.mock("axios");

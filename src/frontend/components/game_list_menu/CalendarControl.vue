@@ -47,7 +47,7 @@
 
 <script setup>
 import { inject, ref, computed, onMounted } from "vue";
-import { apiClient } from "../library/apiClient";
+import { apiClient } from "../../library/apiClient";
 
 const USER_API_PATH = "/api/user/";
 

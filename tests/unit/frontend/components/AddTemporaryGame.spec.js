@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { mount } from "@vue/test-utils";
-import AddTemporaryGame from "@/frontend/components/AddTemporaryGame.vue";
+import AddTemporaryGame from "@/frontend/components/game_list_menu/AddTemporaryGame.vue";
 import axios from "axios";
 import { nanoid } from "nanoid";
 

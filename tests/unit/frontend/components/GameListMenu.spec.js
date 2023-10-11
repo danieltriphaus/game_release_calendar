@@ -1,4 +1,4 @@
-import GameListMenu from "@/frontend/components/GameListMenu.vue";
+import GameListMenu from "@/frontend/components/game_list_menu/GameListMenu.vue";
 import { mount } from "@vue/test-utils";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 

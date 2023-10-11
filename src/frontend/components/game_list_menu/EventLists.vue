@@ -29,7 +29,7 @@
 
 <script setup>
 import { ref, inject, onMounted } from "vue";
-import { apiClient } from "../library/apiClient";
+import { apiClient } from "../../library/apiClient";
 
 const { changeGameListId } = inject("gameListId");
 const user = inject("user");

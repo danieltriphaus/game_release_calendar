@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import GameList from "@/frontend/components/GameList.vue";
+import GameList from "@/frontend/components/game_list/GameList.vue";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 import { flushPromises } from "@vue/test-utils";
 import testData from "./testData.json";

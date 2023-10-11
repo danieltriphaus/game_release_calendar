@@ -45,8 +45,8 @@
 import { ref, onMounted, inject, computed } from "vue";
 import GameCard from "./GameCard.vue";
 import PlatformIcon from "./PlatformIcon.vue";
-import { platformHelper } from "../library/platform.js";
-import { apiClient } from "../library/apiClient";
+import { platformHelper } from "../../library/platform.js";
+import { apiClient } from "../../library/apiClient";
 
 const emit = defineEmits(["delete-game", "platform-selected"]);
 

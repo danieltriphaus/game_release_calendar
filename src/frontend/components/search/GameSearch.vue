@@ -39,11 +39,11 @@
 </template>
 
 <script setup>
-import { apiClient } from "../library/apiClient";
+import { apiClient } from "../../library/apiClient";
 
 import { reactive, defineEmits, ref } from "vue";
 import { getDirective } from "vue-debounce";
-import UserMenu from "./UserMenu.vue";
+import UserMenu from "../UserMenu.vue";
 import SearchResult from "./SearchResult.vue";
 
 const emit = defineEmits(["game-added"]);
