@@ -23,15 +23,23 @@ it("should show components if clicked", async () => {
 
     await wrapper.get("[data-test='list-actions'] #calendar").trigger("click");
 
-    expect(wrapper.find("[data-test='calendar-control']").exists()).toBe(true);
+    expect(wrapper.find("[data-test='calendar']").exists()).toBe(true);
 
     await wrapper.get("[data-test='list-actions'] #archive").trigger("click");
 
-    expect(wrapper.find("[data-test='archive-control']").exists()).toBe(true);
+    expect(wrapper.find("[data-test='archive']").exists()).toBe(true);
 });
 
 it("should hide component if active item is clicked again", async () => {
-    const wrapper = mount(GameListMenu, { global: { provide: { user: { id: "test" }, gameListId: { gameListId: "test" } }, plugins: [BootstrapVue3] } });
+    const wrapper = mount(GameListMenu, {
+        global: {
+            provide: {
+                user: { id: "y1xx", value: { id: "y1xx" } },
+                gameListId: { gameListId: "test" },
+            },
+            plugins: [BootstrapVue3],
+        },
+    });
 
     await wrapper.get(temporaryGameMenuItem).trigger("click");
 

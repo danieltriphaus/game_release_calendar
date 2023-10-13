@@ -16,7 +16,7 @@ it("renders correctly with released unreleased grouping", async () => {
             plugins: [BootstrapVue3],
             provide: {
                 isAuthenticated: true,
-                user: { id: "y1xx" },
+                user: { value: { id: "y1xx" }, id: "y1xx" },
             },
         },
     });
@@ -35,7 +35,7 @@ it("renders correctly with monthly grouping", async () => {
             plugins: [BootstrapVue3],
             provide: {
                 isAuthenticated: true,
-                user: { id: "y1xx" },
+                user: { value: { id: "y1xx" }, id: "y1xx" },
             },
         },
     });

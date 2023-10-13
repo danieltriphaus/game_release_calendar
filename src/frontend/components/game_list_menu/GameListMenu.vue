@@ -6,71 +6,37 @@
             @click="onListMenuClick"
         >
             <li
-                id="temporary_game"
-                :class="{ active: listMenu.temporary_game }"
+                v-for="(item, id) in listMenuNew"
+                :id="id"
+                :key="id"
+                :class="{ active: item.active }"
             >
-                Game not found?
-            </li>
-            <li
-                id="calendar"
-                :class="{ active: listMenu.calendar }"
-            >
-                Calendar
-            </li>
-            <li
-                id="archive"
-                :class="{ active: listMenu.archive }"
-            >
-                Archive
-            </li>
-            <li
-                id="grouping"
-                :class="{ active: listMenu.grouping }"
-            >
-                Grouping
-            </li>
-            <li
-                v-if="user.event_admin"
-                id="events"
-                :class="{ active: listMenu.events }"
-            >
-                Events
+                {{ item.title }}
             </li>
         </ul>
 
         <div
             class="list-actions-content"
         >
-            <AddTemporaryGame
-                v-if="listMenu.temporary_game"
-                data-test="add-temp-game"
-                @game-added="$emit('game-added')"
-            />
-            <CalendarControl
-                v-else-if="listMenu.calendar"
-                data-test="calendar-control"
-            />
-            <ArchiveControl
-                v-else-if="listMenu.archive"
-                data-test="archive-control"
-                :games="games"
-                @delete-game="$emit('delete-game')"
-                @show-archive="$emit('show-archive')"
-            />
-            <GameListGrouping
-                v-else-if="listMenu.grouping"
-                @change-grouping="$emit('change-grouping', $event)"
-            />
-            <EventLists
-                v-else-if="listMenu.events && user.event_admin"
-                data-test="events-control"
-            />
+            <template v-for="(item, id) in listMenuNew">
+                <component
+                    :is="item.component"
+                    v-if="item.active"
+                    :key="id"
+                    :games="games"
+                    :data-test="id"
+                    @game-added="$emit('game-added')"
+                    @delete-game="$emit('delete-game')"
+                    @change-grouping="$emit('change-grouping', $event)"
+                    @show-archive="$emit('show-archive')"
+                />
+            </template>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, inject } from "vue";
+import { ref, inject, shallowRef } from "vue";
 import AddTemporaryGame from "./AddTemporaryGame.vue";
 import CalendarControl from "./CalendarControl.vue";
 import ArchiveControl from "./ArchiveControl.vue";
@@ -88,22 +54,43 @@ const user = inject("user");
 
 defineEmits(["game-added", "delete-game", "change-grouping", "show-archive"]);
 
-const listMenu = ref({
-    temporary_game: false,
-    calendar: false,
-    archive: false,
-    grouping: false,
-    events: false,
+const listMenuNew = ref({
+    temporary_game: {
+        active: false,
+        component: shallowRef(AddTemporaryGame),
+        title: "Game not found?",
+    },
+    calendar: {
+        active: false,
+        component: shallowRef(CalendarControl),
+        title: "Calendar",
+    },
+    archive: {
+        active: false,
+        component: shallowRef(ArchiveControl),
+        title: "Archive",
+    },
+    grouping: {
+        active: false,
+        component: shallowRef(GameListGrouping),
+        title: "Grouping",
+    },
 });
 
+if (user.value.event_admin) {
+    listMenuNew.value.events = {
+        active: false,
+        component: shallowRef(EventLists),
+        title: "Events",
+    };
+}
+
 function onListMenuClick(event) {
-    Object.keys(listMenu.value).forEach((key) => {
-        if (key === event.target.id && listMenu.value[event.target.id] === true) {
-            listMenu.value[key] = false;
+    Object.keys(listMenuNew.value).forEach((key) => {
+        if ((key === event.target.id && listMenuNew.value[event.target.id].active === true) || (key !== event.target.id)) {
+            listMenuNew.value[key].active = false;
         } else if (key === event.target.id) {
-            listMenu.value[key] = true;
-        } else if (key !== event.target.id) {
-            listMenu.value[key] = false;
+            listMenuNew.value[key].active = true;
         }
     });
 }

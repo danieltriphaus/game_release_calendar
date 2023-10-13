@@ -37,7 +37,7 @@ const props = defineProps({
         default: true,
     },
     selectedPlatform: {
-        type: Number,
+        type: Object,
         default: undefined,
     },
 });

@@ -6,7 +6,6 @@
                 :game-list-id="gameListId"
                 @loading="gameListLoading = true"
                 @loading-complete="gameListLoading = false"
-                @change-list="gameListId = $event"
             />
         </b-overlay>
     </template>

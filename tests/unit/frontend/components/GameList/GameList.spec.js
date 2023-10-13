@@ -16,7 +16,7 @@ it("should display user games", async () => {
         global: {
             plugins: [BootstrapVue3],
             provide: {
-                user: { id: "y1xx" },
+                user: { id: "y1xx", value: { id: "y1xx" } },
                 userId: "y1xx",
                 gameListId: { gameListId: "test" },
             },
@@ -44,7 +44,7 @@ it("should display games from given list", async () => {
         global: {
             plugins: [BootstrapVue3],
             provide: {
-                user: { id: "y1xx" },
+                user: { id: "y1xx", value: { id: "y1xx" } },
                 userId: "y1xx",
                 gameListId: { gameListId: "test" },
             },
@@ -63,7 +63,7 @@ it("should display games from given list", async () => {
         global: {
             plugins: [BootstrapVue3],
             provide: {
-                user: { id: "y1xx" },
+                user: { id: "y1xx", value: { id: "y1xx" } },
                 userId: "y1xx",
                 gameListId: { gameListId: "test" },
             },
@@ -88,7 +88,7 @@ it("should display button 'Back To List' in archive which switches list to defau
         global: {
             plugins: [BootstrapVue3],
             provide: {
-                user: { id: "y1xx" },
+                user: { id: "y1xx", value: { id: "y1xx" } },
                 userId: "y1xx",
                 gameListId: { gameListId: "test", changeGameListId },
             },
