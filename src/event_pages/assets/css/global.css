@@ -51,12 +51,12 @@ body {
     background-color: #7313FF;
 }
 
-#register-top-link {
+#register-top-link, a {
 	color: var(--link-color);
 	text-decoration: none;
 }
 
-#register-top-link:hover {
+#register-top-link:hover, a:hover {
 	text-decoration: underline;
 }
 
