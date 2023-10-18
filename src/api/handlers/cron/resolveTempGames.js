@@ -6,8 +6,6 @@ import { getGamesWithMatchingTitle as getIgdbGamesWithMatchingTitle } from "../.
 import { gameTitleMatcher } from "../../library/gameTitleMatcher.js";
 import { upsertGame } from "../../datastore/upsertGame.js";
 
-
-//ToDo: fix this for new GameList Entry structure
 export const resolveTempGames = async (context, req, res) => {
     const temporaryGames = convertFromDatastoreResult(await getAllTemporaryGames());
 
@@ -16,15 +14,28 @@ export const resolveTempGames = async (context, req, res) => {
         return;
     }
 
-    const igdbGames = await getIgdbGamesWithMatchingTitle(temporaryGames.map((temporaryGame) => temporaryGame.name));
-    const gameLists = await getAllGameLists(req.query.userId);
+    const gameLists = await getAllGameLists(req.query.userId, true);
+    const gameListGames = gameLists.map((gameList) => gameList.games).flat();
+    const relevantTemporaryGames = temporaryGames.filter((temporaryGame) => gameListGames.find((game) => game.id === temporaryGame.id));
+
+    if (relevantTemporaryGames.length === 0) {
+        res.status(200).json({ message: "No relevant temporary games to resolve" });
+        return;
+    }
+
+    const igdbGames = await getIgdbGamesWithMatchingTitle(relevantTemporaryGames.map((temporaryGame) => temporaryGame.name));
 
     const gtm = gameTitleMatcher(temporaryGames);
     gtm.matchAgainst(igdbGames);
 
     gameLists.forEach(async (gameList) => {
         const key = getKeyFromDatastoreEntity(gameList);
-        gameList.games = gtm.replaceTemporaryGameIds(gameList.games);
+        const gameIds = gtm.replaceTemporaryGameIds(gameList.games.map((game) => game.id));
+        gameList.games = gameIds.map((gameId) => {
+            return {
+                id: gameId,
+            };
+        });
         await upsertGameList(key.parent, gameList.games, key.id);
     });
 

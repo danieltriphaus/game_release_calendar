@@ -23,12 +23,15 @@ export const getGameList = async (userId, listId = "default") => {
  * @async
 
  * @param {UserID} userId
+ * @param {Boolean} withGames
  * @returns {Promise<Array>}
  */
-export const getAllGameLists = async (userId) => {
+export const getAllGameLists = async (userId, withGames) => {
     const datastore = new Datastore();
-
-    const query = datastore.createQuery("game_list").select("__key__");
+    const query = datastore.createQuery("game_list");
+    if (!withGames) {
+        query.select("__key__");
+    }
     if (userId) {
         query.hasAncestor(datastore.key(["user", userId]));
     }
