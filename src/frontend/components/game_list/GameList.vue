@@ -23,7 +23,7 @@
         </template>
         <template v-if="currentGrouping === 'no-grouping' || gameListId === 'archive'">
             <div
-                v-for="game in sortedGames"
+                v-for="game in gamesForList"
                 :key="game.id"
                 class="row"
             >
@@ -72,6 +72,7 @@ import { apiClient } from "../../library/apiClient";
 const user = inject("user");
 
 const { changeGameListId } = inject("gameListId");
+const isSorted = ref(true);
 
 const emits = defineEmits(["loading", "loading-complete", "show-archive", "show-default"]);
 
@@ -89,6 +90,10 @@ const props = defineProps({
 const games = ref([]);
 
 watch(() => props.gameListId, async () => {
+    if (props.gameListId !== "default") {
+        setGrouping("no-grouping");
+        isSorted.value = false;
+    }
     await populateGameList();
 });
 
@@ -132,6 +137,10 @@ function setGrouping(grouping) {
 
 const categories = computed(() => {
     return getCurrentCategories(currentGrouping.value, [...sortedGames.value]);
+});
+
+const gamesForList = computed(() => {
+    return isSorted.value ? sortedGames.value : games.value;
 });
 
 const sortedGames = computed(() => {

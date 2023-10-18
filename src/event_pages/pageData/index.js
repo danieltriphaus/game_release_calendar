@@ -1,14 +1,20 @@
 import testEvent from "./testEvent.json";
-import sonySoP202308 from "./sonySoP202308.json";
-import { getGameList } from "../../api/datastore/getGameList";
 import { getGamesData } from "../../api/library/getGamesData";
 import dotenv from "dotenv";
 import { displayFields } from "../../api/igdb/gamesFieldLists";
+import { Datastore } from "@google-cloud/datastore";
 
 dotenv.config();
 
 async function getGames(listId) {
-    const gameList = await getGameList(process.env.EVENT_ADMIN_USER, listId);
+    const datastore = new Datastore({
+        projectId: "grc-6732",
+        keyFilename: "./event_credentials.json",
+    });
+    const key = datastore.key(["user", process.env.EVENT_ADMIN_USER, "game_list", listId]);
+
+    const [gameList] = await datastore.get(key);
+
     return await getGamesData(gameList.games.map((game) => game.id), displayFields);
 }
 
@@ -25,8 +31,12 @@ export default {
             games,
         };
     },
-    "/state-of-play-september-2023/index.html": {
-        redirect: "/events/state-of-play-september-2023/",
-        games: sonySoP202308,
+    "/state-of-play-september-2023/index.html": async () => {
+        const games = await getGames("SoP202309");
+
+        return {
+            redirect: "/events/state-of-play-september-2023/",
+            games,
+        };
     },
 };

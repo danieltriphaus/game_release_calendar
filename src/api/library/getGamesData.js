@@ -29,5 +29,9 @@ export const getGamesData = async (gameIds, fields) => {
 
     const temporaryGames = convertFromDatastoreResult(temporaryGamesDatastoreResult);
 
-    return [...igdbGames, ...(temporaryGames ? temporaryGames : [])];
+    const allGameData = [...igdbGames, ...(temporaryGames ? temporaryGames : [])];
+
+    return gameIds
+        .filter((gameId) => allGameData.find((game) => game.id === gameId))
+        .map((gameId) => allGameData.find((game) => game.id === gameId));
 };

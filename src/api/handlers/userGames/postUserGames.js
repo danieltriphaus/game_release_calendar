@@ -17,20 +17,25 @@ export const postUserGames = async (context, req, res) => {
     const userId = context.request.params.user_id;
     const listId = req.body.listId || "default";
 
-    const gameList = await getGameList(userId, listId);
+    let gameList = await getGameList(userId, listId);
 
     const games = req.body.games;
 
     if (isValidRequest(req.body)) {
-        if (gameList) {
-            gameList.games.forEach((gameListEntry) => {
-                if (!games.find((game) => gameListEntry.id === game.id)) {
-                    games.push(JSON.parse(JSON.stringify(gameListEntry)));
-                }
-            });
+        if (!gameList) {
+            gameList = { games: [] };
         }
 
-        await upsertGameList(userId, games, listId);
+        const addGames = games.filter((game) => gameList.games.find((gameListEntry) => gameListEntry.id === game.id) === undefined);
+        gameList.games.push(...addGames);
+        gameList.games.forEach((game, index) => {
+            const replaceEntry = games.find((gameToAdd) => gameToAdd.id === game.id);
+            if (replaceEntry) {
+                gameList.games[index] = replaceEntry;
+            }
+        });
+
+        await upsertGameList(userId, gameList.games, listId);
 
         res.status(200);
     } else {

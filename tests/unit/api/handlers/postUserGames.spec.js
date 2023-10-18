@@ -13,7 +13,7 @@ afterEach(() => {
 
 it("add games to datastore", async () => {
     const gameListGames = [{ id: 123 }, { id: 789 }, { id: "6WjXhK3Iec1C9UwTBq123" }];
-    getGameList.mockResolvedValueOnce({ games: gameListGames });
+    getGameList.mockResolvedValueOnce({ games: [...gameListGames] });
 
     const context = getContext();
     context.request.params.user_id = "y1xx";
@@ -23,7 +23,7 @@ it("add games to datastore", async () => {
 
     expect(upsertGameList).toHaveBeenCalledWith(
         "y1xx",
-        expect.arrayContaining([...context.request.body.games, ...gameListGames]),
+        [...gameListGames, ...context.request.body.games],
         expect.stringContaining(""),
     );
     expect(context.response.status).toHaveBeenCalledWith(200);
@@ -38,7 +38,7 @@ it("create list and add games if no list could be found", async () => {
 
     expect(upsertGameList).toHaveBeenCalledWith(
         "y1xx",
-        expect.arrayContaining(context.request.body.games),
+        context.request.body.games,
         expect.stringContaining(""),
     );
 
@@ -102,13 +102,31 @@ it("should return 400 if inputs are not valid types", async () => {
 });
 
 
-it("should change platform on existing game in list", async () => {
+it("should add platform on existing game in list", async () => {
     const gameListGames = [{ id: 123 }];
     getGameList.mockResolvedValueOnce({ games: gameListGames });
 
     const context = getContext();
     context.request.params.user_id = "y1xx";
-    context.request.body = { games: [{ id: 132, platform: 6 }] };
+    context.request.body = { games: [{ id: 123, platform: 6 }] };
+
+    await postUserGames(context, context.request, context.response);
+
+    expect(upsertGameList).toHaveBeenCalledWith(
+        "y1xx",
+        context.request.body.games,
+        expect.stringContaining(""),
+    );
+    expect(context.response.status).toHaveBeenCalledWith(200);
+});
+
+it("should remove platform on existing game in list", async () => {
+    const gameListGames = [{ id: 123, platform: 6 }];
+    getGameList.mockResolvedValueOnce({ games: gameListGames });
+
+    const context = getContext();
+    context.request.params.user_id = "y1xx";
+    context.request.body = { games: [{ id: 123 }] };
 
     await postUserGames(context, context.request, context.response);
 
