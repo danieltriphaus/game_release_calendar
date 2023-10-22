@@ -39,4 +39,12 @@ export default {
             games,
         };
     },
+    "/summer-game-fest-2023/index.html": async () => {
+        const games = await getGames("SGF2023");
+
+        return {
+            redirect: "/events/summer-game-fest-2023/",
+            games,
+        };
+    },
 };

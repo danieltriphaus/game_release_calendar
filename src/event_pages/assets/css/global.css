@@ -129,3 +129,7 @@ body {
 		right: 20px;
 	}
 }
+
+.text-default {
+	color: var(--bs-body-color) !important;
+}
