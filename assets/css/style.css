@@ -1,0 +1,22 @@
+#top-logo {
+	height: 40px;
+}
+
+.btn {
+	border-radius: 0;
+}
+
+@media (max-width: 767px) {
+	#top-logo {
+		height: 36px;
+	}
+	.main-screenshot {
+		max-width: 350px;
+	}	
+}
+
+@media (max-width: 350px) {
+	.main-screenshot {
+		max-width: 300px;
+	}	
+}
