@@ -2,13 +2,22 @@
 	<div class="row">
 		<div class="col text-center mt-5">
 			<h1>{{ h1_text }}</h1>
-			<a class="btn btn-warning mt-5" href="/app">Start tracking game releases now</a><br>
+			<a class="btn btn-warning mt-5" href="/app">{{call_to_action}}</a><br>
 			<img class="mt-5 main-screenshot" src="/assets/img/screenshot_main.png">
 		</div>
 	</div>
-	<div class="row mb-5 justify-content-center">
-		<div class="col-6 text-center mt-5">
+	<div class="row justify-content-center bg-dark text-light">
+		<div class="col-sm-3 text-center mt-5 mb-5">
+			<h3>{{ feature1_headline }}</h3>
             {{{ feature1_text }}}
+		</div>
+		<div class="col-sm-3 text-center mt-5 mb-5">
+			<h3>{{ feature2_headline }}</h3>
+            {{{ feature2_text }}}
+		</div>
+		<div class="col-sm-3 text-center mt-5 mb-5">
+			<h3>{{ feature3_headline }}</h3>
+            {{{ feature3_text }}}
 		</div>
 	</div>
 </div>
