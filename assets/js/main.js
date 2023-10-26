@@ -11,6 +11,8 @@ import axios from "axios";
 });
 
 if (import.meta.env.MODE === "development") {
+    axios.defaults.baseURL = 'http://localhost:3000';
+
     [...document.getElementsByTagName("a")].forEach((element) => {
         if (element.getAttribute("href")?.startsWith("/") && !element.getAttribute("href")?.startsWith("/app")) {
             element.setAttribute("href", "http://localhost:3000" + element.getAttribute("href"));
@@ -47,7 +49,7 @@ function addEventListenerToButtons(userId) {
     [...document.getElementsByClassName("add-game")].forEach((element) => {
         element.addEventListener("click", async (event) => {
             const parentNode = event.target.parentNode;
-            await apiClient.user(userId).games.post([{ id: parseInt(parentNode.getAttribute("data-game-id")) }]);
+            await axios.post("/api/user/" + userId + "/games", [{ id: parseInt(parentNode.getAttribute("data-game-id")) }]);
             parentNode.classList.add("disabled");
             const title = parentNode.closest(".game").querySelector(".game-info h5").textContent;
             document.getElementById("alert-wrapper").innerHTML = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">" + title + " added to your list<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
