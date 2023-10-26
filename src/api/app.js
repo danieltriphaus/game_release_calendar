@@ -59,17 +59,18 @@ if (process.env.NODE_ENV === "production") {
 
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
-    app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false }));
-    app.use("/app", express.static(__dirname + "/dist/frontend/", { etag: false, lastModified: false }));
-    app.use("/landingpage", express.static(__dirname + "/dist/landingpage", { etag: false, lastModified: false }));
 
     app.get("/", (req, res) => {
         if (req.user) {
             res.redirect("/app");
         } else {
-            res.sendFile(__dirname	+ "/dist/landingpage/index.html");
+            res.sendFile(__dirname	+ "/dist/landingpages/uses/game-release-tracker/index.html");
         }
     });
+
+    // app.use("/events", express.static(__dirname + "/dist/events/", { etag: false, lastModified: false }));
+    app.use("/app", express.static(__dirname + "/dist/frontend/", { etag: false, lastModified: false }));
+    app.use("/", express.static(__dirname + "/dist/landingpages/", { etag: false, lastModified: false }));
 }
 
 let port = process.env.PORT;
@@ -77,8 +78,6 @@ let port = process.env.PORT;
 if (process.env.NODE_ENV === "development") {
     port = 3000;
 }
-
-
 
 const listener = app.listen(port, async () => {
     await getIgdbAccessToken();

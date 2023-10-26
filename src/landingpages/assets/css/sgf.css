@@ -1,0 +1,18 @@
+:root {
+	--link-color: #8B63FC !important;
+	--add-button-color: #8B63FC!important;
+}
+
+body {
+	color: #fff !important;
+	background: rgb(1,6,27);
+	background: linear-gradient(75deg, #CB70FB 0%, #144CFF 100%);
+}
+
+#sgf-logo {
+	width: 300px;
+}
+
+.game-list {
+	color: var(--bs-body-color);
+}
