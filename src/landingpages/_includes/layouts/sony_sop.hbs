@@ -12,6 +12,27 @@
 	<meta name="description"
 		content="{{showcase.meta_description}}">
 </head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-43FFE374ZZ"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	gtag('config', 'G-43FFE374ZZ');
+
+	gtag('consent', 'default', {
+		'analytics_storage': 'denied'
+	});
+
+	if (document.cookie.indexOf("cookie-consent") >= 0) {
+		gtag('consent', 'update', {
+			'analytics_storage': document.cookie
+				.split("; ")
+				.find((row) => row.startsWith("cookie-consent="))
+				?.split("=")[1]
+		});
+	}
+</script>
 
 <body id="sony-sop">
 	<div id="alert-wrapper"></div>
@@ -45,6 +66,28 @@
 			</div>
 		</div>
 	</nav>
+
+    <script>
+		if (document.cookie.indexOf("cookie-consent") >= 0) {
+			document.getElementById("cookie-warning").style.display = "none";
+		}
+
+		document.getElementById("accept-cookies").addEventListener("click", () => {
+			document.cookie = "cookie-consent=granted; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+			document.getElementById("cookie-warning").style.display = "none";
+			gtag('consent', 'update', {
+				'analytics_storage': 'granted'
+			});
+		});
+
+		document.getElementById("refuse-cookies").addEventListener("click", () => {
+			document.cookie = "cookie-consent=denied; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+			document.getElementById("cookie-warning").style.display = "none";
+			gtag('consent', 'update', {
+				'analytics_storage': 'denied'
+			});
+		});
+	</script>
 </body>
 
 </html>
