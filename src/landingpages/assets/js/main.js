@@ -11,7 +11,7 @@ import axios from "axios";
 });
 
 if (import.meta.env.MODE === "development") {
-    axios.defaults.baseURL = 'http://localhost:3000';
+    axios.defaults.baseURL = "http://localhost:3000";
 
     [...document.getElementsByTagName("a")].forEach((element) => {
         if (element.getAttribute("href")?.startsWith("/") && !element.getAttribute("href")?.startsWith("/app")) {
@@ -49,6 +49,9 @@ function addEventListenerToButtons(userId) {
     [...document.getElementsByClassName("add-game")].forEach((element) => {
         element.addEventListener("click", async (event) => {
             const parentNode = event.target.parentNode;
+            caches.open("gamestache-user-games").then((cache) => {
+                cache.delete("/api/user/" + userId + "/games");
+            });
             await axios.post("/api/user/" + userId + "/games", [{ id: parseInt(parentNode.getAttribute("data-game-id")) }]);
             parentNode.classList.add("disabled");
             const title = parentNode.closest(".game").querySelector(".game-info h5").textContent;

@@ -4,6 +4,7 @@ import axios from "axios";
 import testData from "./GameList/testData.json";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 import { setDefaultGrouping } from "@/frontend/library/groupings.js";
+import "isomorphic-fetch";
 
 jest.mock("axios");
 

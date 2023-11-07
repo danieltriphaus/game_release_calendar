@@ -27,5 +27,14 @@ module.exports = {
         "@vue/vue3-jest": {
             babelConfig: true,
         },
+        caches: {
+            open() {
+                return {
+                    put: () => {},
+                    match: () => {},
+                    delete: () => {},
+                };
+            },
+        },
     },
 };

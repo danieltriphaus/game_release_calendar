@@ -3,6 +3,7 @@ import GameList from "@/frontend/components/game_list/GameList.vue";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 import { config, setDefaultGrouping } from "@/frontend/library/groupings.js";
 import testData from "./testData.json";
+import "isomorphic-fetch";
 
 import axios from "axios";
 
