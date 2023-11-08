@@ -10,28 +10,35 @@ async function openGameListCache() {
  * @param {string} userId
  * @param {import("axios").AxiosResponse} response
  */
-async function putGameListCache(userId, response) {
+async function putGameListCache(userId, listId, response) {
     const cache = await openGameListCache();
     const responseBody = JSON.stringify(response.data);
     if (responseBody) {
-        await cache.put(USER_API_PATH + userId + "/games", new Response(responseBody, { headers: response.headers }));
+        await cache.put(
+            getRequestObject(userId, listId),
+            new Response(responseBody, { headers: response.headers }),
+        );
     }
 }
 
-async function getGameListCache(userId) {
+async function getGameListCache(userId, listId) {
     const cache = await openGameListCache();
-    const gameListCache = await cache.match(USER_API_PATH + userId + "/games");
+    const gameListCache = await cache.match(getRequestObject(userId, listId));
 
     if (gameListCache && new Date(gameListCache.headers.get("date")).getTime() + 1000 * 60 * 60 * 24 * 7 > new Date().getTime()) {
         return gameListCache;
     } else {
-        await deleteGameListCache(userId);
+        await deleteGameListCache(userId, listId);
     }
 }
 
-async function deleteGameListCache(userId) {
+async function deleteGameListCache(userId, listId) {
     const cache = await openGameListCache();
-    return await cache.delete(USER_API_PATH + userId + "/games");
+    return await cache.delete(getRequestObject(userId, listId));
+}
+
+function getRequestObject(userId, listId) {
+    return new Request(USER_API_PATH + userId + "/games?" + (new URLSearchParams({ listId })).toString());
 }
 
 
@@ -83,7 +90,7 @@ export const user = (userId) => {
              * @param {string} [listId]
              */
             async post(games, listId) {
-                deleteGameListCache(userId);
+                deleteGameListCache(userId, listId);
                 await axios.post(USER_API_PATH + userId + "/games", { listId: listId, games: games });
             },
 
@@ -94,13 +101,13 @@ export const user = (userId) => {
              * @returns {Promise<IGDBGame[]|undefined>}
              */
             async get(listId) {
-                const GameListCache = await getGameListCache(userId);
+                const GameListCache = await getGameListCache(userId, listId);
                 if (GameListCache) {
                     return await GameListCache.json();
                 }
                 const response = await axios.get(USER_API_PATH + userId + "/games", { params: { listId } });
                 if (response) {
-                    putGameListCache(userId, response);
+                    putGameListCache(userId, listId, response);
                     return response.data;
                 }
             },
@@ -111,7 +118,7 @@ export const user = (userId) => {
              * @param {string} [listId]
              */
             async delete(games, listId) {
-                deleteGameListCache(userId);
+                deleteGameListCache(userId, listId);
                 await axios.delete(USER_API_PATH + userId + "/games", { data: { listId: listId, games: games } });
             },
         }, PROXY_HANDLER_USERID_REQUIRED),

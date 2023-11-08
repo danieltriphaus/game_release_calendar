@@ -50,9 +50,9 @@ function addEventListenerToButtons(userId) {
         element.addEventListener("click", async (event) => {
             const parentNode = event.target.parentNode;
             caches.open("gamestache-user-games").then((cache) => {
-                cache.delete("/api/user/" + userId + "/games");
+                cache.delete("/api/user/" + userId + "/games?listId=default");
             });
-            await axios.post("/api/user/" + userId + "/games", [{ id: parseInt(parentNode.getAttribute("data-game-id")) }]);
+            await axios.post("/api/user/" + userId + "/games", { games: [{ id: parseInt(parentNode.getAttribute("data-game-id")) }] });
             parentNode.classList.add("disabled");
             const title = parentNode.closest(".game").querySelector(".game-info h5").textContent;
             document.getElementById("alert-wrapper").innerHTML = "<div class=\"alert alert-success alert-dismissible\" role=\"alert\">" + title + " added to your list<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
