@@ -2,7 +2,7 @@
     <div>
         <div class="row ms-0">
             <ul
-                class="list-actions col"
+                class="list-actions col-9"
                 data-test="list-actions"
                 @click="onListMenuClick"
             >
@@ -15,7 +15,7 @@
                     {{ item.title }}
                 </li>
             </ul>
-            <div class="col-1 text-end">
+            <div class="col-3 text-end">
                 <button
                     type="button"
                     class="btn btn-outline-primary mt-2 mb-2"
@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div
-                class="list-actions-content"
+                class="list-actions-content p-0"
             >
                 <template v-for="(item, id) in listMenuNew">
                     <component
