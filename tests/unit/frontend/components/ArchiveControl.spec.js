@@ -2,6 +2,7 @@ import { mount } from "@vue/test-utils";
 import ArchiveControl from "@/frontend/components/game_list_menu/ArchiveControl.vue";
 import { BootstrapVue3 } from "bootstrap-vue-3";
 import axios from "axios";
+import "isomorphic-fetch";
 
 jest.mock("axios");
 
