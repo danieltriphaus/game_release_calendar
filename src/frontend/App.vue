@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container-lg">
         <div
             v-show="!isAuthenticated"
             class="row mt-4"

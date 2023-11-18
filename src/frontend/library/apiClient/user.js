@@ -121,6 +121,10 @@ export const user = (userId) => {
                 deleteGameListCache(userId, listId);
                 await axios.delete(USER_API_PATH + userId + "/games", { data: { listId: listId, games: games } });
             },
+
+            async deleteGameListCache(listId) {
+                deleteGameListCache(userId, listId);
+            },
         }, PROXY_HANDLER_USERID_REQUIRED),
         lists: new Proxy({
             /**

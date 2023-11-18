@@ -1,36 +1,47 @@
 <template>
     <div>
-        <ul
-            class="list-actions"
-            data-test="list-actions"
-            @click="onListMenuClick"
-        >
-            <li
-                v-for="(item, id) in listMenuNew"
-                :id="id"
-                :key="id"
-                :class="{ active: item.active }"
+        <div class="row ms-0">
+            <ul
+                class="list-actions col"
+                data-test="list-actions"
+                @click="onListMenuClick"
             >
-                {{ item.title }}
-            </li>
-        </ul>
-
-        <div
-            class="list-actions-content"
-        >
-            <template v-for="(item, id) in listMenuNew">
-                <component
-                    :is="item.component"
-                    v-if="item.active"
+                <li
+                    v-for="(item, id) in listMenuNew"
+                    :id="id"
                     :key="id"
-                    :games="games"
-                    :data-test="id"
-                    @game-added="$emit('game-added')"
-                    @delete-game="$emit('delete-game')"
-                    @change-grouping="$emit('change-grouping', $event)"
-                    @show-archive="$emit('show-archive')"
-                />
-            </template>
+                    :class="{ active: item.active }"
+                >
+                    {{ item.title }}
+                </li>
+            </ul>
+            <div class="col-1 text-end">
+                <button
+                    type="button"
+                    class="btn btn-outline-primary mt-2 mb-2"
+                    title="Refresh Games Data"
+                    @click="$emit('refresh-games')"
+                >
+                    <i class="bi bi-arrow-clockwise" />
+                </button>
+            </div>
+            <div
+                class="list-actions-content"
+            >
+                <template v-for="(item, id) in listMenuNew">
+                    <component
+                        :is="item.component"
+                        v-if="item.active"
+                        :key="id"
+                        :games="games"
+                        :data-test="id"
+                        @game-added="$emit('game-added')"
+                        @delete-game="$emit('delete-game')"
+                        @change-grouping="$emit('change-grouping', $event)"
+                        @show-archive="$emit('show-archive')"
+                    />
+                </template>
+            </div>
         </div>
     </div>
 </template>
@@ -52,7 +63,7 @@ defineProps({
 
 const user = inject("user");
 
-defineEmits(["game-added", "delete-game", "change-grouping", "show-archive"]);
+defineEmits(["game-added", "delete-game", "change-grouping", "show-archive", "refresh-games"]);
 
 const listMenuNew = ref({
     temporary_game: {
@@ -104,7 +115,7 @@ function onListMenuClick(event) {
     margin-bottom: 15px;
 }
 
-.list-actions-content {
+.list-actions-content > * {
     margin-bottom: 15px;
 }
 

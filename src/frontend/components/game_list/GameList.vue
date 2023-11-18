@@ -7,6 +7,7 @@
             @game-added="onGameAdded"
             @delete-game="populateGameList"
             @change-grouping="setGrouping"
+            @refresh-games="refreshGames"
         />
     </div>
     <div>
@@ -105,6 +106,12 @@ async function populateGameList() {
     emits("loading");
     games.value = await apiClient.user(props.userId).games.get(props.gameListId);
     emits("loading-complete");
+}
+
+async function refreshGames() {
+    games.value = [];
+    await apiClient.user(props.userId).games.deleteGameListCache(props.gameListId);
+    await populateGameList();
 }
 
 onMounted(async () => {
