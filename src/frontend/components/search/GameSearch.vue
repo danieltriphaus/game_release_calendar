@@ -24,16 +24,17 @@
                 />
             </div>
         </div>
-
-        <div
-            v-for="result in search.results"
-            :key="result.id"
-            class="results mt-2"
-        >
-            <search-result
-                :result="result"
-                @game-added="onGameAdded"
-            />
+        <div style="max-height: 712px; overflow-y: scroll; overflow-x: hidden">
+            <div
+                v-for="result in search.results"
+                :key="result.id"
+                class="results mt-2"
+            >
+                <search-result
+                    :result="result"
+                    @game-added="onGameAdded"
+                />
+            </div>
         </div>
     </div>
 </template>

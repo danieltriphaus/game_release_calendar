@@ -4,7 +4,7 @@ import axios from "axios";
  */
 
 /** @type {IGDBQuery} */
-const query = "search \"{query}\"; fields {fields}; where involved_companies.developer = true; limit 5;";
+const query = "search \"{query}\"; fields {fields}; where involved_companies.developer = true; limit 50;";
 
 /**
  * @param {IGDBQuery} searchQuery
