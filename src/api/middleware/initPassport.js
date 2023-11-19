@@ -10,7 +10,7 @@ import { DatastoreStore } from "@google-cloud/connect-datastore";
 import { logError } from "../library/writeLog.js";
 
 const VALID_REDIRECTS = [
-    /\/app/g, /\/events\/.*\//g,
+    /\/app/g, /\/showcases\/.*\//g,
 ];
 
 /**
