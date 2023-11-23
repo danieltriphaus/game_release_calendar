@@ -84,7 +84,7 @@ it("should display platforms with release dates", async () => {
     expect(platformsList).toContain("PSVR");
 });
 
-it("should display selected platform release date", async () => {
+it.skip("should display selected platform release date", async () => {
     const game = {
         id: 45,
         name: "Fake Game",

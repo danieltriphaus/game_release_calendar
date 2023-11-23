@@ -17,7 +17,7 @@
                     v-for="(platform) in platforms"
                     :key="platform.id"
                     :platform="platform.abbreviation"
-                    :selected="platform.isSelected"
+                    :selected="isPlatformSelected(platform.id)"
                     :title="platform.title"
                     @click="onSelectPlatform(platform.id)"
                 />
@@ -64,21 +64,30 @@ const props = defineProps({
 
 const platforms = ref([]);
 
-const selectedPlatform = computed(() => platforms.value ? platforms.value.find((platform) => platform.isSelected) : undefined);
+const selectedPlatform = computed(() => {
+    if (platforms.value.length > 0 && props.game.selectedPlatform) {
+        return platforms.value.find((platform) => platform.id === props.game.selectedPlatform);
+    } else {
+        return undefined;
+    }
+});
+
+const isPlatformSelected = computed(() => (platformId) => {
+    if (props.game.selectedPlatform) {
+        return props.game.release_dates.find((releaseDate) => releaseDate.platform.id === props.game.selectedPlatform).date === props.game.release_dates.find((releaseDate) => releaseDate.platform.id === platformId).date;
+    } else {
+        return props.game.first_release_date === props.game.release_dates.find((releaseDate) => releaseDate.platform.id === platformId).date;
+    }
+});
 
 function onSelectPlatform(platformId) {
-    const selectedPlatform = platforms.value.find((platform) => platform.id === platformId);
-
-    if (selectedPlatform.isSelected === true) {
-        selectedPlatform.isSelected = false;
+    if (props.game.selectedPlatform === platformId) {
         apiClient.user(user.value.id).games.post([{ id: props.game.id }], gameListId.value);
     } else {
-        platforms.value.forEach((platform) => platform.isSelected = false);
-        selectedPlatform.isSelected = true;
         apiClient.user(user.value.id).games.post([{ id: props.game.id, platform: platformId }], gameListId.value);
     }
 
-    emit("platform-selected", props.game.id, selectedPlatform.isSelected ? selectedPlatform.id : undefined);
+    emit("platform-selected", props.game.id, platformId);
 }
 
 onMounted(() => {
@@ -89,7 +98,6 @@ onMounted(() => {
                 if (platform.isConfigured()) {
                     platformData.push({
                         id: releaseDate.platform.id,
-                        isSelected: platform.isSelected(props.game.selectedPlatform),
                         title: releaseDate.platform.name,
                         abbreviation: platform.getConfiguredAbbreviation(),
                     });
@@ -98,6 +106,8 @@ onMounted(() => {
             }
         }, []);
     }
+    console.log(props.game.name);
+    console.log(platforms.value);
 });
 </script>
 
