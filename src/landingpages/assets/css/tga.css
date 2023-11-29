@@ -1,0 +1,29 @@
+:root {
+	--link-color: #8E1A01 !important;
+	--add-button-color: #8E1A01 !important;
+}
+
+body {
+	color: #fff !important;
+	background: rgb(1,6,27);
+	background: linear-gradient(120deg, #120202 0%, #8C1703 100%);
+}
+
+#tga-logo {
+	width: 300px;
+}
+
+.game-list {
+	color: var(--bs-body-color);
+}
+
+.btn-outline-primary {
+	color: var(--add-button-color);
+	border-color: var(--add-button-color);
+}
+
+.btn-outline-primary:hover {
+	color: fff;
+	background-color: var(--add-button-color);
+	border-color: var(--add-button-color);
+}

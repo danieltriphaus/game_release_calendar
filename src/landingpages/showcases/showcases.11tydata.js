@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 const { getGames } = require("../js/getGamesById");
 
 const showcases = {
@@ -17,6 +18,16 @@ const showcases = {
         meta_description: "The show features the world gameplay premiere of MORTAL KOMBAT 1 with Ed Boon, as well as a look at the gameplay of ALAN WAKE 2 with Sam Lake...",
         headline: "Summer Game Fest 2023 <br> All announcements from the showcase",
         description: "The show features the world gameplay premiere of MORTAL KOMBAT 1 with Ed Boon, as well as a look at the gameplay of ALAN WAKE 2 with Sam Lake from Remedy, plus more game news and announcements including the world premiere of FortniteWilds the new season of Fortnite launching Friday. Announcements from FINAL FANTASY VII: REBIRTH, PRINCE OF PERSIA: THE LOST CROWN, a surprise appearance by Nicolas Cage and more!",
+        additional_info: "<p>For all the trailers check out <a href='https://www.youtube.com/watch?v=QDXcGEo1TfU' target='_blank'>the offical VoD</a></p>",
+        name: "2023",
+        games: [],
+    }],
+    tga: [{
+        listId: "tga2023",
+        title: "The Game Awards 2023 All announcements",
+        meta_description: "The Game Awards 2023 All announcements",
+        headline: "The Game Awards 2023 All announcements",
+        description: "All announcements from the biggest Award Show in Gaming",
         additional_info: "<p>For all the trailers check out <a href='https://www.youtube.com/watch?v=QDXcGEo1TfU' target='_blank'>the offical VoD</a></p>",
         name: "2023",
         games: [],

@@ -41,9 +41,5 @@ module.exports = {
         return gameLists.filter((gameList) => {
             return gameList[Datastore.KEY].name !== "default" && gameList[Datastore.KEY].name !== "archive";
         });
-    }
-
-    // getEventLists: async () => {
-
-    // }
+    },
 };

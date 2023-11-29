@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="/assets/css/global.css" type="text/css">
-	<link rel="stylesheet" href="/assets/css/sony_sop.css" type="text/css">
+	<link rel="stylesheet" href="/assets/css/tga.css" type="text/css">
     <script type="module" src="/assets/js/main.js"></script>
 	<title>{{showcase.title}}</title>
 	<meta name="description"
@@ -39,18 +39,18 @@
 	<div class="container p-0 mb-5">
         <div class="text-center">
             <div class="text-center">
-                <div class="bg-white">
-                    <img src="/assets/img/sony-sop-logo.jpeg" alt="Sony Logo" id="sony-logo">
-                    <h1>{{{showcase.headline}}}</h1>
-                    <p>{{{showcase.description}}}</p>
+                
+                <img src="/assets/img/tga_logo.jpg" alt="The Game Awards Logo" id="tga-logo">
+                <h1>{{{showcase.headline}}}</h1>
+                <p>{{{showcase.description}}}</p>
+                <div class="bg-white text-default">
                     <p><a id="register-top-link" href="/app/?redirect={{ page.url }}">Register now to track game releases
                             you are interested in</a></p>
                     <p>{{{showcase.additional_info}}}</p>
                 </div>
-                <div class="game-list-spacer"></div>
                 <div class="bg-white">
                     <div class="game-list">
-                        {{> "partials/gameList" games=showcase.games redirect=page.url}}
+                        {{> "partials/gameList" games=showcase.games redirect=page.url }}
                     </div>
                 </div>
             </div>
@@ -66,8 +66,7 @@
 			</div>
 		</div>
 	</nav>
-
-    <script>
+        <script>
 		if (document.cookie.indexOf("cookie-consent") >= 0) {
 			document.getElementById("cookie-warning").style.display = "none";
 		}
