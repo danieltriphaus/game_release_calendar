@@ -106,8 +106,6 @@ onMounted(() => {
             }
         }, []);
     }
-    console.log(props.game.name);
-    console.log(platforms.value);
 });
 </script>
 
