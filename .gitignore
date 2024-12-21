@@ -7,6 +7,8 @@ event_credentials.json
 coverage
 src/api/dist
 build.sh
+.yarn/*
+grc-*.json
 
 # local env files
 .env.local
