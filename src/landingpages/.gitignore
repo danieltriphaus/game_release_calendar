@@ -3,3 +3,4 @@ _site
 *.log
 .env
 event_credentials.json
+.yarn/*
