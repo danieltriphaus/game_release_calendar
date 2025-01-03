@@ -17,8 +17,7 @@
         </div>
         <div class="collapse"
             :id="props.collapseId"
-            :visible="categoryAccordion.isVisible"
-            :class="{show: categoryAccordion.isVisible }"
+            :class="{show: categoryAccordion.isOpenOnLoad }"
         >
             <slot />
         </div>
@@ -34,7 +33,7 @@ const props = defineProps({
 });
 
 const categoryAccordion = reactive({
-    isVisible: false,
+    isOpenOnLoad: false,
     icons: {
         open: "caret-up-fill",
         closed: "caret-down-fill",
@@ -42,13 +41,12 @@ const categoryAccordion = reactive({
 });
 
 function onCollapseStateChanged(isVisible) {
-    categoryAccordion.isVisible = isVisible;
-    localStorage.setItem(props.collapseId + "ExpandCollapse", JSON.stringify(categoryAccordion.isVisible));
+    localStorage.setItem(props.collapseId + "ExpandCollapse", JSON.stringify(isVisible));
 }
 
 onBeforeMount(() => {
     if (localStorage.getItem(props.collapseId + "ExpandCollapse")) {
-        categoryAccordion.isVisible = JSON.parse(localStorage.getItem(props.collapseId + "ExpandCollapse"));
+        categoryAccordion.isOpenOnLoad = JSON.parse(localStorage.getItem(props.collapseId + "ExpandCollapse"));
     }
 });
 
@@ -59,7 +57,7 @@ onMounted(() => {
 });
 
 const accordionTabIcon = computed(() => {
-    if (categoryAccordion.isVisible === true) {
+    if (categoryAccordion.isOpenOnLoad === true) {
         return categoryAccordion.icons.open;
     } else {
         return categoryAccordion.icons.closed;
@@ -85,5 +83,9 @@ const accordionTabIcon = computed(() => {
         color: var(--bs-primary);
         margin-right: 0;
         margin-left: auto;
+    }
+
+    .collapsing {
+        transition: 0.75s;
     }
 </style>
