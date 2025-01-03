@@ -34,3 +34,9 @@ onMounted(async () => {
     user.value = auth.user.value;
 });
 </script>
+
+<style>
+    .container-lg {
+        margin-bottom: 56px;
+    }
+</style>
