@@ -1,4 +1,4 @@
-import { Datastore } from "@google-cloud/datastore";
+import { Datastore, PropertyFilter } from "@google-cloud/datastore";
 import { convertFromDatastoreResult } from "./convertFromDatastoreResult.js";
 
 /**
@@ -29,7 +29,7 @@ export const getUser = async (userId) => {
 export const getUsersByEmailAddress = async (emailAddress) => {
     const datastore = new Datastore();
 
-    const query = datastore.createQuery("user").filter("email_address", "=", emailAddress);
+    const query = datastore.createQuery("user").filter(new PropertyFilter("email_address", "=", emailAddress));
     const [users] = await datastore.runQuery(query);
 
     if (users.length > 0) {
@@ -45,7 +45,7 @@ export const getUsersByEmailAddress = async (emailAddress) => {
 export const getUsersByGoogleId = async (googleId) => {
     const datastore = new Datastore();
 
-    const query = datastore.createQuery("user").filter("google_id", "=", googleId);
+    const query = datastore.createQuery("user").filter(new PropertyFilter("google_id", "=", googleId));
     const [users] = await datastore.runQuery(query);
 
     if (users.length > 0) {
@@ -61,7 +61,7 @@ export const getUsersByGoogleId = async (googleId) => {
 export const getUserByAuthKey = async (authKey) => {
     const datastore = new Datastore();
 
-    const query = datastore.createQuery("user").filter("auth_key", "=", authKey);
+    const query = datastore.createQuery("user").filter(new PropertyFilter("auth_key", "=", authKey));
     const [users] = await datastore.runQuery(query);
 
     if (users.length > 0) {

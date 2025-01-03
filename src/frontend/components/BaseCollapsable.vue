@@ -3,7 +3,8 @@
         class="list-category"
     >
         <div
-            v-b-toggle="props.collapseId"
+            data-bs-toggle="collapse"
+            :data-bs-target="'#' + props.collapseId"
             class="list-category-heading"
         >
             <h5 class="list-heading">
@@ -14,19 +15,18 @@
                 :class="'bi-' + accordionTabIcon"
             />
         </div>
-        <b-collapse
+        <div class="collapse"
             :id="props.collapseId"
             :visible="categoryAccordion.isVisible"
-            @hide="onCollapseStateChanged(false)"
-            @show="onCollapseStateChanged(true)"
+            :class="{show: categoryAccordion.isVisible }"
         >
             <slot />
-        </b-collapse>
+        </div>
     </div>
 </template>
 
 <script setup>
-import { reactive, computed, onBeforeMount } from "vue";
+import { reactive, computed, onBeforeMount, onMounted } from "vue";
 
 const props = defineProps({
     collapseId: { type: String, default: "" },
@@ -41,8 +41,8 @@ const categoryAccordion = reactive({
     },
 });
 
-function onCollapseStateChanged(state) {
-    categoryAccordion.isVisible = state;
+function onCollapseStateChanged(isVisible) {
+    categoryAccordion.isVisible = isVisible;
     localStorage.setItem(props.collapseId + "ExpandCollapse", JSON.stringify(categoryAccordion.isVisible));
 }
 
@@ -52,6 +52,12 @@ onBeforeMount(() => {
     }
 });
 
+onMounted(() => {
+    const domElement = document.getElementById(props.collapseId);
+    domElement.addEventListener("show.bs.collapse", () => onCollapseStateChanged(true))
+    domElement.addEventListener("hide.bs.collapse", () => onCollapseStateChanged(false))
+});
+
 const accordionTabIcon = computed(() => {
     if (categoryAccordion.isVisible === true) {
         return categoryAccordion.icons.open;
@@ -59,7 +65,6 @@ const accordionTabIcon = computed(() => {
         return categoryAccordion.icons.closed;
     }
 });
-
 </script>
 
 <style scoped>

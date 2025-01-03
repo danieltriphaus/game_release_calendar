@@ -69,7 +69,7 @@ function releasedUnreleased() {
 function monthly() {
     const currentYear = new Date().getFullYear();
     return (categoriesMap, game) => {
-        const selectedReleaseDate = getSelectedReleaseDate(game);
+        const selectedReleaseDate = game.release_dates ? getSelectedReleaseDate(game) : { category: 7, date: new Date('9999-12-31').getTime() / 1000 };
         const releaseDate = new Date(selectedReleaseDate.date * 1000);
 
         if (selectedReleaseDate.category === 2 && releaseDate.getFullYear() === currentYear) {
