@@ -8,7 +8,11 @@
             <game-card
                 :game="result"
                 :show-platforms="false"
-            />
+            >
+                <div class="result-info">
+                    <i v-if="result.isOnList" class="bi bi-list-check text-dark" title="Game already on list"></i>
+                </div>
+            </game-card>
         </div>
     </div>
 </template>
@@ -22,11 +26,15 @@ const userId = inject("userId");
 const { gameListId } = inject("gameListId");
 
 const props = defineProps({ result: { type: Object, default: () => {} } });
-const emit = defineEmits(["game-added"]);
+const emit = defineEmits(["game-added", "scroll-to-game"]);
 
 async function addGame() {
-    await apiClient.user(userId.value).games.post([{ id: props.result.id }], gameListId.value);
-    emit("game-added", props.result.id);
+    if (props.result.isOnList) {
+        emit("scroll-to-game", props.result.id)
+    } else {
+        await apiClient.user(userId.value).games.post([{ id: props.result.id }], gameListId.value);
+        emit("game-added", props.result.id);
+    }
 }
 </script>
 
@@ -38,5 +46,12 @@ async function addGame() {
 
     .result:hover {
         background-color: rgb(211, 209, 209);
+    }
+
+    .result-info {
+        text-align: right;
+        margin-left: auto;
+        margin-right: 5px;
+        font-size: 1.5rem;
     }
 </style>

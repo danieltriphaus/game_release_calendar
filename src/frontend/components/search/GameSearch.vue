@@ -24,7 +24,7 @@
                 />
             </div>
         </div>
-        <div style="max-height: 712px; overflow-y: scroll; overflow-x: hidden">
+        <div v-if="search.results?.length > 0" id="results" style="max-height: 712px; overflow-y: scroll; overflow-x: hidden">
             <div
                 v-for="result in search.results"
                 :key="result.id"
@@ -33,6 +33,7 @@
                 <search-result
                     :result="result"
                     @game-added="onGameAdded"
+                    @scroll-to-game="onScrollToList"
                 />
             </div>
         </div>
@@ -42,12 +43,12 @@
 <script setup>
 import { apiClient } from "../../library/apiClient";
 
-import { reactive, defineEmits, ref } from "vue";
+import { reactive, defineEmits, ref, useTemplateRef, nextTick } from "vue";
 import vueDebounce from "vue-debounce";
 import UserMenu from "../UserMenu.vue";
 import SearchResult from "./SearchResult.vue";
 
-const emit = defineEmits(["game-added"]);
+const emit = defineEmits(["game-added", "scroll-to-game"]);
 
 const vDebounce = vueDebounce();
 
@@ -70,6 +71,16 @@ function onGameAdded(id) {
     search.results = [];
     emit("game-added", addedGame);
 }
+
+async function onScrollToList(id) {
+    search.query = "";
+    const addedGame = search.results.find((result) => result.id === id);
+    search.results = [];
+    await nextTick();
+    emit("scroll-to-game", addedGame)
+}
+
+
 </script>
 
 <style scoped>

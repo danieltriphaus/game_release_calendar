@@ -1,6 +1,9 @@
 <template>
     <div>
-        <game-search @game-added="onGameAdded" />
+        <game-search 
+            @game-added="onGameAdded"
+            @scroll-to-game="onScrollToGame"
+        />
 
         <game-list-menu
             :games="games"
@@ -46,7 +49,7 @@
                     v-for="game in category.games"
                     :key="game.id"
                     class="row"
-                    :data-cy="category.id"
+                    :ref="gamesRef"
                 >
                     <game-list-item
                         :game="game"
@@ -67,7 +70,7 @@ import GameListMenu from "../game_list_menu/GameListMenu.vue";
 import { getDefaultGrouping, getCurrentCategories } from "../../library/groupings";
 import { getSelectedReleaseDate } from "../../library/releaseDate";
 
-import { onMounted, ref, computed, inject, watch } from "vue";
+import { onMounted, ref, computed, inject, watch, useTemplateRef } from "vue";
 import { apiClient } from "../../library/apiClient";
 
 const user = inject("user");
@@ -89,6 +92,11 @@ const props = defineProps({
 });
 
 const games = ref([]);
+const gameRefs = [];
+
+function gamesRef(el) {
+    gameRefs.push(el);
+}
 
 watch(() => props.gameListId, async () => {
     if (props.gameListId !== "default") {
@@ -120,6 +128,10 @@ onMounted(async () => {
 
 async function onGameAdded() {
     await populateGameList();
+}
+
+function onScrollToGame(game) {
+    gameRefs.find((gameRef) => gameRef.querySelector('.game').id === 'game-' + game.id).scrollIntoView(true, { block: "start"});
 }
 
 async function deleteGame(id) {

@@ -65,7 +65,7 @@
             }
           }
         },
-        "security": []
+        "security": [{ "userAuth": []}]
       }
     },
     "/game": {
